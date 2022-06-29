@@ -1,4 +1,15 @@
+# Sustainable Blockchain Hack - with Chainlink
+
+### Deploy smart contracts on Kovan
+```
+yarn hardhat deploy --network kovan
+``` 
+
+
 <br/>
+
+<hr>
+
 <p align="center">
 <a href="https://chain.link" target="_blank">
 <img src="./box-img-lg.png" width="225" alt="Chainlink Hardhat logo">
