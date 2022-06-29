@@ -5,6 +5,20 @@
 yarn hardhat deploy --network kovan
 ``` 
 
+<br>
+
+### Test (Staging Test on Testnet)
+- How to execute staging test on Testnet:  
+  https://github.com/masaun/sustainable-blockchain-hack/tree/develop#rinkeby-ethereum-testnet-setup
+
+<br>
+
+### Script (on Kovan)
+- Execute readPrice.ts on Kovan
+```
+yarn hardhat run ./scripts/readPrice.ts --network kovan
+```
+
 
 <br/>
 
