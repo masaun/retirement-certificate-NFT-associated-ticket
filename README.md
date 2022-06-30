@@ -2,8 +2,9 @@
 
 ### Deploy smart contracts on Kovan
 ```
-yarn hardhat deploy --network kovan
+yarn deploy-kovan
 ``` 
+($ `yarn hardhat deploy --network kovan` )
 
 <br>
 
@@ -14,11 +15,11 @@ yarn hardhat deploy --network kovan
 <br>
 
 ### Script (on Kovan)
-- Execute readPrice.ts on Kovan
+- Execute the script file of `readPrice.ts` on Kovan
 ```
-yarn hardhat run ./scripts/readPrice.ts --network kovan
+yarn script-kovan:readPrice
 ```
-
+($ `yarn hardhat run ./scripts/readPrice.ts --network kovan` )
 
 <br/>
 
