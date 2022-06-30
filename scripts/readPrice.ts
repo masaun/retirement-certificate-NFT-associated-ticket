@@ -17,7 +17,7 @@ async function readPrice(): Promise<void> {
     console.log("Deployed-address of the PriceConsumerV3.sol on Kovan", priceConsumerV3.address) 
 
     const price: BigNumber = await priceConsumerV3.getLatestPrice()
-    console.log(`Price retrieved via Chainlink: ${ price.toString()}`)  // eg). result: 113117000000 
+    console.log(`Price retrieved via Chainlink: ${ price.toString() }`)  // eg). result: 113117000000 
 }
 
 readPrice()
