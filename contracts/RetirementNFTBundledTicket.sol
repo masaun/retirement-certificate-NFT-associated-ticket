@@ -29,7 +29,13 @@ contract RetirementNFTBundledTicket is ERC721, AccessControl {
         _;
     }
 
-    function safeMint(address to, uint256 tokenId) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    /**
+     * @notice - Mint a new RetirementNFTBundledTicket with RNG via Chainlink VRF
+     */ 
+    function mintNewRetirementNFTBundledTicket(address to, uint256 tokenId) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        //@dev - [TODO]: Generate Random Number via Chainlink VRF
+
+        //@dev - Mint a new RetirementNFTBundledTicket
         _safeMint(to, tokenId);
     }
 
