@@ -17,8 +17,8 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface RetirementNFTBundledTicketInterface extends utils.Interface {
-  contractName: "RetirementNFTBundledTicket";
+export interface RetirementNFTInterface extends utils.Interface {
+  contractName: "RetirementNFT";
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -174,13 +174,13 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface RetirementNFTBundledTicket extends BaseContract {
-  contractName: "RetirementNFTBundledTicket";
+export interface RetirementNFT extends BaseContract {
+  contractName: "RetirementNFT";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: RetirementNFTBundledTicketInterface;
+  interface: RetirementNFTInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
