@@ -32,6 +32,7 @@ export type { PriceConsumerV3 } from "./PriceConsumerV3";
 export type { RandomNumberConsumerV2 } from "./RandomNumberConsumerV2";
 export type { KeepersCounterEchidnaTest } from "./KeepersCounterEchidnaTest";
 export type { MockOracle } from "./MockOracle";
+export type { RetirementNFTBundledTicket } from "./RetirementNFTBundledTicket";
 
 export { AggregatorInterface__factory } from "./factories/AggregatorInterface__factory";
 export { AggregatorV2V3Interface__factory } from "./factories/AggregatorV2V3Interface__factory";
@@ -64,3 +65,4 @@ export { PriceConsumerV3__factory } from "./factories/PriceConsumerV3__factory";
 export { RandomNumberConsumerV2__factory } from "./factories/RandomNumberConsumerV2__factory";
 export { KeepersCounterEchidnaTest__factory } from "./factories/KeepersCounterEchidnaTest__factory";
 export { MockOracle__factory } from "./factories/MockOracle__factory";
+export { RetirementNFTBundledTicket__factory } from "./factories/RetirementNFTBundledTicket__factory";

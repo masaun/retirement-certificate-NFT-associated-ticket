@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
+//@dev - RNG (Random Number Generated) via Chainlink VRF
+import { RandomNumberConsumerV2 } from "./chainlink-examples/RandomNumberConsumerV2.sol";
+
 
 /**
  * @title The Retirement NFT bundled Ticket contract
