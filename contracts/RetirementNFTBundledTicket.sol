@@ -20,6 +20,14 @@ contract RetirementNFTBundledTicket is ERC721, Ownable {
         //[TODO]: 
     }
 
+    /**
+     * @notice - Check whether a caller (msg.sender) has the RetirementNFT or not
+     */ 
+    modifier onlyRetirementNFTHolder(address caller) {
+        // [TODO]: The method for checking whether a caller (msg.sender) has the RetirementNFT or not
+        _;
+    }
+
     function safeMint(address to, uint256 tokenId) public onlyOwner {
         _safeMint(to, tokenId);
     }
