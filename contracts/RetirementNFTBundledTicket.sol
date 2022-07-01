@@ -4,6 +4,9 @@ pragma solidity ^0.8.7;
 //@dev - RNG (Random Number Generated) via Chainlink VRF
 import { RandomNumberConsumerV2 } from "./chainlink-examples/RandomNumberConsumerV2.sol";
 
+//@dev - Retirement NFT
+import { RetirementNFT } from "RetirementNFT.sol";
+
 
 /**
  * @title The Retirement NFT bundled Ticket contract
