@@ -27,7 +27,8 @@ contract RetirementNFT is ERC721, AccessControl {
      * @notice - Mint a new RetirementNFT with RNG via Chainlink VRF
      */ 
     function mintNewRetirementNFT(address to, uint256 tokenId) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        //@dev - [TODO]: Generate Random Number via Chainlink VRF
+        //@dev - Generate Random Number via Chainlink VRF
+        rngV2.requestRandomWords();
 
         //@dev - Mint a new RetirementNFT
         _safeMint(to, tokenId);
