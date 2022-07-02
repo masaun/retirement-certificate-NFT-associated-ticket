@@ -1,4 +1,4 @@
-# Sustainable Blockchain Hack - with Chainlink
+# Retirement NFT-gated ticket 🎫
 
 ### Deploy smart contracts on Kovan
 ```

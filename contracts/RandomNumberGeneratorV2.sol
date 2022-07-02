@@ -39,7 +39,7 @@ contract RandomNumberGeneratorV2 is VRFConsumerBaseV2 {
 
     uint256[] public s_randomWords;
     uint256 public s_requestId;
-    address s_owner;
+    address s_admin;
 
     event ReturnedRandomness(uint256[] randomWords);
 
@@ -59,15 +59,23 @@ contract RandomNumberGeneratorV2 is VRFConsumerBaseV2 {
         COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
         LINKTOKEN = LinkTokenInterface(link);
         s_keyHash = keyHash;
-        s_owner = msg.sender;
+        s_admin = msg.sender;
         s_subscriptionId = subscriptionId;
+    }
+
+    /**
+     * @notice - Only admin
+     */ 
+    modifier onlyAdmin() {
+        require(msg.sender == s_admin);
+        _;
     }
 
     /**
      * @notice Requests randomness
      * Assumes the subscription is funded sufficiently; "Words" refers to unit of data in Computer Science
      */
-    function requestRandomWords() external onlyOwner {
+    function requestRandomWords() external {
         // Will revert if subscription is not set and funded.
         s_requestId = COORDINATOR.requestRandomWords(
             s_keyHash,
@@ -89,8 +97,4 @@ contract RandomNumberGeneratorV2 is VRFConsumerBaseV2 {
         emit ReturnedRandomness(randomWords);
     }
 
-    modifier onlyOwner() {
-        require(msg.sender == s_owner);
-        _;
-    }
 }
