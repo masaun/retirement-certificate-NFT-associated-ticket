@@ -33,6 +33,7 @@ export interface RetirementNFTInterface extends utils.Interface {
     "ownerOf(uint256)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
+    "rngV2()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
@@ -87,6 +88,7 @@ export interface RetirementNFTInterface extends utils.Interface {
     functionFragment: "revokeRole",
     values: [BytesLike, string]
   ): string;
+  encodeFunctionData(functionFragment: "rngV2", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom",
     values: [string, string, BigNumberish]
@@ -140,6 +142,7 @@ export interface RetirementNFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "rngV2", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom",
     data: BytesLike
@@ -307,6 +310,8 @@ export interface RetirementNFT extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    rngV2(overrides?: CallOverrides): Promise<[string]>;
+
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
@@ -405,6 +410,8 @@ export interface RetirementNFT extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  rngV2(overrides?: CallOverrides): Promise<string>;
+
   "safeTransferFrom(address,address,uint256)"(
     from: string,
     to: string,
@@ -499,6 +506,8 @@ export interface RetirementNFT extends BaseContract {
       account: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    rngV2(overrides?: CallOverrides): Promise<string>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -670,6 +679,8 @@ export interface RetirementNFT extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    rngV2(overrides?: CallOverrides): Promise<BigNumber>;
+
     "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
@@ -779,6 +790,8 @@ export interface RetirementNFT extends BaseContract {
       account: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    rngV2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
