@@ -41,6 +41,7 @@ export type { PriceConsumerV3 } from "./PriceConsumerV3";
 export type { RandomNumberConsumerV2 } from "./RandomNumberConsumerV2";
 export type { KeepersCounterEchidnaTest } from "./KeepersCounterEchidnaTest";
 export type { MockOracle } from "./MockOracle";
+export type { RandomNumberGeneratorV2 } from "./RandomNumberGeneratorV2";
 export type { RetirementNFT } from "./RetirementNFT";
 export type { RetirementNFTBundledTicket } from "./RetirementNFTBundledTicket";
 
@@ -84,5 +85,6 @@ export { PriceConsumerV3__factory } from "./factories/PriceConsumerV3__factory";
 export { RandomNumberConsumerV2__factory } from "./factories/RandomNumberConsumerV2__factory";
 export { KeepersCounterEchidnaTest__factory } from "./factories/KeepersCounterEchidnaTest__factory";
 export { MockOracle__factory } from "./factories/MockOracle__factory";
+export { RandomNumberGeneratorV2__factory } from "./factories/RandomNumberGeneratorV2__factory";
 export { RetirementNFT__factory } from "./factories/RetirementNFT__factory";
 export { RetirementNFTBundledTicket__factory } from "./factories/RetirementNFTBundledTicket__factory";

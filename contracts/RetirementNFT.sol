@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
+//@dev - RNG (Random Number Generated) via Chainlink VRF
+import { RandomNumberGeneratorV2 } from "./RandomNumberGeneratorV2.sol";
+
+//@dev - NFT
 import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
