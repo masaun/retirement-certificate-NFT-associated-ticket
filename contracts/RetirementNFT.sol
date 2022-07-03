@@ -4,9 +4,6 @@ pragma solidity ^0.8.7;
 //@dev - Interfaces
 import { IRetirementNFT } from "./interfaces/IRetirementNFT.sol";
 
-//@dev - RNG (Random Number Generated) via Chainlink VRF
-import { RandomNumberGeneratorV2 } from "./RandomNumberGeneratorV2.sol";
-
 //@dev - NFT
 import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
@@ -17,11 +14,7 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
  */
 contract RetirementNFT is IRetirementNFT, ERC721, AccessControl {
 
-    RandomNumberGeneratorV2 public rngV2;
-
-    constructor(RandomNumberGeneratorV2 _rngV2) ERC721("Retirement NFT", "RNFT") {
-        rngV2 = _rngV2;
-
+    constructor() ERC721("Retirement NFT", "RNFT") {
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
@@ -29,14 +22,7 @@ contract RetirementNFT is IRetirementNFT, ERC721, AccessControl {
     /**
      * @notice - Mint a new RetirementNFT with RNG via Chainlink VRF
      */ 
-    function mintNewRetirementNFT(address to, uint256 tokenId) public override onlyRole(DEFAULT_ADMIN_ROLE) {
-        //@dev - Generate Random Number via Chainlink VRF
-        rngV2.requestRandomWords();
-
-        //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
-        uint256[] memory randomNumbers = rngV2.getSRandomWords();
-        //uint256[] memory randomNumbers = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
-        
+    function mintNewRetirementNFT(address to, uint256 tokenId) public override onlyRole(DEFAULT_ADMIN_ROLE) {        
         //@dev - Mint a new RetirementNFT
         _safeMint(to, tokenId);
     }
