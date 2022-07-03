@@ -11,12 +11,19 @@ import { RetirementNFT } from "./RetirementNFT.sol";
 import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
+//@dev - Struct, Enum, etc
+import { DataTypes } from "./libraries/DataTypes.sol";
+
+
 /**
  * @title The Retirement NFT bundled Ticket contract
  */
 contract RetirementNFTBundledTicket is ERC721, AccessControl {
 
     RandomNumberGeneratorV2 public rngV2;
+
+    //@dev - Storages
+    mapping (address => DataTypes.RetirementNFTBundledTicketMetadata) retirementNFTBundledTicketMetadatas;
 
     constructor(RandomNumberGeneratorV2 _rngV2) ERC721("Retirement NFT Bundled Ticket", "RNFT_BUNDLED_TICKET") {
         rngV2 = _rngV2;
@@ -36,13 +43,19 @@ contract RetirementNFTBundledTicket is ERC721, AccessControl {
     /**
      * @notice - Mint a new RetirementNFTBundledTicket with RNG via Chainlink VRF
      */ 
-    function mintNewRetirementNFTBundledTicket(address to, uint256 tokenId) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    function mintNewRetirementNFTBundledTicket(address to, uint256 tokenId, RetirementNFT retirementNFT) public onlyRole(DEFAULT_ADMIN_ROLE) {
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
         
         //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
         uint256[] memory randomNumbers = rngV2.getSRandomWords();
         //uint256[] memory randomNumbers = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
+
+        //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
+        address RETIREMENT_NFT = address(retirementNFT);
+        DataTypes.RetirementNFTBundledTicketMetadata storage retirementNFTBundledTicketMetadata = retirementNFTBundledTicketMetadatas[RETIREMENT_NFT];
+        retirementNFTBundledTicketMetadata.ticketHolder = address(0);  // [TODO]: Assign actual wallet address 
+        retirementNFTBundledTicketMetadata.randomNumber = randomNumbers[0];
 
         //@dev - Mint a new RetirementNFTBundledTicket
         _safeMint(to, tokenId);

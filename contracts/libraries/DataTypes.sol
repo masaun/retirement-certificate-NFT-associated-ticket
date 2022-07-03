@@ -8,12 +8,11 @@ pragma solidity ^0.8.7;
 library DataTypes {
 
     /**
-     * @notice - Data of Something
+     * @notice - Data of RetirementNFT's Metadata
      */ 
-    struct SomethingStruct {
-        address something1; 
-        uint something2;
-        string contentHash;
+    struct RetirementNFTBundledTicketMetadata {
+        address ticketHolder; 
+        uint256 randomNumber;
     }
 
     /**
