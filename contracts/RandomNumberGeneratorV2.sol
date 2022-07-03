@@ -97,4 +97,17 @@ contract RandomNumberGeneratorV2 is VRFConsumerBaseV2 {
         emit ReturnedRandomness(randomWords);
     }
 
+
+    ///------------------------
+    /// Methods that are added
+    ///-------------------------
+
+    /**
+     * @notice - Get a value that is stored in s_randomWords the last
+     */ 
+    function getSRandomWords() public view returns (uint256[] memory _s_randomWords) {
+        return s_randomWords;
+    }
+
+
 }

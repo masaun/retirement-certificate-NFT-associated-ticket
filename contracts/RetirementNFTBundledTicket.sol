@@ -18,7 +18,7 @@ contract RetirementNFTBundledTicket is ERC721, AccessControl {
 
     RandomNumberGeneratorV2 public rngV2;
 
-    constructor(RandomNumberGeneratorV2 _rngV2) ERC721("Retirement NFT bundled Ticket", "RNFT_BUNDLED_TICKET") {
+    constructor(RandomNumberGeneratorV2 _rngV2) ERC721("Retirement NFT Bundled Ticket", "RNFT_BUNDLED_TICKET") {
         rngV2 = _rngV2;
 
         //@dev - Grant admin role to caller (msg.sender)
@@ -39,7 +39,11 @@ contract RetirementNFTBundledTicket is ERC721, AccessControl {
     function mintNewRetirementNFTBundledTicket(address to, uint256 tokenId) public onlyRole(DEFAULT_ADMIN_ROLE) {
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
-        uint256[] memory randomNumber = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
+        
+        //@dev - Get a value that is stored in s_randomWords by above
+        uint256[] memory randomNumber = rngV2.getSRandomWords();
+        //uint256[] memory randomNumber = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
+
 
         //@dev - Mint a new RetirementNFTBundledTicket
         _safeMint(to, tokenId);

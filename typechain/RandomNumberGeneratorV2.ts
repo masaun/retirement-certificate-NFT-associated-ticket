@@ -20,12 +20,17 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface RandomNumberGeneratorV2Interface extends utils.Interface {
   contractName: "RandomNumberGeneratorV2";
   functions: {
+    "getSRandomWords()": FunctionFragment;
     "rawFulfillRandomWords(uint256,uint256[])": FunctionFragment;
     "requestRandomWords()": FunctionFragment;
     "s_randomWords(uint256)": FunctionFragment;
     "s_requestId()": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "getSRandomWords",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "rawFulfillRandomWords",
     values: [BigNumberish, BigNumberish[]]
@@ -43,6 +48,10 @@ export interface RandomNumberGeneratorV2Interface extends utils.Interface {
     values?: undefined
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "getSRandomWords",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "rawFulfillRandomWords",
     data: BytesLike
@@ -103,6 +112,10 @@ export interface RandomNumberGeneratorV2 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    getSRandomWords(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber[]] & { _s_randomWords: BigNumber[] }>;
+
     rawFulfillRandomWords(
       requestId: BigNumberish,
       randomWords: BigNumberish[],
@@ -120,6 +133,8 @@ export interface RandomNumberGeneratorV2 extends BaseContract {
 
     s_requestId(overrides?: CallOverrides): Promise<[BigNumber]>;
   };
+
+  getSRandomWords(overrides?: CallOverrides): Promise<BigNumber[]>;
 
   rawFulfillRandomWords(
     requestId: BigNumberish,
@@ -139,6 +154,8 @@ export interface RandomNumberGeneratorV2 extends BaseContract {
   s_requestId(overrides?: CallOverrides): Promise<BigNumber>;
 
   callStatic: {
+    getSRandomWords(overrides?: CallOverrides): Promise<BigNumber[]>;
+
     rawFulfillRandomWords(
       requestId: BigNumberish,
       randomWords: BigNumberish[],
@@ -163,6 +180,8 @@ export interface RandomNumberGeneratorV2 extends BaseContract {
   };
 
   estimateGas: {
+    getSRandomWords(overrides?: CallOverrides): Promise<BigNumber>;
+
     rawFulfillRandomWords(
       requestId: BigNumberish,
       randomWords: BigNumberish[],
@@ -182,6 +201,8 @@ export interface RandomNumberGeneratorV2 extends BaseContract {
   };
 
   populateTransaction: {
+    getSRandomWords(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     rawFulfillRandomWords(
       requestId: BigNumberish,
       randomWords: BigNumberish[],
