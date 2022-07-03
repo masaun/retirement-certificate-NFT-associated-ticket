@@ -98,7 +98,7 @@ contract RandomNumberGeneratorV2 is VRFConsumerBaseV2 {
     }
 
 
-    ///------------------------
+    ///-------------------------
     /// Methods that are added
     ///-------------------------
 

@@ -50,8 +50,13 @@ import { RandomNumberConsumerV2, VRFCoordinatorV2Mock } from "../../typechain"
         await new Promise(async (resolve, reject) => {
           randomNumberConsumerV2.once("ReturnedRandomness", async () => {
             console.log("ReturnedRandomness event fired!")
+            
+            //@dev - Retrieve random numbers
             const firstRandomNumber: BigNumber = await randomNumberConsumerV2.s_randomWords(0)
             const secondRandomNumber: BigNumber = await randomNumberConsumerV2.s_randomWords(1)
+            console.log(`firstRandomNumber: ${ firstRandomNumber }`)    // [Example result]: 78541660797044910968829902406342334108369226379826116161446442989268089806461
+            console.log(`secondRandomNumber: ${ secondRandomNumber }`)  // [Example result]: 92458281274488595289803937127152923398167637295201432141969818930235769911599
+
             // assert throws an error if it fails, so we need to wrap
             // it in a try/catch so that the promise returns event
             // if it fails.
@@ -63,8 +68,14 @@ import { RandomNumberConsumerV2, VRFCoordinatorV2Mock } from "../../typechain"
               reject(e)
             }
           })
+
+          //@dev - Execute requestRandomWords() method
           await randomNumberConsumerV2.requestRandomWords()
+
+          //@dev - Retrieve a requestId that was used for execution above
           const requestId: BigNumber = await randomNumberConsumerV2.s_requestId()
+          console.log(`requestId: ${ requestId }`)  // [Example result]: 1
+
           vrfCoordinatorV2Mock.fulfillRandomWords(requestId, randomNumberConsumerV2.address)
         })
       })
