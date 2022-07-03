@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
+//@dev - Interfaces
+import { IRetirementNFTBundledTicket } from "./interfaces/IRetirementNFTBundledTicket.sol";
+
 //@dev - RNG (Random Number Generated) via Chainlink VRF
-import { RandomNumberGeneratorV2 } from "./RandomNumberGeneratorV2.sol";
+import { IRandomNumberGeneratorV2 } from "./interfaces/IRandomNumberGeneratorV2.sol";
 
 //@dev - Retirement NFT
-import { RetirementNFT } from "./RetirementNFT.sol";
+import { IRetirementNFT } from "./interfaces/IRetirementNFT.sol";
 
 //@dev - NFT
 import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -18,14 +21,14 @@ import { DataTypes } from "./libraries/DataTypes.sol";
 /**
  * @title The Retirement NFT bundled Ticket contract
  */
-contract RetirementNFTBundledTicket is ERC721, AccessControl {
+contract RetirementNFTBundledTicket is IRetirementNFTBundledTicket, ERC721, AccessControl {
 
-    RandomNumberGeneratorV2 public rngV2;
+    IRandomNumberGeneratorV2 public rngV2;
 
     //@dev - Storages
     mapping (address => DataTypes.RetirementNFTBundledTicketMetadata) retirementNFTBundledTicketMetadatas;
 
-    constructor(RandomNumberGeneratorV2 _rngV2) ERC721("Retirement NFT Bundled Ticket", "RNFT_BUNDLED_TICKET") {
+    constructor(IRandomNumberGeneratorV2 _rngV2) ERC721("Retirement NFT Bundled Ticket", "RNFT_BUNDLED_TICKET") {
         rngV2 = _rngV2;
 
         //@dev - Grant admin role to caller (msg.sender)
@@ -43,7 +46,7 @@ contract RetirementNFTBundledTicket is ERC721, AccessControl {
     /**
      * @notice - Mint a new RetirementNFTBundledTicket with RNG via Chainlink VRF
      */ 
-    function mintNewRetirementNFTBundledTicket(address to, uint256 tokenId, RetirementNFT retirementNFT) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    function mintNewRetirementNFTBundledTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) public override onlyRole(DEFAULT_ADMIN_ROLE) {
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
         

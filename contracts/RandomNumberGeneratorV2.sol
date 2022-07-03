@@ -2,6 +2,9 @@
 // An example of a consumer contract that relies on a subscription for funding.
 pragma solidity ^0.8.7;
 
+//@dev - Interfaces
+import { IRandomNumberGeneratorV2 } from "./interfaces/IRandomNumberGeneratorV2.sol";
+
 import "@chainlink/contracts/src/v0.8/interfaces/LinkTokenInterface.sol";
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
@@ -10,7 +13,7 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
  * @title The RandomNumberGeneratorV2 contract
  * @notice A contract that gets random values from Chainlink VRF V2
  */
-contract RandomNumberGeneratorV2 is VRFConsumerBaseV2 {
+contract RandomNumberGeneratorV2 is IRandomNumberGeneratorV2, VRFConsumerBaseV2 {
     VRFCoordinatorV2Interface immutable COORDINATOR;
     LinkTokenInterface immutable LINKTOKEN;
 
@@ -75,7 +78,7 @@ contract RandomNumberGeneratorV2 is VRFConsumerBaseV2 {
      * @notice Requests randomness
      * Assumes the subscription is funded sufficiently; "Words" refers to unit of data in Computer Science
      */
-    function requestRandomWords() external {
+    function requestRandomWords() external override {
         // Will revert if subscription is not set and funded.
         s_requestId = COORDINATOR.requestRandomWords(
             s_keyHash,
@@ -105,7 +108,7 @@ contract RandomNumberGeneratorV2 is VRFConsumerBaseV2 {
     /**
      * @notice - Get a value that is stored in s_randomWords the last
      */ 
-    function getSRandomWords() public view returns (uint256[] memory _s_randomWords) {
+    function getSRandomWords() public view override returns (uint256[] memory _s_randomWords) {
         return s_randomWords;
     }
 

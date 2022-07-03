@@ -5,5 +5,7 @@ import { DataTypes } from '../libraries/DataTypes.sol';
 
 
 interface IRetirementNFT {
-    // [TODO]: 
+
+    function mintNewRetirementNFT(address to, uint256 tokenId) external;
+
 }
