@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
+//@dev - Interfaces
+import { IRetirementNFT } from "./interfaces/IRetirementNFT.sol";
+
 //@dev - RNG (Random Number Generated) via Chainlink VRF
 import { RandomNumberGeneratorV2 } from "./RandomNumberGeneratorV2.sol";
 
@@ -12,7 +15,7 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
 /**
  * @title The Retirement NFT contract
  */
-contract RetirementNFT is ERC721, AccessControl {
+contract RetirementNFT is IRetirementNFT, ERC721, AccessControl {
 
     RandomNumberGeneratorV2 public rngV2;
 
@@ -26,13 +29,13 @@ contract RetirementNFT is ERC721, AccessControl {
     /**
      * @notice - Mint a new RetirementNFT with RNG via Chainlink VRF
      */ 
-    function mintNewRetirementNFT(address to, uint256 tokenId) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    function mintNewRetirementNFT(address to, uint256 tokenId) public override onlyRole(DEFAULT_ADMIN_ROLE) {
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
 
-        //@dev - Get a value that is stored in s_randomWords by above
-        uint256[] memory randomNumber = rngV2.getSRandomWords();
-        //uint256[] memory randomNumber = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
+        //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
+        uint256[] memory randomNumbers = rngV2.getSRandomWords();
+        //uint256[] memory randomNumbers = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
         
         //@dev - Mint a new RetirementNFT
         _safeMint(to, tokenId);

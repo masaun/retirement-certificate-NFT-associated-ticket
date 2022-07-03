@@ -28,7 +28,7 @@ export interface RetirementNFTBundledTicketInterface extends utils.Interface {
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mintNewRetirementNFTBundledTicket(address,uint256)": FunctionFragment;
+    "mintNewRetirementNFTBundledTicket(address,uint256,address)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
@@ -73,7 +73,7 @@ export interface RetirementNFTBundledTicketInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "mintNewRetirementNFTBundledTicket",
-    values: [string, BigNumberish]
+    values: [string, BigNumberish, string]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
@@ -288,6 +288,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
     mintNewRetirementNFTBundledTicket(
       to: string,
       tokenId: BigNumberish,
+      retirementNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -391,6 +392,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
   mintNewRetirementNFTBundledTicket(
     to: string,
     tokenId: BigNumberish,
+    retirementNFT: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -488,6 +490,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
     mintNewRetirementNFTBundledTicket(
       to: string,
       tokenId: BigNumberish,
+      retirementNFT: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -657,6 +660,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
     mintNewRetirementNFTBundledTicket(
       to: string,
       tokenId: BigNumberish,
+      retirementNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -769,6 +773,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
     mintNewRetirementNFTBundledTicket(
       to: string,
       tokenId: BigNumberish,
+      retirementNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
