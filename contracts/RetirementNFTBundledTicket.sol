@@ -44,7 +44,6 @@ contract RetirementNFTBundledTicket is ERC721, AccessControl {
         uint256[] memory randomNumbers = rngV2.getSRandomWords();
         //uint256[] memory randomNumbers = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
 
-
         //@dev - Mint a new RetirementNFTBundledTicket
         _safeMint(to, tokenId);
     }
