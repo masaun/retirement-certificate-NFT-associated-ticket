@@ -8,6 +8,8 @@ import { IRetirementNFT } from "./IRetirementNFT.sol";
 
 interface IRetirementNFTAssociatedTicket {
 
-    function mintNewRetirementNFTAssociatedTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) external;
+    function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) external;
+
+    //function mintNewRetirementNFTAssociatedTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) external;
 
 }

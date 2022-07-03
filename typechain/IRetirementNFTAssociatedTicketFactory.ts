@@ -17,33 +17,33 @@ import { FunctionFragment, Result } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface IRetirementNFTAssociatedTicketInterface
+export interface IRetirementNFTAssociatedTicketFactoryInterface
   extends utils.Interface {
-  contractName: "IRetirementNFTAssociatedTicket";
+  contractName: "IRetirementNFTAssociatedTicketFactory";
   functions: {
-    "saveRetirementNFTAssociatedTicketMetadata(address,uint256[])": FunctionFragment;
+    "mintNewRetirementNFTAssociatedTicket(address,uint256,address)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
-    values: [string, BigNumberish[]]
+    functionFragment: "mintNewRetirementNFTAssociatedTicket",
+    values: [string, BigNumberish, string]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
+    functionFragment: "mintNewRetirementNFTAssociatedTicket",
     data: BytesLike
   ): Result;
 
   events: {};
 }
 
-export interface IRetirementNFTAssociatedTicket extends BaseContract {
-  contractName: "IRetirementNFTAssociatedTicket";
+export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
+  contractName: "IRetirementNFTAssociatedTicketFactory";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: IRetirementNFTAssociatedTicketInterface;
+  interface: IRetirementNFTAssociatedTicketFactoryInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -65,23 +65,26 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    saveRetirementNFTAssociatedTicketMetadata(
+    mintNewRetirementNFTAssociatedTicket(
+      to: string,
+      tokenId: BigNumberish,
       retirementNFT: string,
-      randomNumbers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
-  saveRetirementNFTAssociatedTicketMetadata(
+  mintNewRetirementNFTAssociatedTicket(
+    to: string,
+    tokenId: BigNumberish,
     retirementNFT: string,
-    randomNumbers: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    saveRetirementNFTAssociatedTicketMetadata(
+    mintNewRetirementNFTAssociatedTicket(
+      to: string,
+      tokenId: BigNumberish,
       retirementNFT: string,
-      randomNumbers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -89,17 +92,19 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   filters: {};
 
   estimateGas: {
-    saveRetirementNFTAssociatedTicketMetadata(
+    mintNewRetirementNFTAssociatedTicket(
+      to: string,
+      tokenId: BigNumberish,
       retirementNFT: string,
-      randomNumbers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    saveRetirementNFTAssociatedTicketMetadata(
+    mintNewRetirementNFTAssociatedTicket(
+      to: string,
+      tokenId: BigNumberish,
       retirementNFT: string,
-      randomNumbers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

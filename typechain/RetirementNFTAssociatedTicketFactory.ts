@@ -17,9 +17,9 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface RetirementNFTAssociatedTicketInterface
+export interface RetirementNFTAssociatedTicketFactoryInterface
   extends utils.Interface {
-  contractName: "RetirementNFTAssociatedTicket";
+  contractName: "RetirementNFTAssociatedTicketFactory";
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -29,13 +29,13 @@ export interface RetirementNFTAssociatedTicketInterface
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "mintNewRetirementNFTAssociatedTicket(address,uint256,address)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rngV2()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
-    "saveRetirementNFTAssociatedTicketMetadata(address,uint256[])": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
@@ -72,6 +72,10 @@ export interface RetirementNFTAssociatedTicketInterface
     functionFragment: "isApprovedForAll",
     values: [string, string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "mintNewRetirementNFTAssociatedTicket",
+    values: [string, BigNumberish, string]
+  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
@@ -89,10 +93,6 @@ export interface RetirementNFTAssociatedTicketInterface
   encodeFunctionData(
     functionFragment: "safeTransferFrom",
     values: [string, string, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
-    values: [string, BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
@@ -132,6 +132,10 @@ export interface RetirementNFTAssociatedTicketInterface
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "mintNewRetirementNFTAssociatedTicket",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
@@ -142,10 +146,6 @@ export interface RetirementNFTAssociatedTicketInterface
   decodeFunctionResult(functionFragment: "rngV2", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -223,13 +223,13 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface RetirementNFTAssociatedTicket extends BaseContract {
-  contractName: "RetirementNFTAssociatedTicket";
+export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
+  contractName: "RetirementNFTAssociatedTicketFactory";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: RetirementNFTAssociatedTicketInterface;
+  interface: RetirementNFTAssociatedTicketFactoryInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -286,6 +286,13 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    mintNewRetirementNFTAssociatedTicket(
+      to: string,
+      tokenId: BigNumberish,
+      retirementNFT: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     name(overrides?: CallOverrides): Promise<[string]>;
 
     ownerOf(
@@ -319,12 +326,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       tokenId: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    saveRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
-      randomNumbers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -389,6 +390,13 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  mintNewRetirementNFTAssociatedTicket(
+    to: string,
+    tokenId: BigNumberish,
+    retirementNFT: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   name(overrides?: CallOverrides): Promise<string>;
 
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
@@ -419,12 +427,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     to: string,
     tokenId: BigNumberish,
     data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  saveRetirementNFTAssociatedTicketMetadata(
-    retirementNFT: string,
-    randomNumbers: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -486,6 +488,13 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    mintNewRetirementNFTAssociatedTicket(
+      to: string,
+      tokenId: BigNumberish,
+      retirementNFT: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     name(overrides?: CallOverrides): Promise<string>;
 
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
@@ -516,12 +525,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       tokenId: BigNumberish,
       data: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    saveRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
-      randomNumbers: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -655,6 +658,13 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    mintNewRetirementNFTAssociatedTicket(
+      to: string,
+      tokenId: BigNumberish,
+      retirementNFT: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     ownerOf(
@@ -688,12 +698,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       tokenId: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    saveRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
-      randomNumbers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -767,6 +771,13 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    mintNewRetirementNFTAssociatedTicket(
+      to: string,
+      tokenId: BigNumberish,
+      retirementNFT: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     ownerOf(
@@ -800,12 +811,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       tokenId: BigNumberish,
       data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    saveRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
-      randomNumbers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
