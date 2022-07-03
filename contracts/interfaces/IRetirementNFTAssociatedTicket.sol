@@ -6,8 +6,8 @@ import { DataTypes } from '../libraries/DataTypes.sol';
 import { IRetirementNFT } from "./IRetirementNFT.sol";
 
 
-interface IRetirementNFTBundledTicket {
+interface IRetirementNFTAssociatedTicket {
 
-    function mintNewRetirementNFTBundledTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) external;
+    function mintNewRetirementNFTAssociatedTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) external;
 
 }

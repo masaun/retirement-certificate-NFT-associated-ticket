@@ -10,7 +10,7 @@ library DataTypes {
     /**
      * @notice - Data of RetirementNFT's Metadata
      */ 
-    struct RetirementNFTBundledTicketMetadata {
+    struct RetirementNFTAssociatedTicketMetadata {
         address ticketHolder; 
         uint256 randomNumber;
     }

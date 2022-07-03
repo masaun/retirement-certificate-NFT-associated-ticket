@@ -2,7 +2,7 @@
 pragma solidity ^0.8.7;
 
 //@dev - Interfaces
-import { IRetirementNFTBundledTicket } from "./interfaces/IRetirementNFTBundledTicket.sol";
+import { IRetirementNFTAssociatedTicket } from "./interfaces/IRetirementNFTAssociatedTicket.sol";
 
 //@dev - RNG (Random Number Generated) via Chainlink VRF
 import { IRandomNumberGeneratorV2 } from "./interfaces/IRandomNumberGeneratorV2.sol";
@@ -19,14 +19,14 @@ import { DataTypes } from "./libraries/DataTypes.sol";
 
 
 /**
- * @title The Retirement NFT bundled Ticket contract
+ * @title The Retirement NFT associated Ticket contract
  */
-contract RetirementNFTBundledTicket is IRetirementNFTBundledTicket, ERC721, AccessControl {
+contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC721, AccessControl {
 
     IRandomNumberGeneratorV2 public rngV2;
 
     //@dev - Storages
-    mapping (address => DataTypes.RetirementNFTBundledTicketMetadata) retirementNFTBundledTicketMetadatas;
+    mapping (address => DataTypes.RetirementNFTAssociatedTicketMetadata) retirementNFTAssociatedTicketMetadatas;
 
     constructor(IRandomNumberGeneratorV2 _rngV2) ERC721("Retirement NFT Bundled Ticket", "RNFT_BUNDLED_TICKET") {
         rngV2 = _rngV2;
@@ -44,9 +44,9 @@ contract RetirementNFTBundledTicket is IRetirementNFTBundledTicket, ERC721, Acce
     }
 
     /**
-     * @notice - Mint a new RetirementNFTBundledTicket with RNG via Chainlink VRF
+     * @notice - Mint a new RetirementNFTAssociatedTicket with RNG via Chainlink VRF
      */ 
-    function mintNewRetirementNFTBundledTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) public override onlyRole(DEFAULT_ADMIN_ROLE) {
+    function mintNewRetirementNFTAssociatedTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) public override onlyRole(DEFAULT_ADMIN_ROLE) {
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
         
@@ -56,11 +56,11 @@ contract RetirementNFTBundledTicket is IRetirementNFTBundledTicket, ERC721, Acce
 
         //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
         address RETIREMENT_NFT = address(retirementNFT);
-        DataTypes.RetirementNFTBundledTicketMetadata storage retirementNFTBundledTicketMetadata = retirementNFTBundledTicketMetadatas[RETIREMENT_NFT];
-        retirementNFTBundledTicketMetadata.ticketHolder = address(0);  // [TODO]: Assign actual wallet address 
-        retirementNFTBundledTicketMetadata.randomNumber = randomNumbers[0];
+        DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
+        retirementNFTAssociatedTicketMetadata.ticketHolder = address(0);  // [TODO]: Assign actual wallet address 
+        retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
 
-        //@dev - Mint a new RetirementNFTBundledTicket
+        //@dev - Mint a new RetirementNFTAssociatedTicket
         _safeMint(to, tokenId);
     }
 
