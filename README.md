@@ -1,4 +1,4 @@
-# Retirement NFT-gated ticket 🎫
+# Retirement NFT-gated (associated) ticket 🎫
 
 ### Deploy smart contracts on Kovan
 ```
