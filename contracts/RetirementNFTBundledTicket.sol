@@ -2,7 +2,7 @@
 pragma solidity ^0.8.7;
 
 //@dev - RNG (Random Number Generated) via Chainlink VRF
-import { RandomNumberConsumerV2 } from "./chainlink-examples/RandomNumberConsumerV2.sol";
+import { RandomNumberGeneratorV2 } from "./RandomNumberGeneratorV2.sol";
 
 //@dev - Retirement NFT
 import { RetirementNFT } from "./RetirementNFT.sol";
@@ -16,7 +16,11 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
  */
 contract RetirementNFTBundledTicket is ERC721, AccessControl {
 
-    constructor() ERC721("Retirement NFT bundled Ticket", "RNFT_BUNDLED_TICKET") {
+    RandomNumberGeneratorV2 public rngV2;
+
+    constructor(RandomNumberGeneratorV2 _rngV2) ERC721("Retirement NFT Bundled Ticket", "RNFT_BUNDLED_TICKET") {
+        rngV2 = _rngV2;
+
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
@@ -29,7 +33,19 @@ contract RetirementNFTBundledTicket is ERC721, AccessControl {
         _;
     }
 
-    function safeMint(address to, uint256 tokenId) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    /**
+     * @notice - Mint a new RetirementNFTBundledTicket with RNG via Chainlink VRF
+     */ 
+    function mintNewRetirementNFTBundledTicket(address to, uint256 tokenId) public onlyRole(DEFAULT_ADMIN_ROLE) {
+        //@dev - Generate Random Number via Chainlink VRF
+        rngV2.requestRandomWords();
+        
+        //@dev - Get a value that is stored in s_randomWords by above
+        uint256[] memory randomNumber = rngV2.getSRandomWords();
+        //uint256[] memory randomNumber = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
+
+
+        //@dev - Mint a new RetirementNFTBundledTicket
         _safeMint(to, tokenId);
     }
 

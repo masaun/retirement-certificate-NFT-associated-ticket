@@ -28,11 +28,12 @@ export interface RetirementNFTBundledTicketInterface extends utils.Interface {
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
+    "mintNewRetirementNFTBundledTicket(address,uint256)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
-    "safeMint(address,uint256)": FunctionFragment;
+    "rngV2()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
@@ -70,6 +71,10 @@ export interface RetirementNFTBundledTicketInterface extends utils.Interface {
     functionFragment: "isApprovedForAll",
     values: [string, string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "mintNewRetirementNFTBundledTicket",
+    values: [string, BigNumberish]
+  ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
@@ -83,10 +88,7 @@ export interface RetirementNFTBundledTicketInterface extends utils.Interface {
     functionFragment: "revokeRole",
     values: [BytesLike, string]
   ): string;
-  encodeFunctionData(
-    functionFragment: "safeMint",
-    values: [string, BigNumberish]
-  ): string;
+  encodeFunctionData(functionFragment: "rngV2", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom",
     values: [string, string, BigNumberish]
@@ -129,6 +131,10 @@ export interface RetirementNFTBundledTicketInterface extends utils.Interface {
     functionFragment: "isApprovedForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "mintNewRetirementNFTBundledTicket",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
@@ -136,7 +142,7 @@ export interface RetirementNFTBundledTicketInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "safeMint", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "rngV2", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom",
     data: BytesLike
@@ -279,6 +285,12 @@ export interface RetirementNFTBundledTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    mintNewRetirementNFTBundledTicket(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     name(overrides?: CallOverrides): Promise<[string]>;
 
     ownerOf(
@@ -298,11 +310,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    safeMint(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
+    rngV2(overrides?: CallOverrides): Promise<[string]>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -380,6 +388,12 @@ export interface RetirementNFTBundledTicket extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  mintNewRetirementNFTBundledTicket(
+    to: string,
+    tokenId: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   name(overrides?: CallOverrides): Promise<string>;
 
   ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
@@ -396,11 +410,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  safeMint(
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
+  rngV2(overrides?: CallOverrides): Promise<string>;
 
   "safeTransferFrom(address,address,uint256)"(
     from: string,
@@ -475,6 +485,12 @@ export interface RetirementNFTBundledTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
+    mintNewRetirementNFTBundledTicket(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     name(overrides?: CallOverrides): Promise<string>;
 
     ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
@@ -491,11 +507,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    safeMint(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    rngV2(overrides?: CallOverrides): Promise<string>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -642,6 +654,12 @@ export interface RetirementNFTBundledTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    mintNewRetirementNFTBundledTicket(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     name(overrides?: CallOverrides): Promise<BigNumber>;
 
     ownerOf(
@@ -661,11 +679,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    safeMint(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
+    rngV2(overrides?: CallOverrides): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
@@ -752,6 +766,12 @@ export interface RetirementNFTBundledTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    mintNewRetirementNFTBundledTicket(
+      to: string,
+      tokenId: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     ownerOf(
@@ -771,11 +791,7 @@ export interface RetirementNFTBundledTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    safeMint(
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
+    rngV2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: string,
