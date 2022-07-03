@@ -44,26 +44,15 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC721
     }
 
     /**
-     * @notice - Mint a new RetirementNFTAssociatedTicket with RNG via Chainlink VRF
+     * @notice - Save a metadata of RetirementNFTAssociatedTicket
      */ 
-    function mintNewRetirementNFTAssociatedTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) public override onlyRole(DEFAULT_ADMIN_ROLE) {
-        //@dev - Generate Random Number via Chainlink VRF
-        rngV2.requestRandomWords();
-        
-        //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
-        uint256[] memory randomNumbers = rngV2.getSRandomWords();
-        //uint256[] memory randomNumbers = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
-
+    function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) public override {
         //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
         address RETIREMENT_NFT = address(retirementNFT);
         DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
         retirementNFTAssociatedTicketMetadata.ticketHolder = address(0);  // [TODO]: Assign actual wallet address 
         retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
-
-        //@dev - Mint a new RetirementNFTAssociatedTicket
-        _safeMint(to, tokenId);
     }
-
 
     /**
      * @notice - This method is required for Role-based access control of ERC721 by using OpenZeppelin's AccessControl.sol

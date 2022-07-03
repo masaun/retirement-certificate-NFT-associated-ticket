@@ -13,22 +13,17 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "to",
-        type: "address",
-      },
-      {
-        internalType: "uint256",
-        name: "tokenId",
-        type: "uint256",
-      },
-      {
         internalType: "contract IRetirementNFT",
         name: "retirementNFT",
         type: "address",
       },
+      {
+        internalType: "uint256[]",
+        name: "randomNumbers",
+        type: "uint256[]",
+      },
     ],
-    name: "mintNewRetirementNFTAssociatedTicket",
+    name: "saveRetirementNFTAssociatedTicketMetadata",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
