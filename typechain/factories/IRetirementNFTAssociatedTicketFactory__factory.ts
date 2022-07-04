@@ -18,8 +18,46 @@ const _abi = [
         type: "address",
       },
       {
+        internalType: "uint256[]",
+        name: "ticketTypes",
+        type: "uint256[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "mintAmounts",
+        type: "uint256[]",
+      },
+      {
+        internalType: "contract IRetirementNFT",
+        name: "retirementNFT",
+        type: "address",
+      },
+      {
+        internalType: "string",
+        name: "uri",
+        type: "string",
+      },
+    ],
+    name: "mintBatchRetirementNFTAssociatedTicket",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
         internalType: "uint256",
-        name: "tokenId",
+        name: "ticketType",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "mintAmount",
         type: "uint256",
       },
       {
@@ -27,8 +65,13 @@ const _abi = [
         name: "retirementNFT",
         type: "address",
       },
+      {
+        internalType: "string",
+        name: "uri",
+        type: "string",
+      },
     ],
-    name: "mintNewRetirementNFTAssociatedTicket",
+    name: "mintRetirementNFTAssociatedTicket",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",

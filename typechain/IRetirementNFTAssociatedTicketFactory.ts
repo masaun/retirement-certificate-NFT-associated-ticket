@@ -21,16 +21,25 @@ export interface IRetirementNFTAssociatedTicketFactoryInterface
   extends utils.Interface {
   contractName: "IRetirementNFTAssociatedTicketFactory";
   functions: {
-    "mintNewRetirementNFTAssociatedTicket(address,uint256,address)": FunctionFragment;
+    "mintBatchRetirementNFTAssociatedTicket(address,uint256[],uint256[],address,string)": FunctionFragment;
+    "mintRetirementNFTAssociatedTicket(address,uint256,uint256,address,string)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "mintNewRetirementNFTAssociatedTicket",
-    values: [string, BigNumberish, string]
+    functionFragment: "mintBatchRetirementNFTAssociatedTicket",
+    values: [string, BigNumberish[], BigNumberish[], string, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mintRetirementNFTAssociatedTicket",
+    values: [string, BigNumberish, BigNumberish, string, string]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "mintNewRetirementNFTAssociatedTicket",
+    functionFragment: "mintBatchRetirementNFTAssociatedTicket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "mintRetirementNFTAssociatedTicket",
     data: BytesLike
   ): Result;
 
@@ -65,26 +74,59 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    mintNewRetirementNFTAssociatedTicket(
+    mintBatchRetirementNFTAssociatedTicket(
       to: string,
-      tokenId: BigNumberish,
+      ticketTypes: BigNumberish[],
+      mintAmounts: BigNumberish[],
       retirementNFT: string,
+      uri: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    mintRetirementNFTAssociatedTicket(
+      to: string,
+      ticketType: BigNumberish,
+      mintAmount: BigNumberish,
+      retirementNFT: string,
+      uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
-  mintNewRetirementNFTAssociatedTicket(
+  mintBatchRetirementNFTAssociatedTicket(
     to: string,
-    tokenId: BigNumberish,
+    ticketTypes: BigNumberish[],
+    mintAmounts: BigNumberish[],
     retirementNFT: string,
+    uri: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  mintRetirementNFTAssociatedTicket(
+    to: string,
+    ticketType: BigNumberish,
+    mintAmount: BigNumberish,
+    retirementNFT: string,
+    uri: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    mintNewRetirementNFTAssociatedTicket(
+    mintBatchRetirementNFTAssociatedTicket(
       to: string,
-      tokenId: BigNumberish,
+      ticketTypes: BigNumberish[],
+      mintAmounts: BigNumberish[],
       retirementNFT: string,
+      uri: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    mintRetirementNFTAssociatedTicket(
+      to: string,
+      ticketType: BigNumberish,
+      mintAmount: BigNumberish,
+      retirementNFT: string,
+      uri: string,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -92,19 +134,41 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
   filters: {};
 
   estimateGas: {
-    mintNewRetirementNFTAssociatedTicket(
+    mintBatchRetirementNFTAssociatedTicket(
       to: string,
-      tokenId: BigNumberish,
+      ticketTypes: BigNumberish[],
+      mintAmounts: BigNumberish[],
       retirementNFT: string,
+      uri: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    mintRetirementNFTAssociatedTicket(
+      to: string,
+      ticketType: BigNumberish,
+      mintAmount: BigNumberish,
+      retirementNFT: string,
+      uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    mintNewRetirementNFTAssociatedTicket(
+    mintBatchRetirementNFTAssociatedTicket(
       to: string,
-      tokenId: BigNumberish,
+      ticketTypes: BigNumberish[],
+      mintAmounts: BigNumberish[],
       retirementNFT: string,
+      uri: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    mintRetirementNFTAssociatedTicket(
+      to: string,
+      ticketType: BigNumberish,
+      mintAmount: BigNumberish,
+      retirementNFT: string,
+      uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
