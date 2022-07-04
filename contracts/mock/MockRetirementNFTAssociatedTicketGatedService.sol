@@ -28,5 +28,11 @@ contract MockRetirementNFTAssociatedTicketGatedService {
         // [TODO]: 
     }
 
+    /**
+     * @notice - Access a special content that only only a Retirement NFT Associated Ticket holder can access.
+     */ 
+    function accessSpecialContent() public returns (bool) {
+        // [TODO]: 
+    }
 
 }
