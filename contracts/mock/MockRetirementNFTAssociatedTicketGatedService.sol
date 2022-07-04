@@ -21,4 +21,12 @@ contract MockRetirementNFTAssociatedTicketGatedService {
         _;
     }
 
+    /**
+     * @notice - Verify a caller (msg.sender) if the caller has a RetirementNFTAssociatedTicket
+     */
+    function verifyRetirementNFTAssociatedTicket() public returns (bool) {
+        // [TODO]: 
+    }
+
+
 }
