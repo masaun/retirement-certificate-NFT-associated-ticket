@@ -22,7 +22,7 @@ import { DataTypes } from "./libraries/DataTypes.sol";
 
 
 /**
- * @title The Retirement NFT associated Ticket contract
+ * @title - The Retirement NFT associated Ticket contract (ERC1155)
  */
 contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC1155, AccessControl {
 
