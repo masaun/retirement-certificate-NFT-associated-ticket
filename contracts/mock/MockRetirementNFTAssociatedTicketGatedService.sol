@@ -18,6 +18,7 @@ contract MockRetirementNFTAssociatedTicketGatedService {
      */ 
     modifier onlyRetirementNFTAssociatedTicketHolder(address caller) {
         // [TODO]: The method for checking whether a caller (msg.sender) has the RetirementNFT or not
+
         _;
     }
 
@@ -31,7 +32,7 @@ contract MockRetirementNFTAssociatedTicketGatedService {
     /**
      * @notice - Access a special content that only only a Retirement NFT Associated Ticket holder can access.
      */ 
-    function accessSpecialContent() public returns (bool) {
+    function accessSpecialContent() public onlyRetirementNFTAssociatedTicketHolder(msg.sender) returns (bool) {
         // [TODO]: 
     }
 
