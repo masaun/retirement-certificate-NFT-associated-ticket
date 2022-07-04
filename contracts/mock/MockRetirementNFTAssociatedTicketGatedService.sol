@@ -2,6 +2,9 @@
 // An example of a consumer contract that relies on a subscription for funding.
 pragma solidity ^0.8.7;
 
+//import { IRetirementNFTAssociatedTicket } from "../interfaces/IRetirementNFTAssociatedTicket.sol";
+import { RetirementNFTAssociatedTicket } from "../RetirementNFTAssociatedTicket.sol";
+
 
 /**
  * @title - The MockRetirementNFTAssociatedTicketGatedService contract
@@ -16,9 +19,10 @@ contract MockRetirementNFTAssociatedTicketGatedService {
     /**
      * @notice - Check whether a caller (msg.sender) has a RetirementNFTAssociatedTicket or not
      */ 
-    modifier onlyRetirementNFTAssociatedTicketHolder(address caller) {
-        // [TODO]: The method for checking whether a caller (msg.sender) has the RetirementNFT or not
-
+    modifier onlyRetirementNFTAssociatedTicketHolder(address caller, RetirementNFTAssociatedTicket _retirementNFTAssociatedTicket, uint256 ticketType) {
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = _retirementNFTAssociatedTicket;
+        uint numberOfTicket = retirementNFTAssociatedTicket.balanceOf(caller, ticketType);
+        require(numberOfTicket > 0, "A caller should has more than 1 of the RetirementNFTAssociatedTicket");
         _;
     }
 
@@ -32,8 +36,9 @@ contract MockRetirementNFTAssociatedTicketGatedService {
     /**
      * @notice - Access a special content that only only a Retirement NFT Associated Ticket holder can access.
      */ 
-    function accessSpecialContent() public onlyRetirementNFTAssociatedTicketHolder(msg.sender) returns (bool) {
+    function accessSpecialContent(RetirementNFTAssociatedTicket retirementNFTAssociatedTicket, uint256 ticketType) public onlyRetirementNFTAssociatedTicketHolder(msg.sender, retirementNFTAssociatedTicket, ticketType) returns (bool) {
         // [TODO]: 
+
     }
 
 }
