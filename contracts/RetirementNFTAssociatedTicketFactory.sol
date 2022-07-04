@@ -13,8 +13,7 @@ import { RetirementNFTAssociatedTicket } from "./RetirementNFTAssociatedTicket.s
 //@dev - Retirement NFT
 import { IRetirementNFT } from "./interfaces/IRetirementNFT.sol";
 
-//@dev - NFT
-import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+//@dev - OpenZeppelin
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
 //@dev - Struct, Enum, etc
@@ -24,24 +23,55 @@ import { DataTypes } from "./libraries/DataTypes.sol";
 /**
  * @title The factory contract of the Retirement NFT associated Ticket contract
  */
-contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketFactory, ERC721, AccessControl {
+contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketFactory, AccessControl {
 
+    //@dev - contract instances
     IRandomNumberGeneratorV2 public rngV2;
 
     //@dev - Storages
     mapping (address => DataTypes.RetirementNFTAssociatedTicketMetadata) retirementNFTAssociatedTicketMetadatas;
 
-    constructor(IRandomNumberGeneratorV2 _rngV2) ERC721("Retirement NFT Bundled Ticket", "RNFT_BUNDLED_TICKET") {
+    //@dev - Roles
+    bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+
+    /**
+     * @notice - Constructor
+     */ 
+    constructor(IRandomNumberGeneratorV2 _rngV2) {
         rngV2 = _rngV2;
 
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(URI_SETTER_ROLE, msg.sender);
+        _grantRole(MINTER_ROLE, msg.sender);
     }
+
 
     /**
      * @notice - Mint a new RetirementNFTAssociatedTicket with RNG via Chainlink VRF
      */ 
-    function mintNewRetirementNFTAssociatedTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) public override onlyRole(DEFAULT_ADMIN_ROLE) {
+    function mintRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(MINTER_ROLE) {
+        //@dev - Generate Random Number via Chainlink VRF
+        rngV2.requestRandomWords();
+        
+        //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
+        uint256[] memory randomNumbers = rngV2.getSRandomWords();
+
+        //@dev - Create a new retirementNFTAssociatedTicket
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this);
+
+        //@dev - Save a metadata of RetirementNFTAssociatedTicket
+        retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT, randomNumbers);
+
+        //@dev - Mint a new RetirementNFTAssociatedTicket
+        retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
+    }
+
+    /**
+     * @notice - Mint batch RetirementNFTAssociatedTicket with RNG via Chainlink VRF
+     */ 
+    function mintBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(MINTER_ROLE) {
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
         
@@ -50,27 +80,13 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         //uint256[] memory randomNumbers = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
 
         //@dev - Create a new retirementNFTAssociatedTicket
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2);
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
         retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT, randomNumbers);
 
-        //@dev - Mint a new RetirementNFTAssociatedTicket
-        _safeMint(to, tokenId);
-    }
-
-
-
-    /**
-     * @notice - This method is required for Role-based access control of ERC721 by using OpenZeppelin's AccessControl.sol
-     */ 
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721, AccessControl)
-        returns (bool)
-    {
-        return super.supportsInterface(interfaceId);
+        //@dev - Mint batch of RetirementNFTAssociatedTickets
+        retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts, "");
     }
 
 }

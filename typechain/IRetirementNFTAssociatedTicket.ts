@@ -21,14 +21,26 @@ export interface IRetirementNFTAssociatedTicketInterface
   extends utils.Interface {
   contractName: "IRetirementNFTAssociatedTicket";
   functions: {
+    "mint(address,uint256,uint256,bytes)": FunctionFragment;
+    "mintBatch(address,uint256[],uint256[],bytes)": FunctionFragment;
     "saveRetirementNFTAssociatedTicketMetadata(address,uint256[])": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "mint",
+    values: [string, BigNumberish, BigNumberish, BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "mintBatch",
+    values: [string, BigNumberish[], BigNumberish[], BytesLike]
+  ): string;
   encodeFunctionData(
     functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
     values: [string, BigNumberish[]]
   ): string;
 
+  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "mintBatch", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
     data: BytesLike
@@ -65,12 +77,44 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    mint(
+      to: string,
+      ticketType: BigNumberish,
+      mintAmount: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    mintBatch(
+      to: string,
+      ticketTypes: BigNumberish[],
+      mintAmounts: BigNumberish[],
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
       randomNumbers: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  mint(
+    to: string,
+    ticketType: BigNumberish,
+    mintAmount: BigNumberish,
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  mintBatch(
+    to: string,
+    ticketTypes: BigNumberish[],
+    mintAmounts: BigNumberish[],
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   saveRetirementNFTAssociatedTicketMetadata(
     retirementNFT: string,
@@ -79,6 +123,22 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    mint(
+      to: string,
+      ticketType: BigNumberish,
+      mintAmount: BigNumberish,
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    mintBatch(
+      to: string,
+      ticketTypes: BigNumberish[],
+      mintAmounts: BigNumberish[],
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
       randomNumbers: BigNumberish[],
@@ -89,6 +149,22 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   filters: {};
 
   estimateGas: {
+    mint(
+      to: string,
+      ticketType: BigNumberish,
+      mintAmount: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    mintBatch(
+      to: string,
+      ticketTypes: BigNumberish[],
+      mintAmounts: BigNumberish[],
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
       randomNumbers: BigNumberish[],
@@ -97,6 +173,22 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   };
 
   populateTransaction: {
+    mint(
+      to: string,
+      ticketType: BigNumberish,
+      mintAmount: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    mintBatch(
+      to: string,
+      ticketTypes: BigNumberish[],
+      mintAmounts: BigNumberish[],
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
       randomNumbers: BigNumberish[],

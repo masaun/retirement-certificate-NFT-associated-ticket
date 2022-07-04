@@ -8,8 +8,19 @@ import { IRetirementNFT } from "./IRetirementNFT.sol";
 
 interface IRetirementNFTAssociatedTicket {
 
-    function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) external;
+    /**
+     * @notice - Mint a retirementNFTAssociatedTicket
+     */ 
+    function mint(address to, uint256 ticketType, uint256 mintAmount, bytes memory data) external;
 
-    //function mintNewRetirementNFTAssociatedTicket(address to, uint256 tokenId, IRetirementNFT retirementNFT) external;
+    /**
+     * @notice - Mint batch of retirementNFTAssociatedTicket
+     */
+    function mintBatch(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, bytes memory data) external;
+
+    /**
+     * @notice - Save a metadata of RetirementNFTAssociatedTicket
+     */ 
+    function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) external;
 
 }
