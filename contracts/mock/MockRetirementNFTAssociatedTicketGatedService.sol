@@ -13,4 +13,12 @@ contract MockRetirementNFTAssociatedTicketGatedService {
         //[TODO]: 
     }
 
+    /**
+     * @notice - Check whether a caller (msg.sender) has a RetirementNFTAssociatedTicket or not
+     */ 
+    modifier onlyRetirementNFTAssociatedTicketHolder(address caller) {
+        // [TODO]: The method for checking whether a caller (msg.sender) has the RetirementNFT or not
+        _;
+    }
+
 }

@@ -56,14 +56,6 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     }
 
     /**
-     * @notice - Check whether a caller (msg.sender) has the RetirementNFT or not
-     */ 
-    modifier onlyRetirementNFTHolder(address caller) {
-        // [TODO]: The method for checking whether a caller (msg.sender) has the RetirementNFT or not
-        _;
-    }
-
-    /**
      * @notice - Set a new URI (image, etc) for ERC1155 NFT
      */ 
     function setURI(string memory newURI) internal onlyRole(URI_SETTER_ROLE) {
