@@ -1,16 +1,30 @@
 # Retirement NFT-gated (associated) ticket 🎫
-
-### Test
+### Test (Retirement NFT associated ticket) 
 - Unit test
 ```
-yarn test-unit
+yarn test-unit:retirement-NFT-associated-ticket
 ```
 
 <br>
 
 - Staging test
 ```
-yarn test-staging
+yarn test-staging:retirement-NFT-associated-ticket
+```
+
+<br>
+
+### Test (chainlink-examples)
+- Unit test
+```
+yarn test-unit:chainlink-examples
+```
+
+<br>
+
+- Staging test
+```
+yarn test-staging:chainlink-examples
 ```
 
 <br>
