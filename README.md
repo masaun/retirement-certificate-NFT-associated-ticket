@@ -1,5 +1,22 @@
 # Retirement NFT-gated (associated) ticket 🎫
 
+### Test
+- Unit test
+```
+yarn test-unit
+```
+
+<br>
+
+- Staging test
+```
+yarn test-staging
+```
+
+<br>
+
+<hr>
+
 ### Deploy smart contracts on Kovan
 ```
 yarn deploy-kovan
