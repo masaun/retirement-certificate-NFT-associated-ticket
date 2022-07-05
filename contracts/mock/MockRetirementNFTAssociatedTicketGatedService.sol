@@ -5,6 +5,8 @@ pragma solidity ^0.8.7;
 //import { IRetirementNFTAssociatedTicket } from "../interfaces/IRetirementNFTAssociatedTicket.sol";
 import { RetirementNFTAssociatedTicket } from "../RetirementNFTAssociatedTicket.sol";
 
+import "hardhat/console.sol";
+
 
 /**
  * @title - The MockRetirementNFTAssociatedTicketGatedService contract
@@ -35,10 +37,10 @@ contract MockRetirementNFTAssociatedTicketGatedService {
 
     /**
      * @notice - Access a special content that only only a Retirement NFT Associated Ticket holder can access.
+     * @dev - If a caller (msg.sender) pass onlyRetirementNFTAssociatedTicketHolder() modifier, that caller can access special content
      */ 
     function accessSpecialContent(RetirementNFTAssociatedTicket retirementNFTAssociatedTicket, uint256 ticketType) public onlyRetirementNFTAssociatedTicketHolder(msg.sender, retirementNFTAssociatedTicket, ticketType) returns (bool) {
-        // [TODO]: 
-
+        console.log("%s is successful to access special content", msg.sender);
     }
 
 }
