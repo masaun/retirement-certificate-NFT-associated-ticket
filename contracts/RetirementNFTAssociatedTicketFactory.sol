@@ -52,6 +52,8 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
      * @notice - Mint a new RetirementNFTAssociatedTicket with RNG via Chainlink VRF
      */ 
     function mintRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(MINTER_ROLE) {
+        //@dev - [TODO]: Add require() method for checking whether "to" address has a RetiermentNFT or not
+
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
         

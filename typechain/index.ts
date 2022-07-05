@@ -48,6 +48,7 @@ export type { IRandomNumberGeneratorV2 } from "./IRandomNumberGeneratorV2";
 export type { IRetirementNFT } from "./IRetirementNFT";
 export type { IRetirementNFTAssociatedTicket } from "./IRetirementNFTAssociatedTicket";
 export type { IRetirementNFTAssociatedTicketFactory } from "./IRetirementNFTAssociatedTicketFactory";
+export type { MockRetirementNFTAssociatedTicketGatedService } from "./MockRetirementNFTAssociatedTicketGatedService";
 export type { RandomNumberGeneratorV2 } from "./RandomNumberGeneratorV2";
 export type { RetirementNFT } from "./RetirementNFT";
 export type { RetirementNFTAssociatedTicket } from "./RetirementNFTAssociatedTicket";
@@ -100,6 +101,7 @@ export { IRandomNumberGeneratorV2__factory } from "./factories/IRandomNumberGene
 export { IRetirementNFT__factory } from "./factories/IRetirementNFT__factory";
 export { IRetirementNFTAssociatedTicket__factory } from "./factories/IRetirementNFTAssociatedTicket__factory";
 export { IRetirementNFTAssociatedTicketFactory__factory } from "./factories/IRetirementNFTAssociatedTicketFactory__factory";
+export { MockRetirementNFTAssociatedTicketGatedService__factory } from "./factories/MockRetirementNFTAssociatedTicketGatedService__factory";
 export { RandomNumberGeneratorV2__factory } from "./factories/RandomNumberGeneratorV2__factory";
 export { RetirementNFT__factory } from "./factories/RetirementNFT__factory";
 export { RetirementNFTAssociatedTicket__factory } from "./factories/RetirementNFTAssociatedTicket__factory";

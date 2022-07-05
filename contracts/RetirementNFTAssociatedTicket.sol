@@ -22,7 +22,7 @@ import { DataTypes } from "./libraries/DataTypes.sol";
 
 
 /**
- * @title The Retirement NFT associated Ticket contract
+ * @title - The Retirement NFT associated Ticket contract (ERC1155)
  */
 contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC1155, AccessControl {
 
@@ -53,14 +53,6 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         _grantRole(DEFAULT_ADMIN_ROLE, address(_retirementNFTAssociatedTicketFactory));  // Factory contract address
         _grantRole(URI_SETTER_ROLE, address(_retirementNFTAssociatedTicketFactory));     // Factory contract address
         _grantRole(MINTER_ROLE, address(_retirementNFTAssociatedTicketFactory));         // Factory contract address
-    }
-
-    /**
-     * @notice - Check whether a caller (msg.sender) has the RetirementNFT or not
-     */ 
-    modifier onlyRetirementNFTHolder(address caller) {
-        // [TODO]: The method for checking whether a caller (msg.sender) has the RetirementNFT or not
-        _;
     }
 
     /**
