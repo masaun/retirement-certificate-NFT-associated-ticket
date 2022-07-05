@@ -34,6 +34,7 @@ const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "Your polygonscan
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
+
   networks: {
     hardhat: {
       // If you want to do some forking set `enabled` to true
@@ -43,6 +44,7 @@ const config: HardhatUserConfig = {
         enabled: false,
       },
       chainId: 31337,
+      allowUnlimitedContractSize: true
     },
     localhost: {
       chainId: 31337,
