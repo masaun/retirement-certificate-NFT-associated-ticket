@@ -22,24 +22,15 @@ export interface MockRetirementNFTAssociatedTicketGatedServiceInterface
   contractName: "MockRetirementNFTAssociatedTicketGatedService";
   functions: {
     "accessSpecialContent(address,uint256)": FunctionFragment;
-    "verifyRetirementNFTAssociatedTicket()": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "accessSpecialContent",
     values: [string, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "verifyRetirementNFTAssociatedTicket",
-    values?: undefined
-  ): string;
 
   decodeFunctionResult(
     functionFragment: "accessSpecialContent",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "verifyRetirementNFTAssociatedTicket",
     data: BytesLike
   ): Result;
 
@@ -80,10 +71,6 @@ export interface MockRetirementNFTAssociatedTicketGatedService
       ticketType: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    verifyRetirementNFTAssociatedTicket(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
   };
 
   accessSpecialContent(
@@ -92,18 +79,10 @@ export interface MockRetirementNFTAssociatedTicketGatedService
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  verifyRetirementNFTAssociatedTicket(
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   callStatic: {
     accessSpecialContent(
       retirementNFTAssociatedTicket: string,
       ticketType: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<boolean>;
-
-    verifyRetirementNFTAssociatedTicket(
       overrides?: CallOverrides
     ): Promise<boolean>;
   };
@@ -116,20 +95,12 @@ export interface MockRetirementNFTAssociatedTicketGatedService
       ticketType: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    verifyRetirementNFTAssociatedTicket(
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     accessSpecialContent(
       retirementNFTAssociatedTicket: string,
       ticketType: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    verifyRetirementNFTAssociatedTicket(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
