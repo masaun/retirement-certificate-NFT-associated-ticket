@@ -6,14 +6,14 @@ import { RandomNumberGeneratorV2, VRFCoordinatorV2Mock } from "../../typechain"
 
 !developmentChains.includes(network.name)
   ? describe.skip
-  : describe("RandomNumberConsumer Unit Tests", async function () {
+  : describe("RandomNumberGeneratorV2 Unit Tests", async function () {
       let randomNumberGeneratorV2: RandomNumberGeneratorV2
       let vrfCoordinatorV2Mock: VRFCoordinatorV2Mock
 
       beforeEach(async () => {
         await deployments.fixture(["mocks", "vrf"])
         randomNumberGeneratorV2 = await ethers.getContract("RandomNumberGeneratorV2")
-        vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
+        vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")        
       })
 
       it("Should successfully request a random number", async () => {
