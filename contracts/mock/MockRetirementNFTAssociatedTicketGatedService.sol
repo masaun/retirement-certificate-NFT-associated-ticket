@@ -29,13 +29,6 @@ contract MockRetirementNFTAssociatedTicketGatedService {
     }
 
     /**
-     * @notice - Verify a caller (msg.sender) if the caller has a RetirementNFTAssociatedTicket
-     */
-    function verifyRetirementNFTAssociatedTicket() public returns (bool) {
-        // [TODO]: 
-    }
-
-    /**
      * @notice - Access a special content that only only a Retirement NFT Associated Ticket holder can access.
      * @dev - If a caller (msg.sender) pass onlyRetirementNFTAssociatedTicketHolder() modifier, that caller can access special content
      */ 
