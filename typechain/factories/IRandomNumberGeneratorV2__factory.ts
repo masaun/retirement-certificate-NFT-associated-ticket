@@ -38,6 +38,19 @@ const _abi = [
   },
   {
     inputs: [],
+    name: "getSRequestId",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "_s_requestId",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "requestRandomWords",
     outputs: [],
     stateMutability: "nonpayable",
