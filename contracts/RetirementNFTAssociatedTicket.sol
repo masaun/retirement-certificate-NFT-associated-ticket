@@ -97,7 +97,7 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         rngV2.requestRandomWords();
 
         uint256 requestId = rngV2.getSRequestId();
-        console.log("-------------- requestId: %d --------------", requestId);  // [Result]:
+        console.log("-------------- requestId: %d --------------", requestId);  // [Result]:Success to retrieve value
 
         //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
         address RETIREMENT_NFT = address(retirementNFT);
@@ -108,8 +108,8 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         //uint256 randomNumber = rngV2.getSRandomWord();
         //console.log("-------------- randomNumber: %d --------------", randomNumber);  // [Result]: Empty (Fail to retrieve value)
 
-        //uint256[] memory randomNumbers = rngV2.getSRandomWords();
-        //console.log("-------------- randomNumbers: %c --------------", randomNumbers);
+        uint256[] memory randomNumbers = rngV2.getSRandomWords();
+        console.log("-------------- randomNumbers: %s --------------", randomNumbers);
 
 
         DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
