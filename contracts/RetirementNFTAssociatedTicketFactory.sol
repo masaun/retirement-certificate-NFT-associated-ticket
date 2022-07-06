@@ -59,13 +59,14 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         uint256[] memory randomNumbers = rngV2.getSRandomWords();
 
         //@dev - Create a new retirementNFTAssociatedTicket
+        //@dev - [Error]: "AccessControl is missing role"
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
-        retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT, randomNumbers);
+        //retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT, randomNumbers);
 
         //@dev - Mint a new RetirementNFTAssociatedTicket
-        retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
+        //retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
     }
 
     /**
