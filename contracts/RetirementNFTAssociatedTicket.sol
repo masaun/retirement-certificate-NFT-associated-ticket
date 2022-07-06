@@ -16,9 +16,11 @@ import { ERC1155 } from "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 //import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
-
 //@dev - Struct, Enum, etc
 import { DataTypes } from "./libraries/DataTypes.sol";
+
+//@dev - Debugging
+import "hardhat/console.sol";
 
 
 /**
@@ -96,10 +98,14 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
 
         //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
         address RETIREMENT_NFT = address(retirementNFT);
+        console.log("-------------- RETIREMENT_NFT: %s --------------", RETIREMENT_NFT);  // [Result]: Success to retrieve value
 
         //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
         uint256 randomNumber = rngV2.getSRandomWord();
-        //uint256[] memory randomNumbers = rngV2.getSRandomWords();
+        console.log("-------------- randomNumber: %d --------------", randomNumber);  // [Result]: Empty (Fail to retrieve value)
+
+        uint256[] memory randomNumbers = rngV2.getSRandomWords();
+        //console.log("-------------- randomNumbers: %c --------------", randomNumbers);
 
 
         DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
