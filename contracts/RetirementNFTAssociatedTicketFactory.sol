@@ -13,6 +13,9 @@ import { RetirementNFTAssociatedTicket } from "./RetirementNFTAssociatedTicket.s
 //@dev - Retirement NFT
 import { IRetirementNFT } from "./interfaces/IRetirementNFT.sol";
 
+//@dev - Chainlink VRF
+import { VRFCoordinatorV2Mock } from "./chainlink-examples/test/VRFCoordinatorV2Mock.sol";
+
 //@dev - OpenZeppelin
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
@@ -27,6 +30,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
 
     //@dev - contract instances
     IRandomNumberGeneratorV2 public rngV2;
+    VRFCoordinatorV2Mock public vrfCoordinatorV2;
 
     //@dev - Storages
     mapping (address => DataTypes.RetirementNFTAssociatedTicketMetadata) retirementNFTAssociatedTicketMetadatas;
@@ -37,8 +41,9 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
     /**
      * @notice - Constructor
      */ 
-    constructor(IRandomNumberGeneratorV2 _rngV2) {
+    constructor(IRandomNumberGeneratorV2 _rngV2, VRFCoordinatorV2Mock _vrfCoordinatorV2) {
         rngV2 = _rngV2;
+        vrfCoordinatorV2 = _vrfCoordinatorV2;
 
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
@@ -59,7 +64,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         // uint256[] memory randomNumbers = rngV2.getSRandomWords();
 
         //@dev - Create a new retirementNFTAssociatedTicket
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this);
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this, vrfCoordinatorV2);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
         //@dev - [Error]: "panic code 0x32 (Array accessed at an out-of-bounds or negative index)" 
@@ -82,7 +87,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         // uint256[] memory randomNumbers = rngV2.getSRandomWords();
 
         //@dev - Create a new retirementNFTAssociatedTicket
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this);
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this, vrfCoordinatorV2);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
         //@dev - [Error]: "panic code 0x32 (Array accessed at an out-of-bounds or negative index)" 

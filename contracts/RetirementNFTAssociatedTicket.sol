@@ -11,6 +11,9 @@ import { IRandomNumberGeneratorV2 } from "./interfaces/IRandomNumberGeneratorV2.
 //@dev - Retirement NFT
 import { IRetirementNFT } from "./interfaces/IRetirementNFT.sol";
 
+//@dev - Chainlink VRF
+import { VRFCoordinatorV2Mock } from "./chainlink-examples/test/VRFCoordinatorV2Mock.sol";
+
 //@dev - OpenZeppelin
 import { ERC1155 } from "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 //import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -29,6 +32,7 @@ import "hardhat/console.sol";
 contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC1155, AccessControl {
 
     IRandomNumberGeneratorV2 public rngV2;
+    VRFCoordinatorV2Mock public vrfCoordinatorV2;
 
     //@dev - Storages
     mapping (address => DataTypes.RetirementNFTAssociatedTicketMetadata) retirementNFTAssociatedTicketMetadatas;
@@ -45,8 +49,9 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     /**
      * @notice - Constructor
      */ 
-    constructor(IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory) ERC1155("") {
+    constructor(IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory, VRFCoordinatorV2Mock _vrfCoordinatorV2) ERC1155("") {
         rngV2 = _rngV2;
+        vrfCoordinatorV2 = _vrfCoordinatorV2;
 
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, address(_retirementNFTAssociatedTicketFactory));  // Factory contract address
@@ -96,20 +101,23 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
 
+        //@dev - Get requestId
         uint256 requestId = rngV2.getSRequestId();
-        console.log("-------------- requestId: %d --------------", requestId);  // [Result]:
+        console.log("-------------- requestId: %d --------------", requestId);  // [Result]:Success to retrieve value
+
+        //@dev - Execute fulfillRandomWords() method to get callback
+        vrfCoordinatorV2.fulfillRandomWords(requestId, address(rngV2));
+
+        //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
+        uint256 randomNumber = rngV2.getSRandomWord();
+        console.log("-------------- randomNumber: %d --------------", randomNumber);  // [Result]: Empty (Fail to retrieve value)
+
+        //uint256[] memory randomNumbers = rngV2.getSRandomWords();
+        //console.log("-------------- randomNumbers: %s --------------", randomNumbers);
 
         //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
         address RETIREMENT_NFT = address(retirementNFT);
         console.log("-------------- RETIREMENT_NFT: %s --------------", RETIREMENT_NFT);  // [Result]: Success to retrieve value
-
-        //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
-        uint256 randomNumber;
-        //uint256 randomNumber = rngV2.getSRandomWord();
-        //console.log("-------------- randomNumber: %d --------------", randomNumber);  // [Result]: Empty (Fail to retrieve value)
-
-        //uint256[] memory randomNumbers = rngV2.getSRandomWords();
-        //console.log("-------------- randomNumbers: %c --------------", randomNumbers);
 
 
         DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
