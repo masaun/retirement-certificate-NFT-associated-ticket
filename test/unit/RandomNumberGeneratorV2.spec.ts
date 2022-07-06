@@ -35,6 +35,13 @@ import { RandomNumberGeneratorV2, VRFCoordinatorV2Mock } from "../../typechain"
         const firstRandomNumber: BigNumber = await randomNumberGeneratorV2.s_randomWords(0)
         const secondRandomNumber: BigNumber = await randomNumberGeneratorV2.s_randomWords(1)
 
+        //@dev - Get randomNumbers
+        const randomNumbers = await randomNumberGeneratorV2.getSRandomWords();
+        console.log(`"randomNumbers" retrieved via getSRandomWords(): ${ randomNumbers }`)
+
+        const randomNumber = await randomNumberGeneratorV2.getSRandomWord();        
+        console.log(`"randomNumber" retrieved via getSRandomWord(): ${ randomNumber }`)
+
         assert(
           firstRandomNumber.gt(ethers.constants.Zero),
           "First random number is greather than zero"

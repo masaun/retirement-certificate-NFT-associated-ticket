@@ -112,5 +112,8 @@ contract RandomNumberGeneratorV2 is IRandomNumberGeneratorV2, VRFConsumerBaseV2 
         return s_randomWords;
     }
 
+    function getSRandomWord() public view override returns (uint256 _s_randomWord) {
+        return s_randomWords[0];
+    }
 
 }

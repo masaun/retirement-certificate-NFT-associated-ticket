@@ -73,11 +73,6 @@ const _abi = [
         name: "retirementNFT",
         type: "address",
       },
-      {
-        internalType: "uint256",
-        name: "randomNumber",
-        type: "uint256",
-      },
     ],
     name: "saveRetirementNFTAssociatedTicketMetadata",
     outputs: [],
