@@ -46,18 +46,20 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     constructor(IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory) ERC1155("") {
         rngV2 = _rngV2;
 
-        //@dev - Set a URI (image, etc) to the ERC1155 NFT
-        setURI(_uri);
-
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, address(_retirementNFTAssociatedTicketFactory));  // Factory contract address
         _grantRole(URI_SETTER_ROLE, address(_retirementNFTAssociatedTicketFactory));     // Factory contract address
         _grantRole(MINTER_ROLE, address(_retirementNFTAssociatedTicketFactory));         // Factory contract address
+
+        //@dev - Set a URI (image, etc) to the ERC1155 NFT
+        //@dev - NOTE: This method is able to be called by the wallet address that has a "URI_SETTER_ROLE" role.
+        setURI(_uri);
     }
 
     /**
      * @notice - Set a new URI (image, etc) for ERC1155 NFT
      */ 
+    //function setURI(string memory newURI) public {
     function setURI(string memory newURI) internal onlyRole(URI_SETTER_ROLE) {
         _setURI(newURI);
     }
