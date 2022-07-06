@@ -42,6 +42,7 @@ export interface RetirementNFTAssociatedTicketInterface
     "setApprovalForAll(address,bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "uri(uint256)": FunctionFragment;
+    "vrfCoordinatorV2()": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -122,6 +123,10 @@ export interface RetirementNFTAssociatedTicketInterface
     values: [BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "uri", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "vrfCoordinatorV2",
+    values?: undefined
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "DEFAULT_ADMIN_ROLE",
@@ -183,6 +188,10 @@ export interface RetirementNFTAssociatedTicketInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "vrfCoordinatorV2",
+    data: BytesLike
+  ): Result;
 
   events: {
     "ApprovalForAll(address,address,bool)": EventFragment;
@@ -398,6 +407,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     ): Promise<[boolean]>;
 
     uri(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
+
+    vrfCoordinatorV2(overrides?: CallOverrides): Promise<[string]>;
   };
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
@@ -506,6 +517,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
 
   uri(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
+  vrfCoordinatorV2(overrides?: CallOverrides): Promise<string>;
+
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
@@ -612,6 +625,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     ): Promise<boolean>;
 
     uri(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
+
+    vrfCoordinatorV2(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -805,6 +820,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     ): Promise<BigNumber>;
 
     uri(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+
+    vrfCoordinatorV2(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -921,5 +938,7 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    vrfCoordinatorV2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

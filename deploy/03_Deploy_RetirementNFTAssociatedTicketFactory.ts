@@ -7,6 +7,7 @@ import {
 } from "../helper-hardhat-config"
 import { autoFundCheck, verify } from "../helper-functions"
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
+
 import { VRFCoordinatorV2Mock } from "../typechain"
 
 
@@ -67,7 +68,7 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
     ? 1
     : VERIFICATION_BLOCK_CONFIRMATIONS
 
-  const args2: any = [randomNumberGeneratorV2.address]  // [NOTE]: Argument values for constructor
+  const args2: any = [randomNumberGeneratorV2.address, vrfCoordinatorAddress]  // [NOTE]: Argument values for constructor
   const retirementNFTAssociatedTicketFactory = await deploy(`RetirementNFTAssociatedTicketFactory`, {
     from: deployer,
     args: args2,
