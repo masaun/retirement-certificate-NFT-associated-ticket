@@ -16,9 +16,11 @@ import { ERC1155 } from "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 //import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
-
 //@dev - Struct, Enum, etc
 import { DataTypes } from "./libraries/DataTypes.sol";
+
+//@dev - Debugging
+import "hardhat/console.sol";
 
 
 /**
@@ -46,18 +48,20 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     constructor(IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory) ERC1155("") {
         rngV2 = _rngV2;
 
-        //@dev - Set a URI (image, etc) to the ERC1155 NFT
-        setURI(_uri);
-
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, address(_retirementNFTAssociatedTicketFactory));  // Factory contract address
         _grantRole(URI_SETTER_ROLE, address(_retirementNFTAssociatedTicketFactory));     // Factory contract address
         _grantRole(MINTER_ROLE, address(_retirementNFTAssociatedTicketFactory));         // Factory contract address
+
+        //@dev - Set a URI (image, etc) to the ERC1155 NFT
+        //@dev - NOTE: This method is able to be called by the wallet address that has a "URI_SETTER_ROLE" role.
+        setURI(_uri);
     }
 
     /**
      * @notice - Set a new URI (image, etc) for ERC1155 NFT
      */ 
+    //function setURI(string memory newURI) public {
     function setURI(string memory newURI) internal onlyRole(URI_SETTER_ROLE) {
         _setURI(newURI);
     }
@@ -87,12 +91,27 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     /**
      * @notice - Save a metadata of RetirementNFTAssociatedTicket
      */ 
-    function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) public override {
+    function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT) public override {
+    //function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) public override {
+        //@dev - Generate Random Number via Chainlink VRF
+        rngV2.requestRandomWords();
+
         //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
         address RETIREMENT_NFT = address(retirementNFT);
+        console.log("-------------- RETIREMENT_NFT: %s --------------", RETIREMENT_NFT);  // [Result]: Success to retrieve value
+
+        //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
+        uint256 randomNumber = rngV2.getSRandomWord();
+        console.log("-------------- randomNumber: %d --------------", randomNumber);  // [Result]: Empty (Fail to retrieve value)
+
+        uint256[] memory randomNumbers = rngV2.getSRandomWords();
+        //console.log("-------------- randomNumbers: %c --------------", randomNumbers);
+
+
         DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
-        retirementNFTAssociatedTicketMetadata.ticketHolder = address(0);  // [TODO]: Assign actual wallet address 
-        retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
+        retirementNFTAssociatedTicketMetadata.ticketHolder = 0x0000000000000000000000000000000000000000;  // [TODO]: Assign actual wallet address 
+        retirementNFTAssociatedTicketMetadata.randomNumber = randomNumber;
+        //retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
     }
 
 

@@ -10,4 +10,6 @@ interface IRandomNumberGeneratorV2 {
 
     function getSRandomWords() external view returns (uint256[] memory _s_randomWords);
 
+    function getSRandomWord() external view returns (uint256 _s_randomWord);
+
 }

@@ -12,6 +12,19 @@ import type {
 const _abi = [
   {
     inputs: [],
+    name: "getSRandomWord",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "_s_randomWord",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "getSRandomWords",
     outputs: [
       {

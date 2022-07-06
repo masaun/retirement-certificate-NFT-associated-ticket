@@ -21,6 +21,7 @@ interface IRetirementNFTAssociatedTicket {
     /**
      * @notice - Save a metadata of RetirementNFTAssociatedTicket
      */ 
-    function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) external;
+    function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT) external;
+    //function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) external;
 
 }

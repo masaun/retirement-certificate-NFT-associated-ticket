@@ -17,6 +17,8 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
   const { deploy, log, get } = deployments
 
   const { deployer } = await getNamedAccounts()
+  console.log(`####### Deployer address of the RetirementNFTAssociatedTicketFactory.sol: ${ deployer } #######`)
+
   const chainId: number | undefined = network.config.chainId
   if (!chainId) return
 

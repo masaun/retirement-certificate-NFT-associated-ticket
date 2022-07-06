@@ -19,10 +19,15 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export interface IRandomNumberGeneratorV2Interface extends utils.Interface {
   contractName: "IRandomNumberGeneratorV2";
   functions: {
+    "getSRandomWord()": FunctionFragment;
     "getSRandomWords()": FunctionFragment;
     "requestRandomWords()": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "getSRandomWord",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "getSRandomWords",
     values?: undefined
@@ -32,6 +37,10 @@ export interface IRandomNumberGeneratorV2Interface extends utils.Interface {
     values?: undefined
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "getSRandomWord",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "getSRandomWords",
     data: BytesLike
@@ -72,6 +81,10 @@ export interface IRandomNumberGeneratorV2 extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    getSRandomWord(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { _s_randomWord: BigNumber }>;
+
     getSRandomWords(
       overrides?: CallOverrides
     ): Promise<[BigNumber[]] & { _s_randomWords: BigNumber[] }>;
@@ -81,6 +94,8 @@ export interface IRandomNumberGeneratorV2 extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
+  getSRandomWord(overrides?: CallOverrides): Promise<BigNumber>;
+
   getSRandomWords(overrides?: CallOverrides): Promise<BigNumber[]>;
 
   requestRandomWords(
@@ -88,6 +103,8 @@ export interface IRandomNumberGeneratorV2 extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    getSRandomWord(overrides?: CallOverrides): Promise<BigNumber>;
+
     getSRandomWords(overrides?: CallOverrides): Promise<BigNumber[]>;
 
     requestRandomWords(overrides?: CallOverrides): Promise<void>;
@@ -96,6 +113,8 @@ export interface IRandomNumberGeneratorV2 extends BaseContract {
   filters: {};
 
   estimateGas: {
+    getSRandomWord(overrides?: CallOverrides): Promise<BigNumber>;
+
     getSRandomWords(overrides?: CallOverrides): Promise<BigNumber>;
 
     requestRandomWords(
@@ -104,6 +123,8 @@ export interface IRandomNumberGeneratorV2 extends BaseContract {
   };
 
   populateTransaction: {
+    getSRandomWord(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     getSRandomWords(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     requestRandomWords(
