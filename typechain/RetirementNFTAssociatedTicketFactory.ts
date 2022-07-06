@@ -22,8 +22,7 @@ export interface RetirementNFTAssociatedTicketFactoryInterface
   contractName: "RetirementNFTAssociatedTicketFactory";
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
-    "MINTER_ROLE()": FunctionFragment;
-    "URI_SETTER_ROLE()": FunctionFragment;
+    "TICKET_MINTER_ROLE()": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
@@ -40,11 +39,7 @@ export interface RetirementNFTAssociatedTicketFactoryInterface
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "MINTER_ROLE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "URI_SETTER_ROLE",
+    functionFragment: "TICKET_MINTER_ROLE",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -86,11 +81,7 @@ export interface RetirementNFTAssociatedTicketFactoryInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "MINTER_ROLE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "URI_SETTER_ROLE",
+    functionFragment: "TICKET_MINTER_ROLE",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -181,9 +172,7 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
   functions: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
-    MINTER_ROLE(overrides?: CallOverrides): Promise<[string]>;
-
-    URI_SETTER_ROLE(overrides?: CallOverrides): Promise<[string]>;
+    TICKET_MINTER_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<[string]>;
 
@@ -239,9 +228,7 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
-
-  URI_SETTER_ROLE(overrides?: CallOverrides): Promise<string>;
+  TICKET_MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
 
   getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -297,9 +284,7 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
-    MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
-
-    URI_SETTER_ROLE(overrides?: CallOverrides): Promise<string>;
+    TICKET_MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
 
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -391,9 +376,7 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
   estimateGas: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    MINTER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    URI_SETTER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
+    TICKET_MINTER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
     getRoleAdmin(
       role: BytesLike,
@@ -455,9 +438,9 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    MINTER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    URI_SETTER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    TICKET_MINTER_ROLE(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     getRoleAdmin(
       role: BytesLike,

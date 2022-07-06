@@ -18,6 +18,11 @@ import { RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, Li
           let mockOracle: MockOracle
 
           beforeEach(async () => {
+              //@dev - Below is for just checking owner address out.
+              const [owner, addr1] = await ethers.getSigners()
+              console.log(`owner address: ${ owner.address }`)
+
+              //@dev - This is using "hardhat-deploy" module
               await deployments.fixture(["mocks", "api"])
 
               linkToken = await ethers.getContract("LinkToken")
