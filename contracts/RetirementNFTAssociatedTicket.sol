@@ -96,15 +96,19 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
 
+        uint256 requestId = rngV2.getSRequestId();
+        console.log("-------------- requestId: %d --------------", requestId);  // [Result]:
+
         //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
         address RETIREMENT_NFT = address(retirementNFT);
         console.log("-------------- RETIREMENT_NFT: %s --------------", RETIREMENT_NFT);  // [Result]: Success to retrieve value
 
         //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
-        uint256 randomNumber = rngV2.getSRandomWord();
-        console.log("-------------- randomNumber: %d --------------", randomNumber);  // [Result]: Empty (Fail to retrieve value)
+        uint256 randomNumber;
+        //uint256 randomNumber = rngV2.getSRandomWord();
+        //console.log("-------------- randomNumber: %d --------------", randomNumber);  // [Result]: Empty (Fail to retrieve value)
 
-        uint256[] memory randomNumbers = rngV2.getSRandomWords();
+        //uint256[] memory randomNumbers = rngV2.getSRandomWords();
         //console.log("-------------- randomNumbers: %c --------------", randomNumbers);
 
 
