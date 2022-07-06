@@ -62,7 +62,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
-        //retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT, randomNumbers);
+        retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT, randomNumbers[0]);
 
         //@dev - Mint a new RetirementNFTAssociatedTicket
         //retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
@@ -77,12 +77,12 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         
         //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
         uint256[] memory randomNumbers = rngV2.getSRandomWords();
-        //uint256[] memory randomNumbers = rngV2.s_randomWords(0);  // [TODO]: Fix an error 
 
         //@dev - Create a new retirementNFTAssociatedTicket
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
+        //@dev - [Error]: "panic code 0x32 (Array accessed at an out-of-bounds or negative index)" 
         retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT, randomNumbers);
 
         //@dev - Mint batch of RetirementNFTAssociatedTickets

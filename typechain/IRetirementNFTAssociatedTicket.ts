@@ -23,7 +23,7 @@ export interface IRetirementNFTAssociatedTicketInterface
   functions: {
     "mint(address,uint256,uint256,bytes)": FunctionFragment;
     "mintBatch(address,uint256[],uint256[],bytes)": FunctionFragment;
-    "saveRetirementNFTAssociatedTicketMetadata(address,uint256[])": FunctionFragment;
+    "saveRetirementNFTAssociatedTicketMetadata(address,uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -36,7 +36,7 @@ export interface IRetirementNFTAssociatedTicketInterface
   ): string;
   encodeFunctionData(
     functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
-    values: [string, BigNumberish[]]
+    values: [string, BigNumberish]
   ): string;
 
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
@@ -95,7 +95,7 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
 
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
-      randomNumbers: BigNumberish[],
+      randomNumber: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
@@ -118,7 +118,7 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
 
   saveRetirementNFTAssociatedTicketMetadata(
     retirementNFT: string,
-    randomNumbers: BigNumberish[],
+    randomNumber: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -141,7 +141,7 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
 
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
-      randomNumbers: BigNumberish[],
+      randomNumber: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -167,7 +167,7 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
 
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
-      randomNumbers: BigNumberish[],
+      randomNumber: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
   };
@@ -191,7 +191,7 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
 
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
-      randomNumbers: BigNumberish[],
+      randomNumber: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };
