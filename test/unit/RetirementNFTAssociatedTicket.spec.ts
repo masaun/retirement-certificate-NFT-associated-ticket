@@ -32,6 +32,7 @@ import { RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, Li
 
               //@dev - Create the contract instance of the RetirementNFTAssociatedTicketFactory.sol
               retirementNFTAssociatedTicketFactory = await ethers.getContract("RetirementNFTAssociatedTicketFactory")
+              console.log(`##### Deployed-contract address of the RetirementNFTAssociatedTicketFactory.sol: ${ retirementNFTAssociatedTicketFactory.address } ######`)
 
               //@dev - A new RetirementNFTAssociatedTicket is minted
               const to = "0xb794F5eA0ba39494cE839613fffBA74279579268"
