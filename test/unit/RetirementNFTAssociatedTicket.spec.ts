@@ -34,11 +34,7 @@ import { RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, Li
               retirementNFTAssociatedTicketFactory = await ethers.getContract("RetirementNFTAssociatedTicketFactory")
               console.log(`##### Deployed-contract address of the RetirementNFTAssociatedTicketFactory.sol: ${ retirementNFTAssociatedTicketFactory.address } ######`)
 
-              //await run("fund-link", { contract: retirementNFTAssociatedTicket.address, linkaddress: linkTokenAddress })
-          })
-
-          it(`Should be successful that a new RetirementNFTAssociatedTicket is minted`, async () => {
-              //@dev - A new RetirementNFTAssociatedTicket is minted
+              //@dev - Mint a new RetirementNFTAssociatedTicket
               const to = "0xb794F5eA0ba39494cE839613fffBA74279579268"
               const ticketType = 0 
               const mintAmount = 100  // Number of tickets to be minted (ERC1155)
@@ -46,6 +42,14 @@ import { RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, Li
               const uri = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
               let tx = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
               let txReceipt = await tx.wait()
+
+              await run("fund-link", { contract: retirementNFTAssociatedTicketFactory.address, linkaddress: linkTokenAddress })
           })
+
+          it(`Should be successful that ~~`, async () => {
+  
+          })
+
+
 
       })

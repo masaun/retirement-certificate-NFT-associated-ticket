@@ -21,6 +21,7 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
 
 //@dev - Struct, Enum, etc
 import { DataTypes } from "./libraries/DataTypes.sol";
+import { Events } from "./libraries/Events.sol";
 
 
 /**
@@ -65,6 +66,9 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
 
         //@dev - Mint a new RetirementNFTAssociatedTicket
         retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
+
+        //@dev - Emit information of a new RetirementNFTAssociatedTicket minted
+        emit Events.RetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketType, mintAmount, retirementNFT, uri);
     }
 
     /**
@@ -80,6 +84,9 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
 
         //@dev - Mint batch of RetirementNFTAssociatedTickets
         retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts, "");
+
+        //@dev - Emit information of a new RetirementNFTAssociatedTicket minted
+        emit Events.BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
     }
 
 }
