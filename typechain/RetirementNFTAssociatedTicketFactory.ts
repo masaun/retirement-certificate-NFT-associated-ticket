@@ -119,15 +119,53 @@ export interface RetirementNFTAssociatedTicketFactoryInterface
   ): Result;
 
   events: {
+    "BatchRetirementNFTAssociatedTicketMinted(address,address,uint256[],uint256[],address,string)": EventFragment;
+    "RetirementNFTAssociatedTicketMinted(address,address,uint256,uint256,address,string)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
   };
 
+  getEvent(
+    nameOrSignatureOrTopic: "BatchRetirementNFTAssociatedTicketMinted"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "RetirementNFTAssociatedTicketMinted"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
 }
+
+export type BatchRetirementNFTAssociatedTicketMintedEvent = TypedEvent<
+  [string, string, BigNumber[], BigNumber[], string, string],
+  {
+    retirementNFTAssociatedTicket: string;
+    to: string;
+    ticketTypes: BigNumber[];
+    mintAmounts: BigNumber[];
+    retirementNFT: string;
+    uri: string;
+  }
+>;
+
+export type BatchRetirementNFTAssociatedTicketMintedEventFilter =
+  TypedEventFilter<BatchRetirementNFTAssociatedTicketMintedEvent>;
+
+export type RetirementNFTAssociatedTicketMintedEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber, string, string],
+  {
+    retirementNFTAssociatedTicket: string;
+    to: string;
+    ticketType: BigNumber;
+    mintAmount: BigNumber;
+    retirementNFT: string;
+    uri: string;
+  }
+>;
+
+export type RetirementNFTAssociatedTicketMintedEventFilter =
+  TypedEventFilter<RetirementNFTAssociatedTicketMintedEvent>;
 
 export type RoleAdminChangedEvent = TypedEvent<
   [string, string, string],
@@ -354,6 +392,40 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
   };
 
   filters: {
+    "BatchRetirementNFTAssociatedTicketMinted(address,address,uint256[],uint256[],address,string)"(
+      retirementNFTAssociatedTicket?: null,
+      to?: null,
+      ticketTypes?: null,
+      mintAmounts?: null,
+      retirementNFT?: null,
+      uri?: null
+    ): BatchRetirementNFTAssociatedTicketMintedEventFilter;
+    BatchRetirementNFTAssociatedTicketMinted(
+      retirementNFTAssociatedTicket?: null,
+      to?: null,
+      ticketTypes?: null,
+      mintAmounts?: null,
+      retirementNFT?: null,
+      uri?: null
+    ): BatchRetirementNFTAssociatedTicketMintedEventFilter;
+
+    "RetirementNFTAssociatedTicketMinted(address,address,uint256,uint256,address,string)"(
+      retirementNFTAssociatedTicket?: null,
+      to?: null,
+      ticketType?: null,
+      mintAmount?: null,
+      retirementNFT?: null,
+      uri?: null
+    ): RetirementNFTAssociatedTicketMintedEventFilter;
+    RetirementNFTAssociatedTicketMinted(
+      retirementNFTAssociatedTicket?: null,
+      to?: null,
+      ticketType?: null,
+      mintAmount?: null,
+      retirementNFT?: null,
+      uri?: null
+    ): RetirementNFTAssociatedTicketMintedEventFilter;
+
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: BytesLike | null,
       previousAdminRole?: BytesLike | null,

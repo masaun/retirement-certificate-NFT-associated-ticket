@@ -5,6 +5,10 @@ import { network, deployments, ethers, run } from "hardhat"
 import { developmentChains } from "../../helper-hardhat-config"
 import { RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../../typechain"
 
+//@dev - Helper of ethers.js for retrieving eventLogs emitted, etc.
+import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
+//import { convertHexToString, convertStringToHex, toWei, fromWei, getEventLog, getCurrentBlock, getCurrentTimestamp } from "../ethersjs-helper/ethersjsHelper"
+
 
 /**
  * @title - Unit test of the RetirementNFTAssociatedTicket.sol
@@ -42,6 +46,11 @@ import { RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, Li
               const uri = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
               let tx = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
               let txReceipt = await tx.wait()
+
+              const eventName = "RetirementNFTAssociatedTicketMinted"  // [Result]: Fail to retrieve this eventLog ("undefined")
+              //const eventName = "RoleGranted"                        // [Result]: Success to retrieve this eventLog
+              let eventLog = await getEventLog(txReceipt, eventName)
+              console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ JSON.stringify(eventLog, null, 2) }`)
 
               await run("fund-link", { contract: retirementNFTAssociatedTicketFactory.address, linkaddress: linkTokenAddress })
           })
