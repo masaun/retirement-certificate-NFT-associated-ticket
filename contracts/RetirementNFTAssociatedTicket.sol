@@ -110,10 +110,9 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
 
         //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
         uint256 randomNumber = rngV2.getSRandomWord();
-        console.log("-------------- randomNumber: %d --------------", randomNumber);  // [Result]: Empty (Fail to retrieve value)
+        console.log("-------------- randomNumber: %s --------------", randomNumber);  // [Result]: Success
 
-        //uint256[] memory randomNumbers = rngV2.getSRandomWords();
-        //console.log("-------------- randomNumbers: %s --------------", randomNumbers);
+        uint256[] memory randomNumbers = rngV2.getSRandomWords();
 
         //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
         address RETIREMENT_NFT = address(retirementNFT);
