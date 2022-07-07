@@ -89,7 +89,8 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts, "");
 
         //@dev - Emit information of a new RetirementNFTAssociatedTicket minted
-        emit Events.BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
+        emit BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
+        //emit Events.BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
     }
 
 }
