@@ -19,15 +19,16 @@ import { VRFCoordinatorV2Mock } from "./chainlink-examples/test/VRFCoordinatorV2
 //@dev - OpenZeppelin
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
-//@dev - Struct, Enum, etc
+//@dev - Struct, Enum, Event, etc
 import { DataTypes } from "./libraries/DataTypes.sol";
-import { Events } from "./libraries/Events.sol";
+//import { Events } from "./libraries/Events.sol";
+import { EventsHelper } from "./libraries/helper/EventsHelper.sol";  // [NOTE]: Using this instead of ./libraries/Events.sol
 
 
 /**
  * @title The factory contract of the Retirement NFT associated Ticket contract
  */
-contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketFactory, AccessControl {
+contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketFactory, AccessControl, EventsHelper {
 
     //@dev - contract instances
     IRandomNumberGeneratorV2 public rngV2;
@@ -38,6 +39,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
 
     //@dev - Roles
     bytes32 public constant TICKET_MINTER_ROLE = keccak256("TICKET_MINTER_ROLE");
+
 
     /**
      * @notice - Constructor
@@ -54,7 +56,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
 
     /**
      * @notice - Mint a new RetirementNFTAssociatedTicket with RNG via Chainlink VRF
-     */ 
+     */
     function mintRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
         //@dev - [TODO]: Add require() method for checking whether "to" address has a RetiermentNFT or not
 
@@ -68,7 +70,8 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
 
         //@dev - Emit information of a new RetirementNFTAssociatedTicket minted
-        emit Events.RetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketType, mintAmount, retirementNFT, uri);
+        emit RetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketType, mintAmount, retirementNFT, uri);
+        //emit Events.RetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketType, mintAmount, retirementNFT, uri);
     }
 
     /**
