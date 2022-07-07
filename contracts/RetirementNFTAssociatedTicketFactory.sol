@@ -64,7 +64,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT);
 
         //@dev - Mint a new RetirementNFTAssociatedTicket
-        //retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
+        retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
     }
 
     /**
