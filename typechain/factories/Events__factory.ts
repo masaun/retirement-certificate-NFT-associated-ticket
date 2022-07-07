@@ -23,6 +23,49 @@ const _abi = [
       },
       {
         indexed: false,
+        internalType: "uint256[]",
+        name: "ticketTypes",
+        type: "uint256[]",
+      },
+      {
+        indexed: false,
+        internalType: "uint256[]",
+        name: "mintAmounts",
+        type: "uint256[]",
+      },
+      {
+        indexed: false,
+        internalType: "contract IRetirementNFT",
+        name: "retirementNFT",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "uri",
+        type: "string",
+      },
+    ],
+    name: "BatchRetirementNFTAssociatedTicketMinted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "contract RetirementNFTAssociatedTicket",
+        name: "retirementNFTAssociatedTicket",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
         internalType: "uint256",
         name: "ticketType",
         type: "uint256",
@@ -52,7 +95,7 @@ const _abi = [
 ];
 
 const _bytecode =
-  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122096633a339197f3cd01b3846b44f40fba63386824c09da3ccc3525ec8cfd0537464736f6c63430008070033";
+  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220074ee0a012d582c31fc1cec0d5f75a19982586de7a81e0b1c5c9269df9d6adbd64736f6c63430008070033";
 
 type EventsConstructorParams =
   | [signer?: Signer]

@@ -22,10 +22,13 @@ library Events {
         string uri
     );
 
-    // event SomethingEvent2(
-    //     string name, 
-    //     string symbol,
-    //     uint256 timestam
-    // );
+    event BatchRetirementNFTAssociatedTicketMinted(
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket,
+        address to, 
+        uint256[] ticketTypes, 
+        uint256[] mintAmounts,
+        IRetirementNFT retirementNFT, 
+        string uri
+    );
 
 }
