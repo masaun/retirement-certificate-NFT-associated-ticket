@@ -1,5 +1,5 @@
-const { expect } = require("chai")
-const { ethers } = require("hardhat")
+import { expect } from "chai"
+import { ethers } from "hardhat"
 
 
 function convertHexToString(hex: string) {
@@ -7,11 +7,10 @@ function convertHexToString(hex: string) {
     return ethers.utils.arrayify(`${ hex }`)
 }
 
-function convertStringToHex(string: string) {
-    // [Example]: ethers.utils.hexlify([1, 2, 3, 4]) -> '0x01020304'
-    return ethers.utils.hexlify([string])
-}
-
+// function convertStringToHex(text: string) {
+//     // [Example]: ethers.utils.hexlify([1, 2, 3, 4]) -> '0x01020304'
+//     return ethers.utils.hexlify([text])
+// }
 
 function toWei(amount: number) {
     return ethers.utils.parseEther(`${ amount }`)
@@ -22,9 +21,9 @@ function fromWei(amount: number) {
 }
 
 //@dev - Method for retrieving an event log that is associated with "eventName" specified
-async function getEventLog(txReceipt: string, eventName: string) {
+async function getEventLog(txReceipt: any, eventName: string) {
     for (let i = 0; i < txReceipt.events.length; i++) {
-        const eventLogs: string = txReceipt.events[i];
+        const eventLogs: any = txReceipt.events[i];
         console.log(`eventLogs: ${ JSON.stringify(eventLogs, null, 2) }`)
 
         if (eventLogs["event"] == eventName) {
@@ -39,4 +38,5 @@ async function getCurrentBlock() {}
 async function getCurrentTimestamp() {}
 
 //@dev - Export methods
-module.exports = { convertHexToString, convertStringToHex, toWei, fromWei, getEventLog, getCurrentBlock, getCurrentTimestamp }
+export { getEventLog }
+//export { convertHexToString, convertStringToHex, toWei, fromWei, getEventLog, getCurrentBlock, getCurrentTimestamp }
