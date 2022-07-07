@@ -119,8 +119,8 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
 
         DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
         retirementNFTAssociatedTicketMetadata.ticketHolder = 0x0000000000000000000000000000000000000000;  // [TODO]: Assign actual wallet address 
-        retirementNFTAssociatedTicketMetadata.randomNumber = randomNumber;
-        //retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
+        //retirementNFTAssociatedTicketMetadata.randomNumber = randomNumber;
+        retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
     }
 
 
