@@ -57,19 +57,11 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
     function mintRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
         //@dev - [TODO]: Add require() method for checking whether "to" address has a RetiermentNFT or not
 
-        // //@dev - Generate Random Number via Chainlink VRF
-        // rngV2.requestRandomWords();
-        
-        // //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
-        // uint256[] memory randomNumbers = rngV2.getSRandomWords();
-
         //@dev - Create a new retirementNFTAssociatedTicket
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this, vrfCoordinatorV2);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
-        //@dev - [Error]: "panic code 0x32 (Array accessed at an out-of-bounds or negative index)" 
         retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT);
-        //retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT, randomNumbers);
 
         //@dev - Mint a new RetirementNFTAssociatedTicket
         //retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
@@ -80,19 +72,11 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
      */ 
     function mintBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
 
-        // //@dev - Generate Random Number via Chainlink VRF
-        // rngV2.requestRandomWords();
-        
-        // //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
-        // uint256[] memory randomNumbers = rngV2.getSRandomWords();
-
         //@dev - Create a new retirementNFTAssociatedTicket
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(rngV2, uri, this, vrfCoordinatorV2);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
-        //@dev - [Error]: "panic code 0x32 (Array accessed at an out-of-bounds or negative index)" 
         retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT);
-        //retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT, randomNumbers);
 
         //@dev - Mint batch of RetirementNFTAssociatedTickets
         retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts, "");

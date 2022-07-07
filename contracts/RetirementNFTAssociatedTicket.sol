@@ -97,7 +97,6 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
      * @notice - Save a metadata of RetirementNFTAssociatedTicket
      */ 
     function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT) public override {
-    //function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) public override {
         //@dev - Generate Random Number via Chainlink VRF
         rngV2.requestRandomWords();
 
@@ -110,20 +109,18 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
 
         //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
         uint256 randomNumber = rngV2.getSRandomWord();
-        console.log("-------------- randomNumber: %d --------------", randomNumber);  // [Result]: Empty (Fail to retrieve value)
+        console.log("-------------- randomNumber: %s --------------", randomNumber);  // [Result]: Success
 
-        //uint256[] memory randomNumbers = rngV2.getSRandomWords();
-        //console.log("-------------- randomNumbers: %s --------------", randomNumbers);
+        uint256[] memory randomNumbers = rngV2.getSRandomWords();
 
         //@dev - Bundle (Save) a RN retrieved with RetirementNFT Ticket
         address RETIREMENT_NFT = address(retirementNFT);
         console.log("-------------- RETIREMENT_NFT: %s --------------", RETIREMENT_NFT);  // [Result]: Success to retrieve value
 
-
         DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
         retirementNFTAssociatedTicketMetadata.ticketHolder = 0x0000000000000000000000000000000000000000;  // [TODO]: Assign actual wallet address 
-        retirementNFTAssociatedTicketMetadata.randomNumber = randomNumber;
-        //retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
+        //retirementNFTAssociatedTicketMetadata.randomNumber = randomNumber;
+        retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
     }
 
 
