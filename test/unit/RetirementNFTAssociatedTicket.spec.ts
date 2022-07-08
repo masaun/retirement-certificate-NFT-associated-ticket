@@ -39,16 +39,16 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               console.log(`##### Deployed-contract address of the RetirementNFTAssociatedTicketFactory.sol: ${ retirementNFTAssociatedTicketFactory.address } ######`)
 
               //@dev - Mint a new RetirementNFTAssociatedTicket
-              const to = "0xb794F5eA0ba39494cE839613fffBA74279579268"
-              const ticketType = 0 
-              const mintAmount = 100  // Number of tickets to be minted (ERC1155)
-              const retirementNFT = "0x343c43A37D37dfF08AE8C4A11544c718AbB4fCF8"
-              const uri = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
-              let tx = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
-              let txReceipt = await tx.wait()
+              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const ticketType: number = 0 
+              const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
+              const retirementNFT: string = "0x343c43A37D37dfF08AE8C4A11544c718AbB4fCF8"
+              const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
+              let tx: any = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
+              let txReceipt: any = await tx.wait()
 
-              const eventName = "RetirementNFTAssociatedTicketMinted"
-              let eventLog = await getEventLog(txReceipt, eventName)
+              const eventName: string = "RetirementNFTAssociatedTicketMinted"
+              let eventLog: any = await getEventLog(txReceipt, eventName)
               console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ JSON.stringify(eventLog, null, 2) }`)
 
               await run("fund-link", { contract: retirementNFTAssociatedTicketFactory.address, linkaddress: linkTokenAddress })
