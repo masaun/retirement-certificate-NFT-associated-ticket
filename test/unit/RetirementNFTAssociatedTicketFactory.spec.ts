@@ -35,11 +35,11 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 
           it(`Should be successful that a new RetirementNFTAssociatedTicket is minted`, async () => {
               //@dev - A new RetirementNFTAssociatedTicket is minted
-              const to = "0xb794F5eA0ba39494cE839613fffBA74279579268"
-              const ticketType = 0 
-              const mintAmount = 100  // Number of tickets to be minted (ERC1155)
-              const retirementNFT = "0x343c43A37D37dfF08AE8C4A11544c718AbB4fCF8"
-              const uri = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
+              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const ticketType: number = 0 
+              const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
+              const retirementNFT: string = "0x343c43A37D37dfF08AE8C4A11544c718AbB4fCF8"
+              const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
               tx = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
               txReceipt = await tx.wait()
           })
