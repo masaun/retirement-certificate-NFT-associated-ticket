@@ -7,6 +7,7 @@
     "deploy-kovan": "hardhat deploy --network kovan",
     "test-unit:retirement-NFT-associated-ticket": "hardhat test ./test/unit/*.spec.ts --network hardhat",
     "test-unit:chainlink-examples": "hardhat test ./test/chainlink-examples/unit/*.spec.ts --network hardhat",
+    "test-scenario:retirement-NFT-associated-ticket": "hardhat test ./test/scenario/Scenario-test.ts --network hardhat",
     "test-staging:retirement-NFT-associated-ticket": "hardhat test ./test/staging/*.spec.ts --network rinkeby",
     "test-staging:chainlink-examples": "hardhat test ./test/chainlink-examples/staging/*.spec.ts --network rinkeby",
     "script-kovan:readPrice": "hardhat run ./scripts/readPrice.ts --network kovan",
