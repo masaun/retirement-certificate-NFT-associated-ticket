@@ -56,7 +56,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               //@dev - Retrieve an eventLog emitted (NOTE: Event name is "RetirementNFTAssociatedTicketMinted")
               const eventName: string = "RetirementNFTAssociatedTicketMinted"
               let eventLog: any = await getEventLog(txReceipt, eventName)
-              console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ JSON.stringify(eventLog, null, 2) }`)
+              console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ eventLog }`)
 
               //@dev - Create a RetirementNFTAssociatedTicket instance by assigning contract address retrieved above
               const RETIREMENT_NFT_ASSOCIATED_TICKET: string = eventLog[0]
