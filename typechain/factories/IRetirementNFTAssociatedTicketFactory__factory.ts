@@ -11,6 +11,92 @@ import type {
 
 const _abi = [
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "contract RetirementNFTAssociatedTicket",
+        name: "retirementNFTAssociatedTicket",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256[]",
+        name: "ticketTypes",
+        type: "uint256[]",
+      },
+      {
+        indexed: false,
+        internalType: "uint256[]",
+        name: "mintAmounts",
+        type: "uint256[]",
+      },
+      {
+        indexed: false,
+        internalType: "contract IRetirementNFT",
+        name: "retirementNFT",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "uri",
+        type: "string",
+      },
+    ],
+    name: "BatchRetirementNFTAssociatedTicketMinted",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "contract RetirementNFTAssociatedTicket",
+        name: "retirementNFTAssociatedTicket",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "ticketType",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "mintAmount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "contract IRetirementNFT",
+        name: "retirementNFT",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "string",
+        name: "uri",
+        type: "string",
+      },
+    ],
+    name: "RetirementNFTAssociatedTicketMinted",
+    type: "event",
+  },
+  {
     inputs: [
       {
         internalType: "address",
