@@ -47,17 +47,17 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               let tx: any = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
               let txReceipt: any = await tx.wait()
 
+              //@dev - Retrieve an eventLog emitted (NOTE: Event name is "RetirementNFTAssociatedTicketMinted")
               const eventName: string = "RetirementNFTAssociatedTicketMinted"
               let eventLog: any = await getEventLog(txReceipt, eventName)
               console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ JSON.stringify(eventLog, null, 2) }`)
 
-              await run("fund-link", { contract: retirementNFTAssociatedTicketFactory.address, linkaddress: linkTokenAddress })
+              //@dev - Create a RetirementNFTAssociatedTicket by assigning contract address retrieved above
+              const RETIREMENT_NFT_ASSOCIATED_TICKET: string = eventLog[0]
+              retirementNFTAssociatedTicket = await ethers.getContractAt("RetirementNFTAssociatedTicket", RETIREMENT_NFT_ASSOCIATED_TICKET)
+              console.log(`Deployed-address of RetirementNFTAssociatedTicket: ${ RETIREMENT_NFT_ASSOCIATED_TICKET }`)
+
+              await run("fund-link", { contract: retirementNFTAssociatedTicket.address, linkaddress: linkTokenAddress })
           })
-
-          it(`Should be successful that ~~`, async () => {
-  
-          })
-
-
 
       })
