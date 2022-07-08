@@ -21,14 +21,13 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
 
 //@dev - Struct, Enum, Event, etc
 import { DataTypes } from "./libraries/DataTypes.sol";
-//import { Events } from "./libraries/Events.sol";
-import { EventsHelper } from "./libraries/helper/EventsHelper.sol";  // [NOTE]: Using this instead of ./libraries/Events.sol
+import { Events } from "./libraries/Events.sol";
 
 
 /**
  * @title The factory contract of the Retirement NFT associated Ticket contract
  */
-contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketFactory, AccessControl, EventsHelper {
+contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketFactory, AccessControl {
 
     //@dev - contract instances
     IRandomNumberGeneratorV2 public rngV2;
@@ -89,8 +88,8 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts, "");
 
         //@dev - Emit information of a new RetirementNFTAssociatedTicket minted
-        emit BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
-        //emit Events.BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
+        //emit BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
+        emit Events.BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
     }
 
 }

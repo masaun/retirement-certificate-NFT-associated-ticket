@@ -13,7 +13,7 @@ import {
   Signer,
   utils,
 } from "ethers";
-import { FunctionFragment, Result } from "@ethersproject/abi";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
@@ -43,8 +43,48 @@ export interface IRetirementNFTAssociatedTicketFactoryInterface
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "BatchRetirementNFTAssociatedTicketMinted(address,address,uint256[],uint256[],address,string)": EventFragment;
+    "RetirementNFTAssociatedTicketMinted(address,address,uint256,uint256,address,string)": EventFragment;
+  };
+
+  getEvent(
+    nameOrSignatureOrTopic: "BatchRetirementNFTAssociatedTicketMinted"
+  ): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "RetirementNFTAssociatedTicketMinted"
+  ): EventFragment;
 }
+
+export type BatchRetirementNFTAssociatedTicketMintedEvent = TypedEvent<
+  [string, string, BigNumber[], BigNumber[], string, string],
+  {
+    retirementNFTAssociatedTicket: string;
+    to: string;
+    ticketTypes: BigNumber[];
+    mintAmounts: BigNumber[];
+    retirementNFT: string;
+    uri: string;
+  }
+>;
+
+export type BatchRetirementNFTAssociatedTicketMintedEventFilter =
+  TypedEventFilter<BatchRetirementNFTAssociatedTicketMintedEvent>;
+
+export type RetirementNFTAssociatedTicketMintedEvent = TypedEvent<
+  [string, string, BigNumber, BigNumber, string, string],
+  {
+    retirementNFTAssociatedTicket: string;
+    to: string;
+    ticketType: BigNumber;
+    mintAmount: BigNumber;
+    retirementNFT: string;
+    uri: string;
+  }
+>;
+
+export type RetirementNFTAssociatedTicketMintedEventFilter =
+  TypedEventFilter<RetirementNFTAssociatedTicketMintedEvent>;
 
 export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
   contractName: "IRetirementNFTAssociatedTicketFactory";
@@ -131,7 +171,41 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
     ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "BatchRetirementNFTAssociatedTicketMinted(address,address,uint256[],uint256[],address,string)"(
+      retirementNFTAssociatedTicket?: null,
+      to?: null,
+      ticketTypes?: null,
+      mintAmounts?: null,
+      retirementNFT?: null,
+      uri?: null
+    ): BatchRetirementNFTAssociatedTicketMintedEventFilter;
+    BatchRetirementNFTAssociatedTicketMinted(
+      retirementNFTAssociatedTicket?: null,
+      to?: null,
+      ticketTypes?: null,
+      mintAmounts?: null,
+      retirementNFT?: null,
+      uri?: null
+    ): BatchRetirementNFTAssociatedTicketMintedEventFilter;
+
+    "RetirementNFTAssociatedTicketMinted(address,address,uint256,uint256,address,string)"(
+      retirementNFTAssociatedTicket?: null,
+      to?: null,
+      ticketType?: null,
+      mintAmount?: null,
+      retirementNFT?: null,
+      uri?: null
+    ): RetirementNFTAssociatedTicketMintedEventFilter;
+    RetirementNFTAssociatedTicketMinted(
+      retirementNFTAssociatedTicket?: null,
+      to?: null,
+      ticketType?: null,
+      mintAmount?: null,
+      retirementNFT?: null,
+      uri?: null
+    ): RetirementNFTAssociatedTicketMintedEventFilter;
+  };
 
   estimateGas: {
     mintBatchRetirementNFTAssociatedTicket(
