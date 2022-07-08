@@ -3,7 +3,7 @@ import { assert, expect } from "chai"
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
 import { network, deployments, ethers, run } from "hardhat"
 import { developmentChains } from "../../helper-hardhat-config"
-import { RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../../typechain"
+import { RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../../typechain"
 
 //@dev - Helper of ethers.js for retrieving eventLogs emitted, etc.
 import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
@@ -16,12 +16,18 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 !developmentChains.includes(network.name)
     ? describe.skip
     : describe("Scenario Tests", async function () {
+          //@dev - Variables for assigning contract instances
+          let retirementNFTAssociatedTicket: RetirementNFTAssociatedTicket
           let retirementNFTAssociatedTicketFactory: RetirementNFTAssociatedTicketFactory
           let linkToken: LinkToken
           let mockOracle: MockOracle
 
+          //@dev - Variables for assigning deployed-addresses
+          let RETIREMENT_NFT_ASSOCIATED_TICKET: string
+
           let tx: any
           let txReceipt: any
+
 
           beforeEach(async () => {
               await deployments.fixture(["mocks", "api"])
@@ -48,9 +54,14 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               const eventName: string = "RetirementNFTAssociatedTicketMinted"
               let eventLog: any = await getEventLog(txReceipt, eventName)
               console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ JSON.stringify(eventLog, null, 2) }`)
+
+              RETIREMENT_NFT_ASSOCIATED_TICKET = eventLog[0]
           })
 
-
-
+          it(`Should be successful to create a RetirementNFTAssociatedTicket instance by assigning contract address retrieved via eventLog`, async () => {
+              //@dev - Create a RetirementNFTAssociatedTicket instance by assigning contract address retrieved above
+              retirementNFTAssociatedTicket = await ethers.getContractAt("RetirementNFTAssociatedTicket", RETIREMENT_NFT_ASSOCIATED_TICKET)
+              console.log(`Deployed-address of RetirementNFTAssociatedTicket: ${ RETIREMENT_NFT_ASSOCIATED_TICKET }`)
+          })
 
       })
