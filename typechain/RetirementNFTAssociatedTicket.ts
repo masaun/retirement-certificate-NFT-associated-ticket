@@ -17,6 +17,18 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
+export declare namespace DataTypes {
+  export type RetirementNFTAssociatedTicketMetadataStruct = {
+    ticketHolder: string;
+    randomNumber: BigNumberish;
+  };
+
+  export type RetirementNFTAssociatedTicketMetadataStructOutput = [
+    string,
+    BigNumber
+  ] & { ticketHolder: string; randomNumber: BigNumber };
+}
+
 export interface RetirementNFTAssociatedTicketInterface
   extends utils.Interface {
   contractName: "RetirementNFTAssociatedTicket";
@@ -27,6 +39,7 @@ export interface RetirementNFTAssociatedTicketInterface
     "URI_SETTER_ROLE()": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
+    "getRetirementNFTAssociatedTicketMetadata(address)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
@@ -68,6 +81,10 @@ export interface RetirementNFTAssociatedTicketInterface
   encodeFunctionData(
     functionFragment: "balanceOfBatch",
     values: [string[], BigNumberish[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getRetirementNFTAssociatedTicketMetadata",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "getRoleAdmin",
@@ -147,6 +164,10 @@ export interface RetirementNFTAssociatedTicketInterface
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "balanceOfBatch",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getRetirementNFTAssociatedTicketMetadata",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -322,6 +343,15 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
+    getRetirementNFTAssociatedTicketMetadata(
+      retirementNFT: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput] & {
+        _retirementNFTAssociatedTicketMetadata: DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput;
+      }
+    >;
+
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<[string]>;
 
     grantRole(
@@ -431,6 +461,11 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
+  getRetirementNFTAssociatedTicketMetadata(
+    retirementNFT: string,
+    overrides?: CallOverrides
+  ): Promise<DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput>;
+
   getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
   grantRole(
@@ -539,6 +574,11 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       ids: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
+
+    getRetirementNFTAssociatedTicketMetadata(
+      retirementNFT: string,
+      overrides?: CallOverrides
+    ): Promise<DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput>;
 
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -732,6 +772,11 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getRetirementNFTAssociatedTicketMetadata(
+      retirementNFT: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getRoleAdmin(
       role: BytesLike,
       overrides?: CallOverrides
@@ -844,6 +889,11 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     balanceOfBatch(
       accounts: string[],
       ids: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getRetirementNFTAssociatedTicketMetadata(
+      retirementNFT: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

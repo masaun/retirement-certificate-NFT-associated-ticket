@@ -22,6 +22,10 @@ interface IRetirementNFTAssociatedTicket {
      * @notice - Save a metadata of RetirementNFTAssociatedTicket
      */ 
     function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT) external;
-    //function saveRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT, uint256[] memory randomNumbers) external;
+
+    /**
+     * @notice - Get a metadata of RetirementNFTAssociatedTicket
+     */ 
+    function getRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT) external view returns (DataTypes.RetirementNFTAssociatedTicketMetadata memory _retirementNFTAssociatedTicketMetadata);
 
 }

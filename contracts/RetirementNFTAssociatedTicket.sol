@@ -118,11 +118,19 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         console.log("-------------- RETIREMENT_NFT: %s --------------", RETIREMENT_NFT);  // [Result]: Success to retrieve value
 
         DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
-        retirementNFTAssociatedTicketMetadata.ticketHolder = 0x0000000000000000000000000000000000000000;  // [TODO]: Assign actual wallet address 
+        retirementNFTAssociatedTicketMetadata.ticketHolder = 0x0000000000000000000000000000000000000000;  // [TODO]: Assign actual wallet address
         //retirementNFTAssociatedTicketMetadata.randomNumber = randomNumber;
         retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
     }
 
+    /**
+     * @notice - Get a metadata of RetirementNFTAssociatedTicket
+     */ 
+    function getRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT) public view override returns (DataTypes.RetirementNFTAssociatedTicketMetadata memory _retirementNFTAssociatedTicketMetadata) {
+        address RETIREMENT_NFT = address(retirementNFT);
+        DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
+        return retirementNFTAssociatedTicketMetadata;
+    }
 
     /**
      * @notice - This method is required for Role-based access control of ERC1155 by using OpenZeppelin's AccessControl.sol

@@ -17,15 +17,32 @@ import { FunctionFragment, Result } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
+export declare namespace DataTypes {
+  export type RetirementNFTAssociatedTicketMetadataStruct = {
+    ticketHolder: string;
+    randomNumber: BigNumberish;
+  };
+
+  export type RetirementNFTAssociatedTicketMetadataStructOutput = [
+    string,
+    BigNumber
+  ] & { ticketHolder: string; randomNumber: BigNumber };
+}
+
 export interface IRetirementNFTAssociatedTicketInterface
   extends utils.Interface {
   contractName: "IRetirementNFTAssociatedTicket";
   functions: {
+    "getRetirementNFTAssociatedTicketMetadata(address)": FunctionFragment;
     "mint(address,uint256,uint256,bytes)": FunctionFragment;
     "mintBatch(address,uint256[],uint256[],bytes)": FunctionFragment;
     "saveRetirementNFTAssociatedTicketMetadata(address)": FunctionFragment;
   };
 
+  encodeFunctionData(
+    functionFragment: "getRetirementNFTAssociatedTicketMetadata",
+    values: [string]
+  ): string;
   encodeFunctionData(
     functionFragment: "mint",
     values: [string, BigNumberish, BigNumberish, BytesLike]
@@ -39,6 +56,10 @@ export interface IRetirementNFTAssociatedTicketInterface
     values: [string]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "getRetirementNFTAssociatedTicketMetadata",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mintBatch", data: BytesLike): Result;
   decodeFunctionResult(
@@ -77,6 +98,15 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    getRetirementNFTAssociatedTicketMetadata(
+      retirementNFT: string,
+      overrides?: CallOverrides
+    ): Promise<
+      [DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput] & {
+        _retirementNFTAssociatedTicketMetadata: DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput;
+      }
+    >;
+
     mint(
       to: string,
       ticketType: BigNumberish,
@@ -98,6 +128,11 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  getRetirementNFTAssociatedTicketMetadata(
+    retirementNFT: string,
+    overrides?: CallOverrides
+  ): Promise<DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput>;
 
   mint(
     to: string,
@@ -121,6 +156,11 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    getRetirementNFTAssociatedTicketMetadata(
+      retirementNFT: string,
+      overrides?: CallOverrides
+    ): Promise<DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput>;
+
     mint(
       to: string,
       ticketType: BigNumberish,
@@ -146,6 +186,11 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   filters: {};
 
   estimateGas: {
+    getRetirementNFTAssociatedTicketMetadata(
+      retirementNFT: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     mint(
       to: string,
       ticketType: BigNumberish,
@@ -169,6 +214,11 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
   };
 
   populateTransaction: {
+    getRetirementNFTAssociatedTicketMetadata(
+      retirementNFT: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     mint(
       to: string,
       ticketType: BigNumberish,
