@@ -5,6 +5,10 @@ import { network, deployments, ethers, run } from "hardhat"
 import { developmentChains } from "../../helper-hardhat-config"
 import { RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../../typechain"
 
+//@dev - Helper of ethers.js for retrieving eventLogs emitted, etc.
+import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
+//import { convertHexToString, convertStringToHex, toWei, fromWei, getEventLog, getCurrentBlock, getCurrentTimestamp } from "../ethersjs-helper/ethersjsHelper"
+
 
 /**
  * @title - Unit test of the RetirementNFTAssociatedTicketFactory.sol
@@ -15,6 +19,9 @@ import { RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../
           let retirementNFTAssociatedTicketFactory: RetirementNFTAssociatedTicketFactory
           let linkToken: LinkToken
           let mockOracle: MockOracle
+
+          let tx: any
+          let txReceipt: any
 
           beforeEach(async () => {
               await deployments.fixture(["mocks", "api"])
@@ -33,8 +40,14 @@ import { RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../
               const mintAmount = 100  // Number of tickets to be minted (ERC1155)
               const retirementNFT = "0x343c43A37D37dfF08AE8C4A11544c718AbB4fCF8"
               const uri = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
-              let tx = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
-              let txReceipt = await tx.wait()
+              tx = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
+              txReceipt = await tx.wait()
+          })
+
+          it(`Should be successful to retrieve an emitted-event log of "RetirementNFTAssociatedTicketMinted"`, async () => {
+              const eventName: string = "RetirementNFTAssociatedTicketMinted"
+              let eventLog: any = await getEventLog(txReceipt, eventName)
+              console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ JSON.stringify(eventLog, null, 2) }`)
           })
 
       })
