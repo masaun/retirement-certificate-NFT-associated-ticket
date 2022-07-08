@@ -1,5 +1,12 @@
 # Retirement NFT-gated (associated) ticket 🎫
 ### Test (Retirement NFT associated ticket) 
+- Scenario test
+```
+yarn test-scenario:retirement-NFT-associated-ticket
+```
+
+<br>
+
 - Unit test
 ```
 yarn test-unit:retirement-NFT-associated-ticket

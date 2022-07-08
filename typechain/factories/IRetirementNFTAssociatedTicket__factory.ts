@@ -13,6 +13,37 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "contract IRetirementNFT",
+        name: "retirementNFT",
+        type: "address",
+      },
+    ],
+    name: "getRetirementNFTAssociatedTicketMetadata",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "ticketHolder",
+            type: "address",
+          },
+          {
+            internalType: "uint256",
+            name: "randomNumber",
+            type: "uint256",
+          },
+        ],
+        internalType: "struct DataTypes.RetirementNFTAssociatedTicketMetadata",
+        name: "_retirementNFTAssociatedTicketMetadata",
+        type: "tuple",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "address",
         name: "to",
         type: "address",
