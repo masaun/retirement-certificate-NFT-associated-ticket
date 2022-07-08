@@ -47,8 +47,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               let tx = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
               let txReceipt = await tx.wait()
 
-              const eventName = "RetirementNFTAssociatedTicketMinted"  // [Result]: Fail to retrieve this eventLog ("undefined")
-              //const eventName = "RoleGranted"                        // [Result]: Success to retrieve this eventLog
+              const eventName = "RetirementNFTAssociatedTicketMinted"
               let eventLog = await getEventLog(txReceipt, eventName)
               console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ JSON.stringify(eventLog, null, 2) }`)
 
