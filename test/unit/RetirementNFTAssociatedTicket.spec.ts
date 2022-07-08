@@ -3,7 +3,7 @@ import { assert, expect } from "chai"
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
 import { network, deployments, ethers, run } from "hardhat"
 import { developmentChains } from "../../helper-hardhat-config"
-import { RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../../typechain"
+import { RetirementNFT, RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../../typechain"
 
 //@dev - Helper of ethers.js for retrieving eventLogs emitted, etc.
 import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
@@ -16,10 +16,16 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 !developmentChains.includes(network.name)
     ? describe.skip
     : describe("RetirementNFTAssociatedTicket Unit Tests", async function () {
+          //@dev - Variables for assigning contract instances
+          let retirementNFT: RetirementNFT
           let retirementNFTAssociatedTicket: RetirementNFTAssociatedTicket
           let retirementNFTAssociatedTicketFactory: RetirementNFTAssociatedTicketFactory
           let linkToken: LinkToken
           let mockOracle: MockOracle
+
+          //@dev - Variables for assigning deployed-addresses
+          let RETIREMENT_NFT: string = "0x343c43A37D37dfF08AE8C4A11544c718AbB4fCF8"  // Example address
+          let RETIREMENT_NFT_ASSOCIATED_TICKET: string
 
           beforeEach(async () => {
               //@dev - Below is for just checking owner address out.
@@ -42,7 +48,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
               const ticketType: number = 0 
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
-              const retirementNFT: string = "0x343c43A37D37dfF08AE8C4A11544c718AbB4fCF8"
+              const retirementNFT: string = RETIREMENT_NFT
               const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
               let tx: any = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
               let txReceipt: any = await tx.wait()
@@ -60,5 +66,9 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               await run("fund-link", { contract: retirementNFTAssociatedTicket.address, linkaddress: linkTokenAddress })
           })
 
+          it(`getRetirementNFTAssociatedTicketMetadata() - Should be successful that retrieve a metadata of the RetirementNFTAssociatedTicket specified`, async () => {
+              let RetirementNFTAssociatedTicketMetadata: any = await retirementNFTAssociatedTicket.getRetirementNFTAssociatedTicketMetadata(RETIREMENT_NFT)
+              console.log(`RetirementNFTAssociatedTicketMetadata retrieved: ${ RetirementNFTAssociatedTicketMetadata }`)
+          })
 
       })
