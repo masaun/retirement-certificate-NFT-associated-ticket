@@ -11,7 +11,8 @@ library DataTypes {
      * @notice - Data of RetirementNFT's Metadata
      */ 
     struct RetirementNFTAssociatedTicketMetadata {
-        address ticketHolder; 
+        address ticketCreator;
+        //address ticketHolder; 
         uint256 ticketNumber;
     }
 

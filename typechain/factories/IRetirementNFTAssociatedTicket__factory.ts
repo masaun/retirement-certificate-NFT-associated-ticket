@@ -24,7 +24,7 @@ const _abi = [
         components: [
           {
             internalType: "address",
-            name: "ticketHolder",
+            name: "ticketCreator",
             type: "address",
           },
           {
