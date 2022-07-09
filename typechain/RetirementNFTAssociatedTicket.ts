@@ -35,7 +35,6 @@ export interface RetirementNFTAssociatedTicketInterface
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "MINTER_ROLE()": FunctionFragment;
-    "TICKET_TYPE_1()": FunctionFragment;
     "URI_SETTER_ROLE()": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
@@ -64,10 +63,6 @@ export interface RetirementNFTAssociatedTicketInterface
   ): string;
   encodeFunctionData(
     functionFragment: "MINTER_ROLE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "TICKET_TYPE_1",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -151,10 +146,6 @@ export interface RetirementNFTAssociatedTicketInterface
   ): Result;
   decodeFunctionResult(
     functionFragment: "MINTER_ROLE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "TICKET_TYPE_1",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -327,8 +318,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
-    TICKET_TYPE_1(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     URI_SETTER_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
     balanceOf(
@@ -443,8 +432,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
 
   MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  TICKET_TYPE_1(overrides?: CallOverrides): Promise<BigNumber>;
-
   URI_SETTER_ROLE(overrides?: CallOverrides): Promise<string>;
 
   balanceOf(
@@ -554,8 +541,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<string>;
-
-    TICKET_TYPE_1(overrides?: CallOverrides): Promise<BigNumber>;
 
     URI_SETTER_ROLE(overrides?: CallOverrides): Promise<string>;
 
@@ -750,8 +735,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    TICKET_TYPE_1(overrides?: CallOverrides): Promise<BigNumber>;
-
     URI_SETTER_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
     balanceOf(
@@ -867,8 +850,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     MINTER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    TICKET_TYPE_1(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     URI_SETTER_ROLE(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

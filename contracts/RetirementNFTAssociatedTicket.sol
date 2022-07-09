@@ -35,16 +35,12 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     VRFCoordinatorV2Mock public vrfCoordinatorV2;
 
     //@dev - Storages
-    mapping (address => DataTypes.RetirementNFTAssociatedTicketMetadata) retirementNFTAssociatedTicketMetadatas;
+    mapping (address => DataTypes.RetirementNFTAssociatedTicketMetadata) retirementNFTAssociatedTicketMetadatas; // [Key]: RetirementNFT's address -> RetirementNFTAssociatedTicketMetadata struct
 
     //@dev - Roles
     bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    //@dev - Ticket types
-    uint256 public constant TICKET_TYPE_1 = 0;
-    //uint256 public constant TICKET_TYPE_2 = 1;
-    //uint256 public constant TICKET_TYPE_3 = 2;
 
     /**
      * @notice - Constructor

@@ -16,12 +16,12 @@ library DataTypes {
     }
 
     /**
-     * @notice - Enum of Something
+     * @notice - Enum of TicketType
      */ 
-    enum SomethingEnum {
-        SOMETHING_1,
-        SOMETHING_2,
-        SOMETHING_3
+    enum TicketType {
+        TICKET_TYPE_1,
+        TICKET_TYPE_2,
+        TICKET_TYPE_3
     }
 
 }
