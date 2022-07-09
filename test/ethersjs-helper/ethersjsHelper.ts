@@ -24,7 +24,7 @@ function fromWei(amount: number) {
 async function getEventLog(txReceipt: any, eventName: string) {
     for (let i = 0; i < txReceipt.events.length; i++) {
         const eventLogs: any = txReceipt.events[i];
-        console.log(`eventLogs: ${ JSON.stringify(eventLogs, null, 2) }`)
+        //console.log(`eventLogs: ${ JSON.stringify(eventLogs, null, 2) }`)
 
         if (eventLogs["event"] == eventName) {
             const _args: string = eventLogs["args"]
