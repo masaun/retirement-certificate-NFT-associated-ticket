@@ -88,7 +88,13 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           })
 
           it(`mintBatch() - Should be successful that RetirementNFTAssociatedTickets are batch minted`, async () => {
-              //[TODO]:
+              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const ticketTypes: Array<number> = [0, 1]      // Ticket type 0 and 1
+              const mintAmounts: Array<number> = [100, 150]  // Number of tickets to be minted for each ticket types (ERC1155)
+              const data: string = ""
+
+              let tx: any = await retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts, data)
+              let txReceipt: any = await tx.wait()
           })
 
       })
