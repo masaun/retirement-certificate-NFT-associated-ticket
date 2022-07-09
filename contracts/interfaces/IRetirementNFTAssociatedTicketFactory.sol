@@ -15,7 +15,7 @@ import { RetirementNFTAssociatedTicket } from "../RetirementNFTAssociatedTicket.
  */ 
 interface IRetirementNFTAssociatedTicketFactory {
 
-    event RetirementNFTAssociatedTicketMinted(
+    event RetirementNFTAssociatedTicketCreated(
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket,
         address to, 
         uint ticketType, 
@@ -24,7 +24,7 @@ interface IRetirementNFTAssociatedTicketFactory {
         string uri
     );
 
-    event BatchRetirementNFTAssociatedTicketMinted(
+    event BatchRetirementNFTAssociatedTicketCreated(
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket,
         address to, 
         uint256[] ticketTypes, 
@@ -33,8 +33,8 @@ interface IRetirementNFTAssociatedTicketFactory {
         string uri
     );
 
-    function mintRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) external;
+    function createRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) external;
 
-    function mintBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) external;
+    function createBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) external;
 
 }

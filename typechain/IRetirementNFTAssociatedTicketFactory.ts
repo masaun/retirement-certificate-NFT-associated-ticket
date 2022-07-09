@@ -21,42 +21,42 @@ export interface IRetirementNFTAssociatedTicketFactoryInterface
   extends utils.Interface {
   contractName: "IRetirementNFTAssociatedTicketFactory";
   functions: {
-    "mintBatchRetirementNFTAssociatedTicket(address,uint256[],uint256[],address,string)": FunctionFragment;
-    "mintRetirementNFTAssociatedTicket(address,uint256,uint256,address,string)": FunctionFragment;
+    "createBatchRetirementNFTAssociatedTicket(address,uint256[],uint256[],address,string)": FunctionFragment;
+    "createRetirementNFTAssociatedTicket(address,uint256,uint256,address,string)": FunctionFragment;
   };
 
   encodeFunctionData(
-    functionFragment: "mintBatchRetirementNFTAssociatedTicket",
+    functionFragment: "createBatchRetirementNFTAssociatedTicket",
     values: [string, BigNumberish[], BigNumberish[], string, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "mintRetirementNFTAssociatedTicket",
+    functionFragment: "createRetirementNFTAssociatedTicket",
     values: [string, BigNumberish, BigNumberish, string, string]
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "mintBatchRetirementNFTAssociatedTicket",
+    functionFragment: "createBatchRetirementNFTAssociatedTicket",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "mintRetirementNFTAssociatedTicket",
+    functionFragment: "createRetirementNFTAssociatedTicket",
     data: BytesLike
   ): Result;
 
   events: {
-    "BatchRetirementNFTAssociatedTicketMinted(address,address,uint256[],uint256[],address,string)": EventFragment;
-    "RetirementNFTAssociatedTicketMinted(address,address,uint256,uint256,address,string)": EventFragment;
+    "BatchRetirementNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)": EventFragment;
+    "RetirementNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)": EventFragment;
   };
 
   getEvent(
-    nameOrSignatureOrTopic: "BatchRetirementNFTAssociatedTicketMinted"
+    nameOrSignatureOrTopic: "BatchRetirementNFTAssociatedTicketCreated"
   ): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "RetirementNFTAssociatedTicketMinted"
+    nameOrSignatureOrTopic: "RetirementNFTAssociatedTicketCreated"
   ): EventFragment;
 }
 
-export type BatchRetirementNFTAssociatedTicketMintedEvent = TypedEvent<
+export type BatchRetirementNFTAssociatedTicketCreatedEvent = TypedEvent<
   [string, string, BigNumber[], BigNumber[], string, string],
   {
     retirementNFTAssociatedTicket: string;
@@ -68,10 +68,10 @@ export type BatchRetirementNFTAssociatedTicketMintedEvent = TypedEvent<
   }
 >;
 
-export type BatchRetirementNFTAssociatedTicketMintedEventFilter =
-  TypedEventFilter<BatchRetirementNFTAssociatedTicketMintedEvent>;
+export type BatchRetirementNFTAssociatedTicketCreatedEventFilter =
+  TypedEventFilter<BatchRetirementNFTAssociatedTicketCreatedEvent>;
 
-export type RetirementNFTAssociatedTicketMintedEvent = TypedEvent<
+export type RetirementNFTAssociatedTicketCreatedEvent = TypedEvent<
   [string, string, BigNumber, BigNumber, string, string],
   {
     retirementNFTAssociatedTicket: string;
@@ -83,8 +83,8 @@ export type RetirementNFTAssociatedTicketMintedEvent = TypedEvent<
   }
 >;
 
-export type RetirementNFTAssociatedTicketMintedEventFilter =
-  TypedEventFilter<RetirementNFTAssociatedTicketMintedEvent>;
+export type RetirementNFTAssociatedTicketCreatedEventFilter =
+  TypedEventFilter<RetirementNFTAssociatedTicketCreatedEvent>;
 
 export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
   contractName: "IRetirementNFTAssociatedTicketFactory";
@@ -114,7 +114,7 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    mintBatchRetirementNFTAssociatedTicket(
+    createBatchRetirementNFTAssociatedTicket(
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
@@ -123,7 +123,7 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    mintRetirementNFTAssociatedTicket(
+    createRetirementNFTAssociatedTicket(
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
@@ -133,7 +133,7 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  mintBatchRetirementNFTAssociatedTicket(
+  createBatchRetirementNFTAssociatedTicket(
     to: string,
     ticketTypes: BigNumberish[],
     mintAmounts: BigNumberish[],
@@ -142,7 +142,7 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  mintRetirementNFTAssociatedTicket(
+  createRetirementNFTAssociatedTicket(
     to: string,
     ticketType: BigNumberish,
     mintAmount: BigNumberish,
@@ -152,7 +152,7 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    mintBatchRetirementNFTAssociatedTicket(
+    createBatchRetirementNFTAssociatedTicket(
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
@@ -161,7 +161,7 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    mintRetirementNFTAssociatedTicket(
+    createRetirementNFTAssociatedTicket(
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
@@ -172,43 +172,43 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
   };
 
   filters: {
-    "BatchRetirementNFTAssociatedTicketMinted(address,address,uint256[],uint256[],address,string)"(
+    "BatchRetirementNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)"(
       retirementNFTAssociatedTicket?: null,
       to?: null,
       ticketTypes?: null,
       mintAmounts?: null,
       retirementNFT?: null,
       uri?: null
-    ): BatchRetirementNFTAssociatedTicketMintedEventFilter;
-    BatchRetirementNFTAssociatedTicketMinted(
+    ): BatchRetirementNFTAssociatedTicketCreatedEventFilter;
+    BatchRetirementNFTAssociatedTicketCreated(
       retirementNFTAssociatedTicket?: null,
       to?: null,
       ticketTypes?: null,
       mintAmounts?: null,
       retirementNFT?: null,
       uri?: null
-    ): BatchRetirementNFTAssociatedTicketMintedEventFilter;
+    ): BatchRetirementNFTAssociatedTicketCreatedEventFilter;
 
-    "RetirementNFTAssociatedTicketMinted(address,address,uint256,uint256,address,string)"(
+    "RetirementNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)"(
       retirementNFTAssociatedTicket?: null,
       to?: null,
       ticketType?: null,
       mintAmount?: null,
       retirementNFT?: null,
       uri?: null
-    ): RetirementNFTAssociatedTicketMintedEventFilter;
-    RetirementNFTAssociatedTicketMinted(
+    ): RetirementNFTAssociatedTicketCreatedEventFilter;
+    RetirementNFTAssociatedTicketCreated(
       retirementNFTAssociatedTicket?: null,
       to?: null,
       ticketType?: null,
       mintAmount?: null,
       retirementNFT?: null,
       uri?: null
-    ): RetirementNFTAssociatedTicketMintedEventFilter;
+    ): RetirementNFTAssociatedTicketCreatedEventFilter;
   };
 
   estimateGas: {
-    mintBatchRetirementNFTAssociatedTicket(
+    createBatchRetirementNFTAssociatedTicket(
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
@@ -217,7 +217,7 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    mintRetirementNFTAssociatedTicket(
+    createRetirementNFTAssociatedTicket(
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
@@ -228,7 +228,7 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
   };
 
   populateTransaction: {
-    mintBatchRetirementNFTAssociatedTicket(
+    createBatchRetirementNFTAssociatedTicket(
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
@@ -237,7 +237,7 @@ export interface IRetirementNFTAssociatedTicketFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    mintRetirementNFTAssociatedTicket(
+    createRetirementNFTAssociatedTicket(
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,

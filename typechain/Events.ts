@@ -11,19 +11,19 @@ export interface EventsInterface extends utils.Interface {
   functions: {};
 
   events: {
-    "BatchRetirementNFTAssociatedTicketMinted(address,address,uint256[],uint256[],address,string)": EventFragment;
-    "RetirementNFTAssociatedTicketMinted(address,address,uint256,uint256,address,string)": EventFragment;
+    "BatchRetirementNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)": EventFragment;
+    "RetirementNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)": EventFragment;
   };
 
   getEvent(
-    nameOrSignatureOrTopic: "BatchRetirementNFTAssociatedTicketMinted"
+    nameOrSignatureOrTopic: "BatchRetirementNFTAssociatedTicketCreated"
   ): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "RetirementNFTAssociatedTicketMinted"
+    nameOrSignatureOrTopic: "RetirementNFTAssociatedTicketCreated"
   ): EventFragment;
 }
 
-export type BatchRetirementNFTAssociatedTicketMintedEvent = TypedEvent<
+export type BatchRetirementNFTAssociatedTicketCreatedEvent = TypedEvent<
   [string, string, BigNumber[], BigNumber[], string, string],
   {
     retirementNFTAssociatedTicket: string;
@@ -35,10 +35,10 @@ export type BatchRetirementNFTAssociatedTicketMintedEvent = TypedEvent<
   }
 >;
 
-export type BatchRetirementNFTAssociatedTicketMintedEventFilter =
-  TypedEventFilter<BatchRetirementNFTAssociatedTicketMintedEvent>;
+export type BatchRetirementNFTAssociatedTicketCreatedEventFilter =
+  TypedEventFilter<BatchRetirementNFTAssociatedTicketCreatedEvent>;
 
-export type RetirementNFTAssociatedTicketMintedEvent = TypedEvent<
+export type RetirementNFTAssociatedTicketCreatedEvent = TypedEvent<
   [string, string, BigNumber, BigNumber, string, string],
   {
     retirementNFTAssociatedTicket: string;
@@ -50,8 +50,8 @@ export type RetirementNFTAssociatedTicketMintedEvent = TypedEvent<
   }
 >;
 
-export type RetirementNFTAssociatedTicketMintedEventFilter =
-  TypedEventFilter<RetirementNFTAssociatedTicketMintedEvent>;
+export type RetirementNFTAssociatedTicketCreatedEventFilter =
+  TypedEventFilter<RetirementNFTAssociatedTicketCreatedEvent>;
 
 export interface Events extends BaseContract {
   contractName: "Events";
@@ -85,39 +85,39 @@ export interface Events extends BaseContract {
   callStatic: {};
 
   filters: {
-    "BatchRetirementNFTAssociatedTicketMinted(address,address,uint256[],uint256[],address,string)"(
+    "BatchRetirementNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)"(
       retirementNFTAssociatedTicket?: null,
       to?: null,
       ticketTypes?: null,
       mintAmounts?: null,
       retirementNFT?: null,
       uri?: null
-    ): BatchRetirementNFTAssociatedTicketMintedEventFilter;
-    BatchRetirementNFTAssociatedTicketMinted(
+    ): BatchRetirementNFTAssociatedTicketCreatedEventFilter;
+    BatchRetirementNFTAssociatedTicketCreated(
       retirementNFTAssociatedTicket?: null,
       to?: null,
       ticketTypes?: null,
       mintAmounts?: null,
       retirementNFT?: null,
       uri?: null
-    ): BatchRetirementNFTAssociatedTicketMintedEventFilter;
+    ): BatchRetirementNFTAssociatedTicketCreatedEventFilter;
 
-    "RetirementNFTAssociatedTicketMinted(address,address,uint256,uint256,address,string)"(
+    "RetirementNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)"(
       retirementNFTAssociatedTicket?: null,
       to?: null,
       ticketType?: null,
       mintAmount?: null,
       retirementNFT?: null,
       uri?: null
-    ): RetirementNFTAssociatedTicketMintedEventFilter;
-    RetirementNFTAssociatedTicketMinted(
+    ): RetirementNFTAssociatedTicketCreatedEventFilter;
+    RetirementNFTAssociatedTicketCreated(
       retirementNFTAssociatedTicket?: null,
       to?: null,
       ticketType?: null,
       mintAmount?: null,
       retirementNFT?: null,
       uri?: null
-    ): RetirementNFTAssociatedTicketMintedEventFilter;
+    ): RetirementNFTAssociatedTicketCreatedEventFilter;
   };
 
   estimateGas: {};

@@ -56,9 +56,9 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
 
 
     /**
-     * @notice - Mint a new RetirementNFTAssociatedTicket with RNG via Chainlink VRF
+     * @notice - Create a new RetirementNFTAssociatedTicket with RNG via Chainlink VRF
      */
-    function mintRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
+    function createRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
         //@dev - [TODO]: Add require() method for checking whether "to" address has a RetiermentNFT or not
 
         //@dev - Create a new retirementNFTAssociatedTicket
@@ -70,15 +70,15 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         //@dev - Mint a new RetirementNFTAssociatedTicket
         //retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
 
-        //@dev - Emit information of a new RetirementNFTAssociatedTicket minted
-        emit RetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketType, mintAmount, retirementNFT, uri);
-        //emit Events.RetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketType, mintAmount, retirementNFT, uri);
+        //@dev - Emit information of a new RetirementNFTAssociatedTicket created
+        emit RetirementNFTAssociatedTicketCreated(retirementNFTAssociatedTicket, to, ticketType, mintAmount, retirementNFT, uri);
+        //emit Events.RetirementNFTAssociatedTicketCreated(retirementNFTAssociatedTicket, to, ticketType, mintAmount, retirementNFT, uri);
     }
 
     /**
-     * @notice - Mint batch RetirementNFTAssociatedTicket with RNG via Chainlink VRF
+     * @notice - Create batch RetirementNFTAssociatedTicket with RNG via Chainlink VRF
      */ 
-    function mintBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
+    function createBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
 
         //@dev - Create a new retirementNFTAssociatedTicket
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(ticketMinterRoleAddress, rngV2, uri, this, vrfCoordinatorV2);
@@ -89,9 +89,9 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         //@dev - Mint batch of RetirementNFTAssociatedTickets
         //retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts, "");
 
-        //@dev - Emit information of a new RetirementNFTAssociatedTicket minted
-        //emit BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
-        emit Events.BatchRetirementNFTAssociatedTicketMinted(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
+        //@dev - Emit information of a new RetirementNFTAssociatedTicket created
+        //emit BatchRetirementNFTAssociatedTicketCreated(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
+        emit Events.BatchRetirementNFTAssociatedTicketCreated(retirementNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementNFT, uri);
     }
 
 }
