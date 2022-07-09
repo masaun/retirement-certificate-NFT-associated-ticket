@@ -100,6 +100,12 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               let txReceipt: any = await tx.wait()
           })
 
-          
+          it(`accessSpecialContent() - Should be successful to access a special content that only only a Retirement NFT Associated Ticket holder can access.`, async () => {
+              //[TODO]: 
+              const ticketType: number = 0
+
+              let tx: any = await retirementNFTAssociatedTicketGatedService.accessSpecialContent(RETIREMENT_NFT_ASSOCIATED_TICKET, ticketType)
+              let txReceipt = await tx.wait() 
+          })
 
       })
