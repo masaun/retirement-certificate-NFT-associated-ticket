@@ -84,7 +84,7 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
   
   log(`Run RetirementNFTAssociatedTicketFactory contract with following command:`)
   const networkName: string = network.name == "hardhat" ? "localhost" : network.name
-  log(`yarn hardhat request-data --contract ${retirementNFTAssociatedTicketFactory .address} --network ${networkName}`)
+  log(`yarn hardhat request-data --contract ${retirementNFTAssociatedTicketFactory.address} --network ${networkName}`)
   log(`----------------------------------------------------`)
 }
 

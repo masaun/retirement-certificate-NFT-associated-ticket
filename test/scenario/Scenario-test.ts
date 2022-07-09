@@ -3,7 +3,7 @@ import { assert, expect } from "chai"
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
 import { network, deployments, ethers, run } from "hardhat"
 import { developmentChains } from "../../helper-hardhat-config"
-import { RetirementNFT, RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../../typechain"
+import { RetirementNFT, RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, MockRetirementNFTAssociatedTicketGatedService, LinkToken, MockOracle } from "../../typechain"
 
 //@dev - Helper of ethers.js for retrieving eventLogs emitted, etc.
 import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
@@ -20,6 +20,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let retirementNFT: RetirementNFT
           let retirementNFTAssociatedTicket: RetirementNFTAssociatedTicket
           let retirementNFTAssociatedTicketFactory: RetirementNFTAssociatedTicketFactory
+          let retirementNFTAssociatedTicketGatedService: MockRetirementNFTAssociatedTicketGatedService
           let linkToken: LinkToken
           let mockOracle: MockOracle
 
@@ -27,6 +28,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let RETIREMENT_NFT: string
           let RETIREMENT_NFT_ASSOCIATED_TICKET: string
           let RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY: string
+          let RETIREMENT_NFT_ASSOCIATED_TICKET_GATED_SERVICE: string
 
           let tx: any
           let txReceipt: any
@@ -45,6 +47,11 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               retirementNFTAssociatedTicketFactory = await ethers.getContract("RetirementNFTAssociatedTicketFactory")
               RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY = retirementNFTAssociatedTicketFactory.address
               console.log(`##### Deployed-contract address of the RetirementNFTAssociatedTicketFactory.sol: ${ RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY } ######`)
+
+              //@dev - Create the contract instance of the MockRetirementNFTAssociatedTicketGatedService.sol
+              retirementNFTAssociatedTicketGatedService = await ethers.getContract("MockRetirementNFTAssociatedTicketGatedService")
+              RETIREMENT_NFT_ASSOCIATED_TICKET_GATED_SERVICE = retirementNFTAssociatedTicketGatedService.address
+              console.log(`##### Deployed-contract address of the MockRetirementNFTAssociatedTicketGatedService.sol: ${ RETIREMENT_NFT_ASSOCIATED_TICKET_GATED_SERVICE } ######`)
 
               await run("fund-link", { contract: retirementNFTAssociatedTicketFactory.address, linkaddress: linkTokenAddress })
           })
@@ -92,5 +99,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               let tx: any = await retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts)
               let txReceipt: any = await tx.wait()
           })
+
+          
 
       })
