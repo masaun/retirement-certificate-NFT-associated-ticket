@@ -29,7 +29,7 @@ const _abi = [
           },
           {
             internalType: "uint256",
-            name: "randomNumber",
+            name: "ticketNumber",
             type: "uint256",
           },
         ],

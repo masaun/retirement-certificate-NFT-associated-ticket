@@ -12,11 +12,11 @@ library DataTypes {
      */ 
     struct RetirementNFTAssociatedTicketMetadata {
         address ticketHolder; 
-        uint256 randomNumber;
+        uint256 ticketNumber;
     }
 
     /**
-     * @notice - Enum of TicketType
+     * @notice - Enum of TicketType (for ERC1155-based ticket)
      */ 
     enum TicketType {
         TICKET_TYPE_1,

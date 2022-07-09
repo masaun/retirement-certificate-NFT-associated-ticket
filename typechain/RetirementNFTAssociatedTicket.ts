@@ -20,13 +20,13 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 export declare namespace DataTypes {
   export type RetirementNFTAssociatedTicketMetadataStruct = {
     ticketHolder: string;
-    randomNumber: BigNumberish;
+    ticketNumber: BigNumberish;
   };
 
   export type RetirementNFTAssociatedTicketMetadataStructOutput = [
     string,
     BigNumber
-  ] & { ticketHolder: string; randomNumber: BigNumber };
+  ] & { ticketHolder: string; ticketNumber: BigNumber };
 }
 
 export interface RetirementNFTAssociatedTicketInterface
