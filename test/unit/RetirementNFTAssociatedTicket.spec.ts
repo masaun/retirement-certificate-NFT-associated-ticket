@@ -51,18 +51,18 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY = retirementNFTAssociatedTicketFactory.address
               console.log(`##### Deployed-contract address of the RetirementNFTAssociatedTicketFactory.sol: ${ RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY } ######`)
 
-              //@dev - Mint a new RetirementNFTAssociatedTicket
+              //@dev - Create a new RetirementNFTAssociatedTicket
               const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
               const ticketType: number = 0 
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
               const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
-              let tx: any = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
+              let tx: any = await retirementNFTAssociatedTicketFactory.createRetirementNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
               let txReceipt: any = await tx.wait()
 
-              //@dev - Retrieve an eventLog emitted (NOTE: Event name is "RetirementNFTAssociatedTicketMinted")
-              const eventName: string = "RetirementNFTAssociatedTicketMinted"
+              //@dev - Retrieve an eventLog emitted (NOTE: Event name is "RetirementNFTAssociatedTicketCreated")
+              const eventName: string = "RetirementNFTAssociatedTicketCreated"
               let eventLog: any = await getEventLog(txReceipt, eventName)
-              console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ eventLog }`)
+              console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketCreated": ${ eventLog }`)
 
               //@dev - Create a RetirementNFTAssociatedTicket instance by assigning contract address retrieved above
               RETIREMENT_NFT_ASSOCIATED_TICKET = eventLog[0]

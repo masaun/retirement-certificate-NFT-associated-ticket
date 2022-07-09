@@ -13,7 +13,7 @@ import { DataTypes } from './DataTypes.sol';
 
 library Events {
 
-    event RetirementNFTAssociatedTicketMinted(
+    event RetirementNFTAssociatedTicketCreated(
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket,
         address to, 
         uint ticketType, 
@@ -22,7 +22,7 @@ library Events {
         string uri
     );
 
-    event BatchRetirementNFTAssociatedTicketMinted(
+    event BatchRetirementNFTAssociatedTicketCreated(
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket,
         address to, 
         uint256[] ticketTypes, 

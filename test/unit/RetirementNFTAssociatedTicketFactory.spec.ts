@@ -49,20 +49,20 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               await run("fund-link", { contract: retirementNFTAssociatedTicketFactory.address, linkaddress: linkTokenAddress })
           })
 
-          it(`Should be successful that a new RetirementNFTAssociatedTicket is minted`, async () => {
+          it(`Should be successful that a new RetirementNFTAssociatedTicket is created`, async () => {
               //@dev - A new RetirementNFTAssociatedTicket is minted
               const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
               const ticketType: number = 0 
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
               const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
-              tx = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
+              tx = await retirementNFTAssociatedTicketFactory.createRetirementNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
               txReceipt = await tx.wait()
           })
 
-          it(`Should be successful to retrieve an emitted-event log of "RetirementNFTAssociatedTicketMinted"`, async () => {
-              const eventName: string = "RetirementNFTAssociatedTicketMinted"
+          it(`Should be successful to retrieve an emitted-event log of "RetirementNFTAssociatedTicketCreated"`, async () => {
+              const eventName: string = "RetirementNFTAssociatedTicketCreated"
               let eventLog: any = await getEventLog(txReceipt, eventName)
-              console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ eventLog }`)
+              console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketCreated": ${ eventLog }`)
 
               //@dev - Create a RetirementNFTAssociatedTicket instance by assigning contract address retrieved above
               RETIREMENT_NFT_ASSOCIATED_TICKET = eventLog[0]
