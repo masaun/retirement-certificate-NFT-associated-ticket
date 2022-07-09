@@ -24,12 +24,12 @@ const _abi = [
         components: [
           {
             internalType: "address",
-            name: "ticketHolder",
+            name: "ticketCreator",
             type: "address",
           },
           {
             internalType: "uint256",
-            name: "randomNumber",
+            name: "ticketNumber",
             type: "uint256",
           },
         ],

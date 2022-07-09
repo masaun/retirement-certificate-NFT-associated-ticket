@@ -31,25 +31,27 @@ import "hardhat/console.sol";
  */
 contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC1155, AccessControl {
 
+    //@dev - Smart contract instances
     IRandomNumberGeneratorV2 public rngV2;
     VRFCoordinatorV2Mock public vrfCoordinatorV2;
 
     //@dev - Storages
-    mapping (address => DataTypes.RetirementNFTAssociatedTicketMetadata) retirementNFTAssociatedTicketMetadatas;
+    mapping (address => DataTypes.RetirementNFTAssociatedTicketMetadata) retirementNFTAssociatedTicketMetadatas; // [Key]: RetirementNFT's address -> RetirementNFTAssociatedTicketMetadata struct
 
     //@dev - Roles
+    address public TICKET_CREATOR;
     bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    //@dev - Ticket types
-    uint256 public constant TICKET_TYPE_1 = 0;
-    //uint256 public constant TICKET_TYPE_2 = 1;
-    //uint256 public constant TICKET_TYPE_3 = 2;
 
     /**
      * @notice - Constructor
      */ 
-    constructor(address _ticketMinterRoleAddress, IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory, VRFCoordinatorV2Mock _vrfCoordinatorV2) ERC1155("") {
+    constructor(address _ticketCreator, IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory, VRFCoordinatorV2Mock _vrfCoordinatorV2) ERC1155("") {
+        //@dev - Assign a ticket creator's address
+        TICKET_CREATOR = _ticketCreator;
+
+        //@dev - Create smart contract instances
         rngV2 = _rngV2;
         vrfCoordinatorV2 = _vrfCoordinatorV2;
 
@@ -57,7 +59,7 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         _grantRole(DEFAULT_ADMIN_ROLE, address(_retirementNFTAssociatedTicketFactory));  // Factory contract address
         _grantRole(URI_SETTER_ROLE, address(_retirementNFTAssociatedTicketFactory));     // Factory contract address
         //_grantRole(MINTER_ROLE, address(_retirementNFTAssociatedTicketFactory));       // Factory contract address
-        _grantRole(MINTER_ROLE, _ticketMinterRoleAddress);
+        _grantRole(MINTER_ROLE, _ticketCreator);
 
         //@dev - Set a URI (image, etc) to the ERC1155 NFT
         //@dev - NOTE: This method is able to be called by the wallet address that has a "URI_SETTER_ROLE" role.
@@ -121,9 +123,10 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         console.log("-------------- RETIREMENT_NFT: %s --------------", RETIREMENT_NFT);  // [Result]: Success to retrieve value
 
         DataTypes.RetirementNFTAssociatedTicketMetadata storage retirementNFTAssociatedTicketMetadata = retirementNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
-        retirementNFTAssociatedTicketMetadata.ticketHolder = 0x0000000000000000000000000000000000000000;  // [TODO]: Assign actual wallet address
-        //retirementNFTAssociatedTicketMetadata.randomNumber = randomNumber;
-        retirementNFTAssociatedTicketMetadata.randomNumber = randomNumbers[0];
+        retirementNFTAssociatedTicketMetadata.ticketCreator = TICKET_CREATOR;
+        //retirementNFTAssociatedTicketMetadata.ticketHolder = 0x0000000000000000000000000000000000000000; 
+        //retirementNFTAssociatedTicketMetadata.ticketNumber = randomNumber;
+        retirementNFTAssociatedTicketMetadata.ticketNumber = randomNumbers[0];
     }
 
     /**
