@@ -34,8 +34,8 @@ export interface IRetirementNFTAssociatedTicketInterface
   contractName: "IRetirementNFTAssociatedTicket";
   functions: {
     "getRetirementNFTAssociatedTicketMetadata(address)": FunctionFragment;
-    "mint(address,uint256,uint256,bytes)": FunctionFragment;
-    "mintBatch(address,uint256[],uint256[],bytes)": FunctionFragment;
+    "mint(address,uint256,uint256)": FunctionFragment;
+    "mintBatch(address,uint256[],uint256[])": FunctionFragment;
     "saveRetirementNFTAssociatedTicketMetadata(address)": FunctionFragment;
   };
 
@@ -45,11 +45,11 @@ export interface IRetirementNFTAssociatedTicketInterface
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
-    values: [string, BigNumberish, BigNumberish, BytesLike]
+    values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "mintBatch",
-    values: [string, BigNumberish[], BigNumberish[], BytesLike]
+    values: [string, BigNumberish[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
@@ -111,7 +111,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -119,7 +118,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -138,7 +136,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
     to: string,
     ticketType: BigNumberish,
     mintAmount: BigNumberish,
-    data: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -146,7 +143,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
     to: string,
     ticketTypes: BigNumberish[],
     mintAmounts: BigNumberish[],
-    data: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -165,7 +161,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -173,7 +168,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -195,7 +189,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -203,7 +196,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -223,7 +215,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -231,7 +222,6 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

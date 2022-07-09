@@ -74,22 +74,24 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     /**
      * @notice - Mint a retirementNFTAssociatedTicket
      */ 
-    function mint(address to, uint256 ticketType, uint256 mintAmount, bytes memory data)
+    function mint(address to, uint256 ticketType, uint256 mintAmount)
         public 
         override
-        onlyRole(MINTER_ROLE)
+        //onlyRole(MINTER_ROLE)
     {
+        bytes memory data = "";
         _mint(to, ticketType, mintAmount, data);
     }
 
     /**
      * @notice - Mint batch of retirementNFTAssociatedTicket
      */
-    function mintBatch(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, bytes memory data)
+    function mintBatch(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts)
         public
         override
-        onlyRole(MINTER_ROLE)
+        //onlyRole(MINTER_ROLE)
     {
+        bytes memory data = "";
         _mintBatch(to, ticketTypes, mintAmounts, data);
     }
 
