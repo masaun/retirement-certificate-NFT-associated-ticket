@@ -58,11 +58,6 @@ const _abi = [
         name: "mintAmount",
         type: "uint256",
       },
-      {
-        internalType: "bytes",
-        name: "data",
-        type: "bytes",
-      },
     ],
     name: "mint",
     outputs: [],
@@ -85,11 +80,6 @@ const _abi = [
         internalType: "uint256[]",
         name: "mintAmounts",
         type: "uint256[]",
-      },
-      {
-        internalType: "bytes",
-        name: "data",
-        type: "bytes",
       },
     ],
     name: "mintBatch",

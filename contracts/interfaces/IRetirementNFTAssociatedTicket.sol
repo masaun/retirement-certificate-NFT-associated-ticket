@@ -11,12 +11,12 @@ interface IRetirementNFTAssociatedTicket {
     /**
      * @notice - Mint a retirementNFTAssociatedTicket
      */ 
-    function mint(address to, uint256 ticketType, uint256 mintAmount, bytes memory data) external;
+    function mint(address to, uint256 ticketType, uint256 mintAmount) external;
 
     /**
      * @notice - Mint batch of retirementNFTAssociatedTicket
      */
-    function mintBatch(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, bytes memory data) external;
+    function mintBatch(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts) external;
 
     /**
      * @notice - Save a metadata of RetirementNFTAssociatedTicket

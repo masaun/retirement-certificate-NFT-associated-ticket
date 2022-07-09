@@ -49,14 +49,15 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     /**
      * @notice - Constructor
      */ 
-    constructor(IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory, VRFCoordinatorV2Mock _vrfCoordinatorV2) ERC1155("") {
+    constructor(address _ticketMinterRoleAddress, IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory, VRFCoordinatorV2Mock _vrfCoordinatorV2) ERC1155("") {
         rngV2 = _rngV2;
         vrfCoordinatorV2 = _vrfCoordinatorV2;
 
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, address(_retirementNFTAssociatedTicketFactory));  // Factory contract address
         _grantRole(URI_SETTER_ROLE, address(_retirementNFTAssociatedTicketFactory));     // Factory contract address
-        _grantRole(MINTER_ROLE, address(_retirementNFTAssociatedTicketFactory));         // Factory contract address
+        //_grantRole(MINTER_ROLE, address(_retirementNFTAssociatedTicketFactory));       // Factory contract address
+        _grantRole(MINTER_ROLE, _ticketMinterRoleAddress);
 
         //@dev - Set a URI (image, etc) to the ERC1155 NFT
         //@dev - NOTE: This method is able to be called by the wallet address that has a "URI_SETTER_ROLE" role.
@@ -74,22 +75,24 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     /**
      * @notice - Mint a retirementNFTAssociatedTicket
      */ 
-    function mint(address to, uint256 ticketType, uint256 mintAmount, bytes memory data)
+    function mint(address to, uint256 ticketType, uint256 mintAmount)
         public 
         override
         onlyRole(MINTER_ROLE)
     {
+        bytes memory data = "";
         _mint(to, ticketType, mintAmount, data);
     }
 
     /**
      * @notice - Mint batch of retirementNFTAssociatedTicket
      */
-    function mintBatch(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, bytes memory data)
+    function mintBatch(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts)
         public
         override
         onlyRole(MINTER_ROLE)
     {
+        bytes memory data = "";
         _mintBatch(to, ticketTypes, mintAmounts, data);
     }
 

@@ -44,8 +44,8 @@ export interface RetirementNFTAssociatedTicketInterface
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mint(address,uint256,uint256,bytes)": FunctionFragment;
-    "mintBatch(address,uint256[],uint256[],bytes)": FunctionFragment;
+    "mint(address,uint256,uint256)": FunctionFragment;
+    "mintBatch(address,uint256[],uint256[])": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rngV2()": FunctionFragment;
@@ -104,11 +104,11 @@ export interface RetirementNFTAssociatedTicketInterface
   ): string;
   encodeFunctionData(
     functionFragment: "mint",
-    values: [string, BigNumberish, BigNumberish, BytesLike]
+    values: [string, BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "mintBatch",
-    values: [string, BigNumberish[], BigNumberish[], BytesLike]
+    values: [string, BigNumberish[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "renounceRole",
@@ -376,7 +376,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -384,7 +383,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -490,7 +488,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     to: string,
     ticketType: BigNumberish,
     mintAmount: BigNumberish,
-    data: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -498,7 +495,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     to: string,
     ticketTypes: BigNumberish[],
     mintAmounts: BigNumberish[],
-    data: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -604,7 +600,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -612,7 +607,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -804,7 +798,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -812,7 +805,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -924,7 +916,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -932,7 +923,6 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
