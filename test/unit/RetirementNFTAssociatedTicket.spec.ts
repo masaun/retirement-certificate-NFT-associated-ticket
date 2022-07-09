@@ -24,8 +24,9 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let mockOracle: MockOracle
 
           //@dev - Variables for assigning deployed-addresses
-          let RETIREMENT_NFT: string = "0x343c43A37D37dfF08AE8C4A11544c718AbB4fCF8"  // Example address
+          let RETIREMENT_NFT: string
           let RETIREMENT_NFT_ASSOCIATED_TICKET: string
+          let RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY: string
 
           beforeEach(async () => {
               //@dev - Below is for just checking owner address out.
@@ -40,17 +41,22 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 
               mockOracle = await ethers.getContract("MockOracle")
 
+              //@dev - Create the contract instance of the RetirementNFT.sol
+              retirementNFT = await ethers.getContract("RetirementNFT")
+              RETIREMENT_NFT = retirementNFT.address
+              console.log(`##### Deployed-contract address of the RetirementNFT.sol: ${ RETIREMENT_NFT } ######`)
+
               //@dev - Create the contract instance of the RetirementNFTAssociatedTicketFactory.sol
               retirementNFTAssociatedTicketFactory = await ethers.getContract("RetirementNFTAssociatedTicketFactory")
-              console.log(`##### Deployed-contract address of the RetirementNFTAssociatedTicketFactory.sol: ${ retirementNFTAssociatedTicketFactory.address } ######`)
+              RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY = retirementNFTAssociatedTicketFactory.address
+              console.log(`##### Deployed-contract address of the RetirementNFTAssociatedTicketFactory.sol: ${ RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY } ######`)
 
               //@dev - Mint a new RetirementNFTAssociatedTicket
               const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
               const ticketType: number = 0 
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
-              const retirementNFT: string = RETIREMENT_NFT
               const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
-              let tx: any = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, retirementNFT, uri)
+              let tx: any = await retirementNFTAssociatedTicketFactory.mintRetirementNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
               let txReceipt: any = await tx.wait()
 
               //@dev - Retrieve an eventLog emitted (NOTE: Event name is "RetirementNFTAssociatedTicketMinted")
@@ -59,7 +65,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketMinted": ${ eventLog }`)
 
               //@dev - Create a RetirementNFTAssociatedTicket instance by assigning contract address retrieved above
-              const RETIREMENT_NFT_ASSOCIATED_TICKET: string = eventLog[0]
+              RETIREMENT_NFT_ASSOCIATED_TICKET = eventLog[0]
               retirementNFTAssociatedTicket = await ethers.getContractAt("RetirementNFTAssociatedTicket", RETIREMENT_NFT_ASSOCIATED_TICKET)
               console.log(`Deployed-address of RetirementNFTAssociatedTicket: ${ RETIREMENT_NFT_ASSOCIATED_TICKET }`)
 
