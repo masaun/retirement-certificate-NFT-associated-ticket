@@ -3,7 +3,7 @@ import { assert, expect } from "chai"
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
 import { network, deployments, ethers, run } from "hardhat"
 import { developmentChains } from "../../helper-hardhat-config"
-import {  RetirementNFT, RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../../typechain"
+import { RetirementNFT, RetirementNFTAssociatedTicket, RetirementNFTAssociatedTicketFactory, LinkToken, MockOracle } from "../../typechain"
 
 //@dev - Helper of ethers.js for retrieving eventLogs emitted, etc.
 import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
@@ -11,7 +11,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 
 
 /**
- * @title - Unit test of the RetirementNFTAssociatedTicketFactory.sol
+ * @title - Unit test of the RetirementNFTAssociatedTicket.sol
  */ 
 !developmentChains.includes(network.name)
     ? describe.skip
@@ -31,10 +31,8 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let tx: any
           let txReceipt: any
 
-
           before(async () => {
               await deployments.fixture(["mocks", "api"])
-
               linkToken = await ethers.getContract("LinkToken")
               const linkTokenAddress: string = linkToken.address
 
@@ -66,13 +64,33 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               let eventLog: any = await getEventLog(txReceipt, eventName)
               console.log(`Emitted-EventLog of "RetirementNFTAssociatedTicketCreated": ${ eventLog }`)
 
-              RETIREMENT_NFT_ASSOCIATED_TICKET = eventLog[0]
-          })
-
-          it(`Should be successful to create a RetirementNFTAssociatedTicket instance by assigning contract address retrieved via eventLog`, async () => {
               //@dev - Create a RetirementNFTAssociatedTicket instance by assigning contract address retrieved above
+              RETIREMENT_NFT_ASSOCIATED_TICKET = eventLog[0]
               retirementNFTAssociatedTicket = await ethers.getContractAt("RetirementNFTAssociatedTicket", RETIREMENT_NFT_ASSOCIATED_TICKET)
               console.log(`Deployed-address of RetirementNFTAssociatedTicket: ${ RETIREMENT_NFT_ASSOCIATED_TICKET }`)
+          })
+
+          it(`getRetirementNFTAssociatedTicketMetadata() - Should be successful that retrieve a metadata of the RetirementNFTAssociatedTicket specified`, async () => {
+              let RetirementNFTAssociatedTicketMetadata: any = await retirementNFTAssociatedTicket.getRetirementNFTAssociatedTicketMetadata(RETIREMENT_NFT)
+              console.log(`RetirementNFTAssociatedTicketMetadata retrieved: ${ RetirementNFTAssociatedTicketMetadata }`)
+          })
+
+          it(`mint() - Should be successful that a RetirementNFTAssociatedTicket is minted`, async () => {
+              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const ticketType: number = 0    // Ticket type 0
+              const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
+
+              let tx: any = await retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount)
+              let txReceipt: any = await tx.wait()
+          })
+
+          it(`mintBatch() - Should be successful that RetirementNFTAssociatedTickets are batch minted`, async () => {
+              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const ticketTypes: Array<number> = [0, 1, 2]        // Ticket type 0 and 1 and 2
+              const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
+
+              let tx: any = await retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts)
+              let txReceipt: any = await tx.wait()
           })
 
       })
