@@ -28,7 +28,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let RETIREMENT_NFT_ASSOCIATED_TICKET: string
           let RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY: string
 
-          beforeEach(async () => {
+          before(async () => {
               //@dev - Below is for just checking owner address out.
               const [owner, addr1] = await ethers.getSigners()
               console.log(`owner address: ${ owner.address }`)
@@ -89,8 +89,8 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 
           it(`mintBatch() - Should be successful that RetirementNFTAssociatedTickets are batch minted`, async () => {
               const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
-              const ticketTypes: Array<number> = [0, 1]      // Ticket type 0 and 1
-              const mintAmounts: Array<number> = [100, 150]  // Number of tickets to be minted for each ticket types (ERC1155)
+              const ticketTypes: Array<number> = [0, 1, 2]      // Ticket type 0 and 1 and 2
+              const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
               const data: string = ""
 
               let tx: any = await retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts, data)

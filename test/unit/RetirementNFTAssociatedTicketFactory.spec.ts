@@ -31,7 +31,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let tx: any
           let txReceipt: any
 
-          beforeEach(async () => {
+          before(async () => {
               await deployments.fixture(["mocks", "api"])
               linkToken = await ethers.getContract("LinkToken")
               const linkTokenAddress: string = linkToken.address
