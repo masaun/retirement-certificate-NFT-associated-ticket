@@ -16,12 +16,18 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 !developmentChains.includes(network.name)
     ? describe.skip
     : describe("Scenario Tests", async function () {
-          //@dev - Wallet addresses
-          let deployer
-          let ticketCreator
-          let ticketHolder1
-          let ticketHolder2
-          let addrs
+          //@dev - Signer of wallet addresses
+          let deployer: any
+          let ticketCreator: any
+          let ticketHolder1: any
+          let ticketHolder2: any
+          let addrs: any
+
+          //@dev - wallet addresses
+          let DEPLOYER: string
+          let TICKET_CREATOR: string
+          let TICKET_HOLDER_1: string
+          let TICKET_HOLDER_2: string
 
           //@dev - Variables for assigning contract instances
           let retirementNFT: RetirementNFT
@@ -43,7 +49,11 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           before(async () => {
               [deployer, ticketHolder1, ticketHolder2, ...addrs] = await ethers.getSigners()
               ticketCreator = deployer  // [NOTE]: In this test, a deloyer is also role of a ticket creator
-              console.log(`\n deployer: ${ deployer.address } \n ticketCreator: ${ ticketCreator.address } \n ticketHolder1: ${ ticketHolder1.address } \n ticketHolder2: ${ ticketHolder2.address } \n`)
+              DEPLOYER = deployer.address
+              TICKET_CREATOR = deployer.address
+              TICKET_HOLDER_1 = ticketHolder1.address
+              TICKET_HOLDER_2 = ticketHolder2.address
+              console.log(`\n deployer: ${ DEPLOYER } \n ticketCreator: ${ TICKET_CREATOR } \n ticketHolder1: ${ TICKET_HOLDER_1 } \n ticketHolder2: ${ TICKET_HOLDER_2 } \n`)
 
               await deployments.fixture(["mocks", "api"])
 
@@ -70,7 +80,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 
           it(`Should be successful that a new RetirementNFTAssociatedTicket is created`, async () => {
               //@dev - A new RetirementNFTAssociatedTicket is minted
-              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const to: string = TICKET_HOLDER_1
               const ticketType: number = 0 
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
               const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
@@ -95,7 +105,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           })
 
           it(`mint() - Should be successful that a RetirementNFTAssociatedTicket is minted`, async () => {
-              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const to: string = TICKET_HOLDER_1
               const ticketType: number = 0    // Ticket type 0
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
 
@@ -104,7 +114,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           })
 
           it(`mintBatch() - Should be successful that RetirementNFTAssociatedTickets are batch minted`, async () => {
-              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const to: string = TICKET_HOLDER_1
               const ticketTypes: Array<number> = [0, 1, 2]        // Ticket type 0 and 1 and 2
               const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
 
