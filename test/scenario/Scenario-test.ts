@@ -16,6 +16,13 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 !developmentChains.includes(network.name)
     ? describe.skip
     : describe("Scenario Tests", async function () {
+          //@dev - Wallet addresses
+          let deployer
+          let terminalOwner
+          let caller
+          let beneficiary 
+          let addrs
+
           //@dev - Variables for assigning contract instances
           let retirementNFT: RetirementNFT
           let retirementNFTAssociatedTicket: RetirementNFTAssociatedTicket
@@ -34,7 +41,11 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let txReceipt: any
 
           before(async () => {
+              [deployer, terminalOwner, caller, beneficiary, ...addrs] = await ethers.getSigners()
+              console.log(`\n deployer: ${ deployer.address } \n terminalOwner: ${ terminalOwner.address } \n caller: ${ caller.address } \n beneficiary: ${ beneficiary.address } \n`)
+
               await deployments.fixture(["mocks", "api"])
+
               linkToken = await ethers.getContract("LinkToken")
               const linkTokenAddress: string = linkToken.address
 
