@@ -47,6 +47,7 @@ export interface RetirementNFTAssociatedTicketInterface
     "mint(address,uint256,uint256)": FunctionFragment;
     "mintBatch(address,uint256[],uint256[])": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
+    "retirementNFT()": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rngV2()": FunctionFragment;
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
@@ -113,6 +114,10 @@ export interface RetirementNFTAssociatedTicketInterface
   encodeFunctionData(
     functionFragment: "renounceRole",
     values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "retirementNFT",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "revokeRole",
@@ -184,6 +189,10 @@ export interface RetirementNFTAssociatedTicketInterface
   decodeFunctionResult(functionFragment: "mintBatch", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "retirementNFT",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
@@ -392,6 +401,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    retirementNFT(overrides?: CallOverrides): Promise<[string]>;
+
     revokeRole(
       role: BytesLike,
       account: string,
@@ -504,6 +515,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  retirementNFT(overrides?: CallOverrides): Promise<string>;
+
   revokeRole(
     role: BytesLike,
     account: string,
@@ -615,6 +628,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       account: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    retirementNFT(overrides?: CallOverrides): Promise<string>;
 
     revokeRole(
       role: BytesLike,
@@ -814,6 +829,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    retirementNFT(overrides?: CallOverrides): Promise<BigNumber>;
+
     revokeRole(
       role: BytesLike,
       account: string,
@@ -931,6 +948,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       account: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    retirementNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     revokeRole(
       role: BytesLike,

@@ -62,7 +62,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         //@dev - [TODO]: Add require() method for checking whether "to" address has a RetiermentNFT or not
 
         //@dev - Create a new retirementNFTAssociatedTicket
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(ticketCreator, rngV2, uri, this, vrfCoordinatorV2);
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(retirementNFT, ticketCreator, rngV2, uri, this, vrfCoordinatorV2);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
         retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT);
@@ -81,7 +81,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
     function createBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
 
         //@dev - Create a new retirementNFTAssociatedTicket
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(ticketCreator, rngV2, uri, this, vrfCoordinatorV2);
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(retirementNFT, ticketCreator, rngV2, uri, this, vrfCoordinatorV2);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
         retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT);

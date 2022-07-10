@@ -27,6 +27,20 @@ contract RetirementNFT is IRetirementNFT, ERC721, AccessControl {
         _safeMint(to, tokenId);
     }
 
+    /**
+     * @dev - Get the number of tokens in an account of walletAddress.
+     */
+    function retirementNFTBalanceOf(address walletAddress) public override view returns (uint256 _balance) {
+        return balanceOf(walletAddress);
+    }
+
+    /**
+     * @dev - Get the owner of the `tokenId` of Retirment NFT.
+     */
+    function retirementNFTOwnerOf(uint256 tokenId) public override view returns (address _owner) {
+        return ownerOf(tokenId);
+    }
+
 
     /**
      * @notice - This method is required for Role-based access control of ERC721 by using OpenZeppelin's AccessControl.sol
