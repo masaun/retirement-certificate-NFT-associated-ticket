@@ -16,6 +16,19 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 !developmentChains.includes(network.name)
     ? describe.skip
     : describe("RetirementNFTAssociatedTicket Unit Tests", async function () {
+          //@dev - Signer of wallet addresses
+          let deployer: any
+          let ticketCreator: any
+          let ticketHolder1: any
+          let ticketHolder2: any
+          let addrs: any
+
+          //@dev - wallet addresses
+          let DEPLOYER: string
+          let TICKET_CREATOR: string
+          let TICKET_HOLDER_1: string
+          let TICKET_HOLDER_2: string
+
           //@dev - Variables for assigning contract instances
           let retirementNFT: RetirementNFT
           let retirementNFTAssociatedTicket: RetirementNFTAssociatedTicket
@@ -29,9 +42,14 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY: string
 
           before(async () => {
-              //@dev - Below is for just checking owner address out.
-              const [owner, addr1] = await ethers.getSigners()
-              console.log(`owner address: ${ owner.address }`)
+              //@dev - Get signers and wallet addresses for this tests 
+              [deployer, ticketHolder1, ticketHolder2, ...addrs] = await ethers.getSigners()
+              ticketCreator = deployer  // [NOTE]: In this test, a deloyer is also role of a ticket creator
+              DEPLOYER = deployer.address
+              TICKET_CREATOR = deployer.address
+              TICKET_HOLDER_1 = ticketHolder1.address
+              TICKET_HOLDER_2 = ticketHolder2.address
+              console.log(`\n deployer: ${ DEPLOYER } \n ticketCreator: ${ TICKET_CREATOR } \n ticketHolder1: ${ TICKET_HOLDER_1 } \n ticketHolder2: ${ TICKET_HOLDER_2 } \n`)
 
               //@dev - This is using "hardhat-deploy" module
               await deployments.fixture(["mocks", "api"])
@@ -52,11 +70,11 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               console.log(`##### Deployed-contract address of the RetirementNFTAssociatedTicketFactory.sol: ${ RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY } ######`)
 
               //@dev - Create a new RetirementNFTAssociatedTicket
-              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const to: string = TICKET_HOLDER_1
               const ticketType: number = 0 
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
               const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
-              let tx: any = await retirementNFTAssociatedTicketFactory.createRetirementNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
+              let tx: any = await retirementNFTAssociatedTicketFactory.connect(ticketCreator).createRetirementNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
               let txReceipt: any = await tx.wait()
 
               //@dev - Retrieve an eventLog emitted (NOTE: Event name is "RetirementNFTAssociatedTicketCreated")
@@ -78,11 +96,11 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           })
 
           it(`mint() - Should be successful that a RetirementNFTAssociatedTicket is minted`, async () => {
-              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const to: string = TICKET_HOLDER_1
               const ticketType: number = 0    // Ticket type 0
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
 
-              let tx: any = await retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount)
+              let tx: any = await retirementNFTAssociatedTicket.connect(ticketCreator).mint(to, ticketType, mintAmount)
               let txReceipt: any = await tx.wait()
           })
 
@@ -91,7 +109,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               const ticketTypes: Array<number> = [0, 1, 2]        // Ticket type 0 and 1 and 2
               const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
 
-              let tx: any = await retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts)
+              let tx: any = await retirementNFTAssociatedTicket.connect(ticketCreator).mintBatch(to, ticketTypes, mintAmounts)
               let txReceipt: any = await tx.wait()
           })
 
