@@ -93,7 +93,8 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           it(`Should be successful to mint a RetirementNFT`, async () => {
               const to: string = TICKET_HOLDER_1
               const tokenId: number = 0
-              retirementNFT.connect(deployer).mintNewRetirementNFT(to, tokenId)
+              let tx = await retirementNFT.connect(deployer).mintNewRetirementNFT(to, tokenId)
+              let txReceipt = await tx.wait()
           })
 
           it(`getRetirementNFTAssociatedTicketMetadata() - Should be successful that retrieve a metadata of the RetirementNFTAssociatedTicket specified`, async () => {
@@ -111,7 +112,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           })
 
           it(`mintBatch() - Should be successful that RetirementNFTAssociatedTickets are batch minted`, async () => {
-              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
+              const to: string = TICKET_HOLDER_1
               const ticketTypes: Array<number> = [1, 2, 3]        // Ticket type 1 and 2 and 3
               const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
 

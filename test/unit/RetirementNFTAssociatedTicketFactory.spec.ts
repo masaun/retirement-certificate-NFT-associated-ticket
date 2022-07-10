@@ -76,7 +76,8 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           it(`Should be successful to mint a RetirementNFT`, async () => {
               const to: string = TICKET_HOLDER_1
               const tokenId: number = 0
-              retirementNFT.connect(deployer).mintNewRetirementNFT(to, tokenId)
+              let tx = await retirementNFT.connect(deployer).mintNewRetirementNFT(to, tokenId)
+              let txReceipt = await tx.wait()
           })
 
           it(`Should be successful that a new RetirementNFTAssociatedTicket is created`, async () => {
