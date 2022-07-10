@@ -22,7 +22,7 @@ contract RetirementNFT is IRetirementNFT, ERC721, AccessControl {
     /**
      * @notice - Mint a new RetirementNFT with RNG via Chainlink VRF
      */ 
-    function mintNewRetirementNFT(address to, uint256 tokenId) public override onlyRole(DEFAULT_ADMIN_ROLE) {        
+    function mintNewRetirementNFT(address to, uint256 tokenId) public override onlyRole(DEFAULT_ADMIN_ROLE) {
         //@dev - Mint a new RetirementNFT
         _safeMint(to, tokenId);
     }
