@@ -27,6 +27,7 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
   //@dev - Deploy the RandomNumberGeneratorV2 contract
   let linkTokenAddress: string | undefined
   let vrfCoordinatorAddress: string | undefined
+  //let ticketCreator: string | undefined  // [TODO]: Need to assign a ticket creator's address when deploying on Mainnet/Testnet
   let subscriptionId: BigNumber
 
   if (chainId === 31337) {
@@ -84,7 +85,7 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
   
   log(`Run RetirementNFTAssociatedTicketFactory contract with following command:`)
   const networkName: string = network.name == "hardhat" ? "localhost" : network.name
-  log(`yarn hardhat request-data --contract ${retirementNFTAssociatedTicketFactory .address} --network ${networkName}`)
+  log(`yarn hardhat request-data --contract ${retirementNFTAssociatedTicketFactory.address} --network ${networkName}`)
   log(`----------------------------------------------------`)
 }
 
