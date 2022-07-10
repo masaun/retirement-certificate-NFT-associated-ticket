@@ -18,9 +18,9 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
     : describe("Scenario Tests", async function () {
           //@dev - Wallet addresses
           let deployer
-          let terminalOwner
-          let caller
-          let beneficiary 
+          let ticketCreator
+          let ticketHolder1
+          let ticketHolder2
           let addrs
 
           //@dev - Variables for assigning contract instances
@@ -41,8 +41,8 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let txReceipt: any
 
           before(async () => {
-              [deployer, terminalOwner, caller, beneficiary, ...addrs] = await ethers.getSigners()
-              console.log(`\n deployer: ${ deployer.address } \n terminalOwner: ${ terminalOwner.address } \n caller: ${ caller.address } \n beneficiary: ${ beneficiary.address } \n`)
+              [deployer, ticketCreator, ticketHolder1, ticketHolder2, ...addrs] = await ethers.getSigners()
+              console.log(`\n deployer: ${ deployer.address } \n ticketCreator: ${ ticketCreator.address } \n ticketHolder1: ${ ticketHolder1.address } \n ticketHolder2: ${ ticketHolder2.address } \n`)
 
               await deployments.fixture(["mocks", "api"])
 
