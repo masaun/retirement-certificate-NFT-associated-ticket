@@ -37,7 +37,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
     mapping (address => DataTypes.RetirementNFTAssociatedTicketMetadata) retirementNFTAssociatedTicketMetadatas;
 
     //@dev - Roles
-    address private ticketMinterRoleAddress;
+    address private ticketCreator;
     bytes32 public constant TICKET_MINTER_ROLE = keccak256("TICKET_MINTER_ROLE");
 
 
@@ -51,7 +51,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
         _grantRole(TICKET_MINTER_ROLE, msg.sender);
-        ticketMinterRoleAddress = msg.sender;
+        ticketCreator = msg.sender;
     }
 
 
@@ -62,7 +62,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         //@dev - [TODO]: Add require() method for checking whether "to" address has a RetiermentNFT or not
 
         //@dev - Create a new retirementNFTAssociatedTicket
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(ticketMinterRoleAddress, rngV2, uri, this, vrfCoordinatorV2);
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(ticketCreator, rngV2, uri, this, vrfCoordinatorV2);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
         retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT);
@@ -81,7 +81,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
     function createBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
 
         //@dev - Create a new retirementNFTAssociatedTicket
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(ticketMinterRoleAddress, rngV2, uri, this, vrfCoordinatorV2);
+        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(ticketCreator, rngV2, uri, this, vrfCoordinatorV2);
 
         //@dev - Save a metadata of RetirementNFTAssociatedTicket
         retirementNFTAssociatedTicket.saveRetirementNFTAssociatedTicketMetadata(retirementNFT);
