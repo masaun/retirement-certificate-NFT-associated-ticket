@@ -27,6 +27,7 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
   //@dev - Deploy the RandomNumberGeneratorV2 contract
   let linkTokenAddress: string | undefined
   let vrfCoordinatorAddress: string | undefined
+  //let ticketCreator: string | undefined  // [TODO]: Need to assign a ticket creator's address when deploying on Mainnet/Testnet
   let subscriptionId: BigNumber
 
   if (chainId === 31337) {

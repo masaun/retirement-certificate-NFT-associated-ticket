@@ -41,7 +41,8 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let txReceipt: any
 
           before(async () => {
-              [deployer, ticketCreator, ticketHolder1, ticketHolder2, ...addrs] = await ethers.getSigners()
+              [deployer, ticketHolder1, ticketHolder2, ...addrs] = await ethers.getSigners()
+              ticketCreator = deployer  // [NOTE]: In this test, a deloyer is also role of a ticket creator
               console.log(`\n deployer: ${ deployer.address } \n ticketCreator: ${ ticketCreator.address } \n ticketHolder1: ${ ticketHolder1.address } \n ticketHolder2: ${ ticketHolder2.address } \n`)
 
               await deployments.fixture(["mocks", "api"])

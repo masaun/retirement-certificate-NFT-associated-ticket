@@ -49,9 +49,9 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
         vrfCoordinatorV2 = _vrfCoordinatorV2;
 
         //@dev - Grant admin role to caller (msg.sender)
-        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _grantRole(TICKET_MINTER_ROLE, msg.sender);
-        ticketCreator = msg.sender;
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);  // Deployer address
+        _grantRole(TICKET_MINTER_ROLE, msg.sender);  // Deployer address
+        ticketCreator = msg.sender;                  // Deployer address
     }
 
 
