@@ -84,7 +84,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               const ticketType: number = 0 
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
               const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
-              tx = await retirementNFTAssociatedTicketFactory.createRetirementNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
+              tx = await retirementNFTAssociatedTicketFactory.connect(ticketCreator).createRetirementNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
               txReceipt = await tx.wait()
           })
 
@@ -109,7 +109,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               const ticketType: number = 0    // Ticket type 0
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
 
-              let tx: any = await retirementNFTAssociatedTicket.mint(to, ticketType, mintAmount)
+              let tx: any = await retirementNFTAssociatedTicket.connect(ticketCreator).mint(to, ticketType, mintAmount)
               let txReceipt: any = await tx.wait()
           })
 
@@ -118,7 +118,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               const ticketTypes: Array<number> = [0, 1, 2]        // Ticket type 0 and 1 and 2
               const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
 
-              let tx: any = await retirementNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts)
+              let tx: any = await retirementNFTAssociatedTicket.connect(ticketCreator).mintBatch(to, ticketTypes, mintAmounts)
               let txReceipt: any = await tx.wait()
           })
 
@@ -126,7 +126,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               //[TODO]: 
               const ticketType: number = 0
 
-              let tx: any = await retirementNFTAssociatedTicketGatedService.accessSpecialContent(RETIREMENT_NFT_ASSOCIATED_TICKET, ticketType)
+              let tx: any = await retirementNFTAssociatedTicketGatedService.connect(ticketHolder1).accessSpecialContent(RETIREMENT_NFT_ASSOCIATED_TICKET, ticketType)
               let txReceipt = await tx.wait() 
           })
 
