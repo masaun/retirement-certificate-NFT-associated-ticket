@@ -47,6 +47,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let txReceipt: any
 
           before(async () => {
+              //@dev - Get signers and wallet addresses for this tests 
               [deployer, ticketHolder1, ticketHolder2, ...addrs] = await ethers.getSigners()
               ticketCreator = deployer  // [NOTE]: In this test, a deloyer is also role of a ticket creator
               DEPLOYER = deployer.address
@@ -55,6 +56,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               TICKET_HOLDER_2 = ticketHolder2.address
               console.log(`\n deployer: ${ DEPLOYER } \n ticketCreator: ${ TICKET_CREATOR } \n ticketHolder1: ${ TICKET_HOLDER_1 } \n ticketHolder2: ${ TICKET_HOLDER_2 } \n`)
 
+              //@dev - Using "hardhat-deploy" module
               await deployments.fixture(["mocks", "api"])
 
               linkToken = await ethers.getContract("LinkToken")
