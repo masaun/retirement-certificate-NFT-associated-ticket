@@ -73,6 +73,13 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               await run("fund-link", { contract: retirementNFTAssociatedTicketFactory.address, linkaddress: linkTokenAddress })
           })
 
+          it(`Should be successful to mint a RetirementNFT`, async () => {
+              const to: string = TICKET_HOLDER_1
+              const tokenId: number = 0
+              let tx = await retirementNFT.connect(deployer).mintNewRetirementNFT(to, tokenId)
+              let txReceipt = await tx.wait()
+          })
+
           it(`Should be successful that a new RetirementNFTAssociatedTicket is created`, async () => {
               //@dev - A new RetirementNFTAssociatedTicket is minted
               const to: string = TICKET_HOLDER_1

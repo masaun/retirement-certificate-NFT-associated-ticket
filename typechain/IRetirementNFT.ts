@@ -21,15 +21,33 @@ export interface IRetirementNFTInterface extends utils.Interface {
   contractName: "IRetirementNFT";
   functions: {
     "mintNewRetirementNFT(address,uint256)": FunctionFragment;
+    "retirementNFTBalanceOf(address)": FunctionFragment;
+    "retirementNFTOwnerOf(uint256)": FunctionFragment;
   };
 
   encodeFunctionData(
     functionFragment: "mintNewRetirementNFT",
     values: [string, BigNumberish]
   ): string;
+  encodeFunctionData(
+    functionFragment: "retirementNFTBalanceOf",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "retirementNFTOwnerOf",
+    values: [BigNumberish]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "mintNewRetirementNFT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "retirementNFTBalanceOf",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "retirementNFTOwnerOf",
     data: BytesLike
   ): Result;
 
@@ -69,6 +87,16 @@ export interface IRetirementNFT extends BaseContract {
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    retirementNFTBalanceOf(
+      walletAddress: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { _balance: BigNumber }>;
+
+    retirementNFTOwnerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string] & { _owner: string }>;
   };
 
   mintNewRetirementNFT(
@@ -77,12 +105,32 @@ export interface IRetirementNFT extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  retirementNFTBalanceOf(
+    walletAddress: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  retirementNFTOwnerOf(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   callStatic: {
     mintNewRetirementNFT(
       to: string,
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    retirementNFTBalanceOf(
+      walletAddress: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    retirementNFTOwnerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
   };
 
   filters: {};
@@ -93,6 +141,16 @@ export interface IRetirementNFT extends BaseContract {
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    retirementNFTBalanceOf(
+      walletAddress: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    retirementNFTOwnerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -100,6 +158,16 @@ export interface IRetirementNFT extends BaseContract {
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    retirementNFTBalanceOf(
+      walletAddress: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    retirementNFTOwnerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -32,6 +32,7 @@ import "hardhat/console.sol";
 contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC1155, AccessControl {
 
     //@dev - Smart contract instances
+    IRetirementNFT public retirementNFT;
     IRandomNumberGeneratorV2 public rngV2;
     VRFCoordinatorV2Mock public vrfCoordinatorV2;
 
@@ -47,11 +48,12 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     /**
      * @notice - Constructor
      */ 
-    constructor(address _ticketCreator, IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory, VRFCoordinatorV2Mock _vrfCoordinatorV2) ERC1155("") {
+    constructor(IRetirementNFT _retirementNFT, address _ticketCreator, IRandomNumberGeneratorV2 _rngV2, string memory _uri, IRetirementNFTAssociatedTicketFactory _retirementNFTAssociatedTicketFactory, VRFCoordinatorV2Mock _vrfCoordinatorV2) ERC1155("") {
         //@dev - Assign a ticket creator's address
         TICKET_CREATOR = _ticketCreator;
 
         //@dev - Create smart contract instances
+        retirementNFT = _retirementNFT;
         rngV2 = _rngV2;
         vrfCoordinatorV2 = _vrfCoordinatorV2;
 
@@ -82,6 +84,7 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         override
         onlyRole(MINTER_ROLE)
     {
+        require(retirementNFT.retirementNFTBalanceOf(to) > 0, '"to" address must has more than 1 Retirement NFT');
         bytes memory data = "";
         _mint(to, ticketType, mintAmount, data);
     }
@@ -94,6 +97,7 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         override
         onlyRole(MINTER_ROLE)
     {
+        require(retirementNFT.retirementNFTBalanceOf(to) > 0, '"to" address must has more than 1 Retirement NFT');
         bytes memory data = "";
         _mintBatch(to, ticketTypes, mintAmounts, data);
     }

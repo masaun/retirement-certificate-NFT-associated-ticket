@@ -22,9 +22,23 @@ contract RetirementNFT is IRetirementNFT, ERC721, AccessControl {
     /**
      * @notice - Mint a new RetirementNFT with RNG via Chainlink VRF
      */ 
-    function mintNewRetirementNFT(address to, uint256 tokenId) public override onlyRole(DEFAULT_ADMIN_ROLE) {        
+    function mintNewRetirementNFT(address to, uint256 tokenId) public override onlyRole(DEFAULT_ADMIN_ROLE) {
         //@dev - Mint a new RetirementNFT
         _safeMint(to, tokenId);
+    }
+
+    /**
+     * @dev - Get the number of tokens in an account of walletAddress.
+     */
+    function retirementNFTBalanceOf(address walletAddress) public override view returns (uint256 _balance) {
+        return balanceOf(walletAddress);
+    }
+
+    /**
+     * @dev - Get the owner of the `tokenId` of Retirment NFT.
+     */
+    function retirementNFTOwnerOf(uint256 tokenId) public override view returns (address _owner) {
+        return ownerOf(tokenId);
     }
 
 

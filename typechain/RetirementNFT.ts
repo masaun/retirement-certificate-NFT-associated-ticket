@@ -32,6 +32,8 @@ export interface RetirementNFTInterface extends utils.Interface {
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
+    "retirementNFTBalanceOf(address)": FunctionFragment;
+    "retirementNFTOwnerOf(uint256)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
@@ -82,6 +84,14 @@ export interface RetirementNFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "renounceRole",
     values: [BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "retirementNFTBalanceOf",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "retirementNFTOwnerOf",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "revokeRole",
@@ -137,6 +147,14 @@ export interface RetirementNFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceRole",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "retirementNFTBalanceOf",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "retirementNFTOwnerOf",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
@@ -301,6 +319,16 @@ export interface RetirementNFT extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    retirementNFTBalanceOf(
+      walletAddress: string,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { _balance: BigNumber }>;
+
+    retirementNFTOwnerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string] & { _owner: string }>;
+
     revokeRole(
       role: BytesLike,
       account: string,
@@ -399,6 +427,16 @@ export interface RetirementNFT extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  retirementNFTBalanceOf(
+    walletAddress: string,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  retirementNFTOwnerOf(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
+
   revokeRole(
     role: BytesLike,
     account: string,
@@ -493,6 +531,16 @@ export interface RetirementNFT extends BaseContract {
       account: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    retirementNFTBalanceOf(
+      walletAddress: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    retirementNFTOwnerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     revokeRole(
       role: BytesLike,
@@ -664,6 +712,16 @@ export interface RetirementNFT extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    retirementNFTBalanceOf(
+      walletAddress: string,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    retirementNFTOwnerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     revokeRole(
       role: BytesLike,
       account: string,
@@ -772,6 +830,16 @@ export interface RetirementNFT extends BaseContract {
       role: BytesLike,
       account: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    retirementNFTBalanceOf(
+      walletAddress: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    retirementNFTOwnerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     revokeRole(

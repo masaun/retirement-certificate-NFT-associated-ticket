@@ -90,6 +90,13 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               await run("fund-link", { contract: retirementNFTAssociatedTicket.address, linkaddress: linkTokenAddress })
           })
 
+          it(`Should be successful to mint a RetirementNFT`, async () => {
+              const to: string = TICKET_HOLDER_1
+              const tokenId: number = 0
+              let tx = await retirementNFT.connect(deployer).mintNewRetirementNFT(to, tokenId)
+              let txReceipt = await tx.wait()
+          })
+
           it(`getRetirementNFTAssociatedTicketMetadata() - Should be successful that retrieve a metadata of the RetirementNFTAssociatedTicket specified`, async () => {
               let RetirementNFTAssociatedTicketMetadata: any = await retirementNFTAssociatedTicket.getRetirementNFTAssociatedTicketMetadata(RETIREMENT_NFT)
               console.log(`RetirementNFTAssociatedTicketMetadata retrieved: ${ RetirementNFTAssociatedTicketMetadata }`)
@@ -105,8 +112,8 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           })
 
           it(`mintBatch() - Should be successful that RetirementNFTAssociatedTickets are batch minted`, async () => {
-              const to: string = "0xb794F5eA0ba39494cE839613fffBA74279579268"
-              const ticketTypes: Array<number> = [0, 1, 2]        // Ticket type 0 and 1 and 2
+              const to: string = TICKET_HOLDER_1
+              const ticketTypes: Array<number> = [1, 2, 3]        // Ticket type 1 and 2 and 3
               const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
 
               let tx: any = await retirementNFTAssociatedTicket.connect(ticketCreator).mintBatch(to, ticketTypes, mintAmounts)
