@@ -48,6 +48,8 @@ export interface RetirementNFTAssociatedTicketInterface
     "mintBatch(address,uint256[],uint256[])": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "retirementNFT()": FunctionFragment;
+    "retirementNFTAssociatedTicketBalanceOf(address,uint256)": FunctionFragment;
+    "retirementNFTAssociatedTicketBalanceOfBatch(address[],uint256[])": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rngV2()": FunctionFragment;
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
@@ -118,6 +120,14 @@ export interface RetirementNFTAssociatedTicketInterface
   encodeFunctionData(
     functionFragment: "retirementNFT",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "retirementNFTAssociatedTicketBalanceOf",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "retirementNFTAssociatedTicketBalanceOfBatch",
+    values: [string[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "revokeRole",
@@ -193,6 +203,14 @@ export interface RetirementNFTAssociatedTicketInterface
   ): Result;
   decodeFunctionResult(
     functionFragment: "retirementNFT",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "retirementNFTAssociatedTicketBalanceOf",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "retirementNFTAssociatedTicketBalanceOfBatch",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
@@ -403,6 +421,22 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
 
     retirementNFT(overrides?: CallOverrides): Promise<[string]>;
 
+    retirementNFTAssociatedTicketBalanceOf(
+      walletAddress: string,
+      ticketType: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber] & { _numberOfRetirementNFTAssociatedTickets: BigNumber }
+    >;
+
+    retirementNFTAssociatedTicketBalanceOfBatch(
+      walletAddresses: string[],
+      ticketTypes: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber[]] & { _numberOfRetirementNFTAssociatedTickets: BigNumber[] }
+    >;
+
     revokeRole(
       role: BytesLike,
       account: string,
@@ -517,6 +551,18 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
 
   retirementNFT(overrides?: CallOverrides): Promise<string>;
 
+  retirementNFTAssociatedTicketBalanceOf(
+    walletAddress: string,
+    ticketType: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  retirementNFTAssociatedTicketBalanceOfBatch(
+    walletAddresses: string[],
+    ticketTypes: BigNumberish[],
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
+
   revokeRole(
     role: BytesLike,
     account: string,
@@ -630,6 +676,18 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     ): Promise<void>;
 
     retirementNFT(overrides?: CallOverrides): Promise<string>;
+
+    retirementNFTAssociatedTicketBalanceOf(
+      walletAddress: string,
+      ticketType: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    retirementNFTAssociatedTicketBalanceOfBatch(
+      walletAddresses: string[],
+      ticketTypes: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
 
     revokeRole(
       role: BytesLike,
@@ -831,6 +889,18 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
 
     retirementNFT(overrides?: CallOverrides): Promise<BigNumber>;
 
+    retirementNFTAssociatedTicketBalanceOf(
+      walletAddress: string,
+      ticketType: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    retirementNFTAssociatedTicketBalanceOfBatch(
+      walletAddresses: string[],
+      ticketTypes: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     revokeRole(
       role: BytesLike,
       account: string,
@@ -952,6 +1022,18 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     retirementNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    retirementNFTAssociatedTicketBalanceOf(
+      walletAddress: string,
+      ticketType: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    retirementNFTAssociatedTicketBalanceOfBatch(
+      walletAddresses: string[],
+      ticketTypes: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
     revokeRole(
       role: BytesLike,

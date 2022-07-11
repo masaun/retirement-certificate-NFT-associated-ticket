@@ -10,7 +10,7 @@ interface IRetirementNFT {
 
     function mintNewRetirementNFT(address to, uint256 tokenId) external;
 
-    function retirementNFTBalanceOf(address walletAddress) external view returns (uint256 _balance);
+    function retirementNFTBalanceOf(address walletAddress) external view returns (uint256 _numberOfRetirementNFTs);
 
     function retirementNFTOwnerOf(uint256 tokenId) external view returns (address _owner);
 

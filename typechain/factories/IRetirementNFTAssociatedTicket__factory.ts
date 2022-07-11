@@ -90,6 +90,54 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "walletAddress",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "ticketType",
+        type: "uint256",
+      },
+    ],
+    name: "retirementNFTAssociatedTicketBalanceOf",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "_numberOfRetirementNFTAssociatedTickets",
+        type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address[]",
+        name: "walletAddresses",
+        type: "address[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "ticketTypes",
+        type: "uint256[]",
+      },
+    ],
+    name: "retirementNFTAssociatedTicketBalanceOfBatch",
+    outputs: [
+      {
+        internalType: "uint256[]",
+        name: "_numberOfRetirementNFTAssociatedTickets",
+        type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "contract IRetirementNFT",
         name: "retirementNFT",
         type: "address",
