@@ -121,6 +121,14 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               let txReceipt: any = await tx.wait()
           })
 
+          it(`retirementNFTAssociatedTicketBalanceOf() - Wallet address of "TICKET_HOLDER_1" should has 1 RetirementNFTAssociatedTicket of ticket type 1`, async () => {
+              const walletAddress: string = TICKET_HOLDER_1
+              const ticketType: number = 0    // Ticket type 0
+
+              let numberOfRetirementNFTAssociatedTickets: BigNumber = await retirementNFTAssociatedTicket.retirementNFTAssociatedTicketBalanceOf(walletAddress, ticketType)
+              console.log(`Number of RetirementNFTAssociatedTickets: ${ numberOfRetirementNFTAssociatedTickets }`)
+          })
+
           it(`mintBatch() - Should be successful that RetirementNFTAssociatedTickets are batch minted`, async () => {
               const to: string = TICKET_HOLDER_1
               const ticketTypes: Array<number> = [1, 2, 3]        // Ticket type 0 and 1 and 2
@@ -128,6 +136,14 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 
               let tx: any = await retirementNFTAssociatedTicket.connect(ticketCreator).mintBatch(to, ticketTypes, mintAmounts)
               let txReceipt: any = await tx.wait()
+          })
+
+          it(`retirementNFTAssociatedTicketBalanceOfBatch() - Wallet address of "TICKET_HOLDER_1" should has each 1 RetirementNFTAssociatedTicket of each ticket type 1, 2, 3`, async () => {
+              const walletAddresses: Array<string> = [TICKET_HOLDER_1, TICKET_HOLDER_1, TICKET_HOLDER_1]
+              const ticketTypes: Array<number> = [1, 2, 3]    // Ticket type 1 and 2 and 3
+
+              let numberOfEachRetirementNFTAssociatedTickets: Array<BigNumber> = await retirementNFTAssociatedTicket.retirementNFTAssociatedTicketBalanceOfBatch(walletAddresses, ticketTypes)
+              console.log(`Number of each RetirementNFTAssociatedTickets: ${ numberOfEachRetirementNFTAssociatedTickets }`)
           })
 
           it(`accessSpecialContent() - Should be successful to access a special content that only only a Retirement NFT Associated Ticket holder can access.`, async () => {
