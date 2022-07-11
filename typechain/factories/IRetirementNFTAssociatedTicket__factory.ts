@@ -128,7 +128,7 @@ const _abi = [
     outputs: [
       {
         internalType: "uint256[]",
-        name: "_numberOfRetirementNFTAssociatedTickets",
+        name: "_numberOfEachRetirementNFTAssociatedTickets",
         type: "uint256[]",
       },
     ],

@@ -38,8 +38,8 @@ interface IRetirementNFTAssociatedTicket {
 
     /**
      * @dev - Get the number of RetirementNFTAssociatedTickets (In case of batch) in an account of walletAddress.
-     * @return _numberOfRetirementNFTAssociatedTickets - Number of RetirementNFTAssociatedTickets that wallet addresses has
+     * @return _numberOfEachRetirementNFTAssociatedTickets - Number of each RetirementNFTAssociatedTickets that wallet addresses has
      */
-    function retirementNFTAssociatedTicketBalanceOfBatch(address[] memory walletAddresses, uint256[] memory ticketTypes) external view returns (uint256[] memory _numberOfRetirementNFTAssociatedTickets);
+    function retirementNFTAssociatedTicketBalanceOfBatch(address[] memory walletAddresses, uint256[] memory ticketTypes) external view returns (uint256[] memory _numberOfEachRetirementNFTAssociatedTickets);
 
 }

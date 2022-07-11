@@ -105,19 +105,35 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           it(`mint() - Should be successful that a RetirementNFTAssociatedTicket is minted`, async () => {
               const to: string = TICKET_HOLDER_1
               const ticketType: number = 0    // Ticket type 0
-              const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
+              const mintAmount: number = 1   // Number of tickets to be minted (ERC1155)
 
               let tx: any = await retirementNFTAssociatedTicket.connect(ticketCreator).mint(to, ticketType, mintAmount)
               let txReceipt: any = await tx.wait()
           })
 
+          it(`retirementNFTAssociatedTicketBalanceOf() - Wallet address of "TICKET_HOLDER_1" should has 1 RetirementNFTAssociatedTicket of ticket type 1`, async () => {
+              const walletAddress: string = TICKET_HOLDER_1
+              const ticketType: number = 0    // Ticket type 0
+
+              let numberOfRetirementNFTAssociatedTickets: BigNumber = await retirementNFTAssociatedTicket.retirementNFTAssociatedTicketBalanceOf(walletAddress, ticketType)
+              console.log(`Number of RetirementNFTAssociatedTickets: ${ numberOfRetirementNFTAssociatedTickets }`)
+          })
+
           it(`mintBatch() - Should be successful that RetirementNFTAssociatedTickets are batch minted`, async () => {
               const to: string = TICKET_HOLDER_1
               const ticketTypes: Array<number> = [1, 2, 3]        // Ticket type 1 and 2 and 3
-              const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
+              const mintAmounts: Array<number> = [1, 1, 1]  // Number of tickets to be minted for each ticket types (ERC1155)
 
               let tx: any = await retirementNFTAssociatedTicket.connect(ticketCreator).mintBatch(to, ticketTypes, mintAmounts)
               let txReceipt: any = await tx.wait()
+          })
+
+          it(`retirementNFTAssociatedTicketBalanceOfBatch() - Wallet address of "TICKET_HOLDER_1" should has each 1 RetirementNFTAssociatedTicket of each ticket type 1, 2, 3`, async () => {
+              const walletAddresses: Array<string> = [TICKET_HOLDER_1, TICKET_HOLDER_1, TICKET_HOLDER_1]
+              const ticketTypes: Array<number> = [1, 2, 3]    // Ticket type 1 and 2 and 3
+
+              let numberOfEachRetirementNFTAssociatedTickets: Array<BigNumber> = await retirementNFTAssociatedTicket.retirementNFTAssociatedTicketBalanceOfBatch(walletAddresses, ticketTypes)
+              console.log(`Number of each RetirementNFTAssociatedTickets: ${ numberOfEachRetirementNFTAssociatedTickets }`)
           })
 
       })

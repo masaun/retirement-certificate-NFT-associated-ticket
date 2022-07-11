@@ -152,7 +152,9 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       ticketTypes: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber[]] & { _numberOfRetirementNFTAssociatedTickets: BigNumber[] }
+      [BigNumber[]] & {
+        _numberOfEachRetirementNFTAssociatedTickets: BigNumber[];
+      }
     >;
 
     saveRetirementNFTAssociatedTicketMetadata(
