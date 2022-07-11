@@ -142,6 +142,37 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         return retirementNFTAssociatedTicketMetadata;
     }
 
+
+    ///-----------------
+    /// Getter methods
+    ///-----------------
+
+    /**
+     * @dev - Get the number of RetirementNFTAssociatedTickets in an account of walletAddress.
+     * @return _numberOfRetirementNFTAssociatedTickets - Number of RetirementNFTAssociatedTickets that a wallet address has
+     */
+    function retirementNFTAssociatedTicketBalanceOf(address walletAddress, uint256 ticketType) public override view returns (uint256 _numberOfRetirementNFTAssociatedTickets) {
+        return balanceOf(walletAddress, ticketType);
+    }
+
+    /**
+     * @dev - Get the number of RetirementNFTAssociatedTickets (In case of batch) in an account of walletAddress.
+     * @return _numberOfRetirementNFTAssociatedTickets - Number of RetirementNFTAssociatedTickets that wallet addresses has
+     */
+    function retirementNFTAssociatedTicketBalanceOfBatch(address[] memory walletAddresses, uint256[] memory ticketTypes) public override view returns (uint256[] memory _numberOfRetirementNFTAssociatedTickets) {
+        return balanceOfBatch(walletAddresses, ticketTypes);
+    }
+
+
+
+    /**
+     * @dev - Get the owner of the `ticketType` of RetirementNFTAssociatedTickets.
+     */
+    // function retirementNFTAssociatedTicketOwnerOf(uint256 ticketType) public override view returns (address _owner) {
+    //     return ownerOf(tokenId);
+    // }
+
+
     /**
      * @notice - This method is required for Role-based access control of ERC1155 by using OpenZeppelin's AccessControl.sol
      */ 

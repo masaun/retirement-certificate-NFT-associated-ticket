@@ -36,6 +36,8 @@ export interface IRetirementNFTAssociatedTicketInterface
     "getRetirementNFTAssociatedTicketMetadata(address)": FunctionFragment;
     "mint(address,uint256,uint256)": FunctionFragment;
     "mintBatch(address,uint256[],uint256[])": FunctionFragment;
+    "retirementNFTAssociatedTicketBalanceOf(address,uint256)": FunctionFragment;
+    "retirementNFTAssociatedTicketBalanceOfBatch(address[],uint256[])": FunctionFragment;
     "saveRetirementNFTAssociatedTicketMetadata(address)": FunctionFragment;
   };
 
@@ -52,6 +54,14 @@ export interface IRetirementNFTAssociatedTicketInterface
     values: [string, BigNumberish[], BigNumberish[]]
   ): string;
   encodeFunctionData(
+    functionFragment: "retirementNFTAssociatedTicketBalanceOf",
+    values: [string, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "retirementNFTAssociatedTicketBalanceOfBatch",
+    values: [string[], BigNumberish[]]
+  ): string;
+  encodeFunctionData(
     functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
     values: [string]
   ): string;
@@ -62,6 +72,14 @@ export interface IRetirementNFTAssociatedTicketInterface
   ): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mintBatch", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "retirementNFTAssociatedTicketBalanceOf",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "retirementNFTAssociatedTicketBalanceOfBatch",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
     data: BytesLike
@@ -121,6 +139,24 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    retirementNFTAssociatedTicketBalanceOf(
+      walletAddress: string,
+      ticketType: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber] & { _numberOfRetirementNFTAssociatedTickets: BigNumber }
+    >;
+
+    retirementNFTAssociatedTicketBalanceOfBatch(
+      walletAddresses: string[],
+      ticketTypes: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber[]] & {
+        _numberOfEachRetirementNFTAssociatedTickets: BigNumber[];
+      }
+    >;
+
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -146,6 +182,18 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  retirementNFTAssociatedTicketBalanceOf(
+    walletAddress: string,
+    ticketType: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  retirementNFTAssociatedTicketBalanceOfBatch(
+    walletAddresses: string[],
+    ticketTypes: BigNumberish[],
+    overrides?: CallOverrides
+  ): Promise<BigNumber[]>;
+
   saveRetirementNFTAssociatedTicketMetadata(
     retirementNFT: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -170,6 +218,18 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       mintAmounts: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<void>;
+
+    retirementNFTAssociatedTicketBalanceOf(
+      walletAddress: string,
+      ticketType: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    retirementNFTAssociatedTicketBalanceOfBatch(
+      walletAddresses: string[],
+      ticketTypes: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber[]>;
 
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
@@ -199,6 +259,18 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    retirementNFTAssociatedTicketBalanceOf(
+      walletAddress: string,
+      ticketType: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    retirementNFTAssociatedTicketBalanceOfBatch(
+      walletAddresses: string[],
+      ticketTypes: BigNumberish[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     saveRetirementNFTAssociatedTicketMetadata(
       retirementNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -223,6 +295,18 @@ export interface IRetirementNFTAssociatedTicket extends BaseContract {
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    retirementNFTAssociatedTicketBalanceOf(
+      walletAddress: string,
+      ticketType: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    retirementNFTAssociatedTicketBalanceOfBatch(
+      walletAddresses: string[],
+      ticketTypes: BigNumberish[],
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     saveRetirementNFTAssociatedTicketMetadata(

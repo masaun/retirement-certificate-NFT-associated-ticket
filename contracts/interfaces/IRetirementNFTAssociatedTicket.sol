@@ -30,4 +30,16 @@ interface IRetirementNFTAssociatedTicket {
      */ 
     function getRetirementNFTAssociatedTicketMetadata(IRetirementNFT retirementNFT) external view returns (DataTypes.RetirementNFTAssociatedTicketMetadata memory _retirementNFTAssociatedTicketMetadata);
 
+    /**
+     * @dev - Get the number of RetirementNFTAssociatedTickets in an account of walletAddress.
+     * @return _numberOfRetirementNFTAssociatedTickets - Number of RetirementNFTAssociatedTickets that a wallet address has
+     */
+    function retirementNFTAssociatedTicketBalanceOf(address walletAddress, uint256 ticketType) external view returns (uint256 _numberOfRetirementNFTAssociatedTickets);
+
+    /**
+     * @dev - Get the number of RetirementNFTAssociatedTickets (In case of batch) in an account of walletAddress.
+     * @return _numberOfEachRetirementNFTAssociatedTickets - Number of each RetirementNFTAssociatedTickets that wallet addresses has
+     */
+    function retirementNFTAssociatedTicketBalanceOfBatch(address[] memory walletAddresses, uint256[] memory ticketTypes) external view returns (uint256[] memory _numberOfEachRetirementNFTAssociatedTickets);
+
 }

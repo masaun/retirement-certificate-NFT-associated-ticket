@@ -322,7 +322,7 @@ export interface RetirementNFT extends BaseContract {
     retirementNFTBalanceOf(
       walletAddress: string,
       overrides?: CallOverrides
-    ): Promise<[BigNumber] & { _balance: BigNumber }>;
+    ): Promise<[BigNumber] & { _numberOfRetirementNFTs: BigNumber }>;
 
     retirementNFTOwnerOf(
       tokenId: BigNumberish,

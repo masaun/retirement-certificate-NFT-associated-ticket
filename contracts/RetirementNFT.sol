@@ -29,8 +29,9 @@ contract RetirementNFT is IRetirementNFT, ERC721, AccessControl {
 
     /**
      * @dev - Get the number of tokens in an account of walletAddress.
+     * @return _numberOfRetirementNFTs - Number of RetirementNFTs that a wallet address has
      */
-    function retirementNFTBalanceOf(address walletAddress) public override view returns (uint256 _balance) {
+    function retirementNFTBalanceOf(address walletAddress) public override view returns (uint256 _numberOfRetirementNFTs) {
         return balanceOf(walletAddress);
     }
 

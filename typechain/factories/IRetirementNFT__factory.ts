@@ -40,7 +40,7 @@ const _abi = [
     outputs: [
       {
         internalType: "uint256",
-        name: "_balance",
+        name: "_numberOfRetirementNFTs",
         type: "uint256",
       },
     ],
