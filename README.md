@@ -1,4 +1,12 @@
 # Retirement NFT-gated (associated) ticket 🎫
+### Overview
+
+<br>
+
+### Use case of Retirement NFT-associated ticket
+
+<br>
+
 ### Test (Retirement NFT associated ticket) 
 - Scenario test
 ```
