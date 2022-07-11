@@ -13,7 +13,7 @@ library DataTypes {
     struct RetirementNFTAssociatedTicketMetadata {
         address ticketCreator;
         //address ticketHolder; 
-        uint256 ticketNumber;
+        uint256 ticketNumber;    //@dev - Random number generated (RNG) via Chainlink VRF will be stored into here 
     }
 
     /**
