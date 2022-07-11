@@ -38,7 +38,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
 
     //@dev - Roles
     address private ticketCreator;
-    bytes32 public constant TICKET_MINTER_ROLE = keccak256("TICKET_MINTER_ROLE");
+    bytes32 public constant TICKET_CREATOR_ROLE = keccak256("TICKET_CREATOR_ROLE");
 
 
     /**
@@ -50,7 +50,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
 
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);  // Deployer address
-        _grantRole(TICKET_MINTER_ROLE, msg.sender);  // Deployer address
+        _grantRole(TICKET_CREATOR_ROLE, msg.sender);  // Deployer address
         ticketCreator = msg.sender;                  // Deployer address
     }
 
@@ -58,7 +58,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
     /**
      * @notice - Create a new RetirementNFTAssociatedTicket with RNG via Chainlink VRF
      */
-    function createRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
+    function createRetirementNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_CREATOR_ROLE) {
         //@dev - [TODO]: Add require() method for checking whether "to" address has a RetiermentNFT or not
 
         //@dev - Create a new retirementNFTAssociatedTicket
@@ -78,7 +78,7 @@ contract RetirementNFTAssociatedTicketFactory is IRetirementNFTAssociatedTicketF
     /**
      * @notice - Create batch RetirementNFTAssociatedTicket with RNG via Chainlink VRF
      */ 
-    function createBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_MINTER_ROLE) {
+    function createBatchRetirementNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementNFT retirementNFT, string memory uri) public override onlyRole(TICKET_CREATOR_ROLE) {
 
         //@dev - Create a new retirementNFTAssociatedTicket
         RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = new RetirementNFTAssociatedTicket(retirementNFT, ticketCreator, rngV2, uri, this, vrfCoordinatorV2);

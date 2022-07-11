@@ -42,7 +42,7 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     //@dev - Roles
     address public TICKET_CREATOR;
     bytes32 public constant URI_SETTER_ROLE = keccak256("URI_SETTER_ROLE");
-    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 public constant TICKET_MINTER_ROLE = keccak256("TICKET_MINTER_ROLE");
 
 
     /**
@@ -60,8 +60,8 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, address(_retirementNFTAssociatedTicketFactory));  // Factory contract address
         _grantRole(URI_SETTER_ROLE, address(_retirementNFTAssociatedTicketFactory));     // Factory contract address
-        //_grantRole(MINTER_ROLE, address(_retirementNFTAssociatedTicketFactory));       // Factory contract address
-        _grantRole(MINTER_ROLE, _ticketCreator);
+        //_grantRole(TICKET_MINTER_ROLE, address(_retirementNFTAssociatedTicketFactory));       // Factory contract address
+        _grantRole(TICKET_MINTER_ROLE, _ticketCreator);
 
         //@dev - Set a URI (image, etc) to the ERC1155 NFT
         //@dev - NOTE: This method is able to be called by the wallet address that has a "URI_SETTER_ROLE" role.
@@ -82,7 +82,7 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     function mint(address to, uint256 ticketType, uint256 mintAmount)
         public 
         override
-        onlyRole(MINTER_ROLE)
+        onlyRole(TICKET_MINTER_ROLE)
     {
         require(retirementNFT.retirementNFTBalanceOf(to) > 0, '"to" address must has more than 1 Retirement NFT');
         bytes memory data = "";
@@ -95,7 +95,7 @@ contract RetirementNFTAssociatedTicket is IRetirementNFTAssociatedTicket, ERC115
     function mintBatch(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts)
         public
         override
-        onlyRole(MINTER_ROLE)
+        onlyRole(TICKET_MINTER_ROLE)
     {
         require(retirementNFT.retirementNFTBalanceOf(to) > 0, '"to" address must has more than 1 Retirement NFT');
         bytes memory data = "";
