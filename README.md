@@ -22,6 +22,15 @@
 <br>
 
 ### Use case of Retirement Certificate NFT-associated Ticket
+- Professional Sports Teams
+  - Retirement Certificate NFT-associated Ticket gated access 
+    - eg). Only Retirement Certificate NFT-associated Ticket holders can access special space or events in their home stadium.
+
+<br>
+
+- Artists (Producer of Music Concerts)
+  - Retirement Certificate NFT-associated Ticket gated access
+    - eg). Only Retirement Certificate NFT-associated Ticket holders can access special space or events in their music concert hall.
 
 <br>
 
@@ -55,7 +64,7 @@ yarn test-unit:chainlink-examples
 
 <br>
 
-- Staging test
+- Staging test (chainlink-examples)
 ```
 yarn test-staging:chainlink-examples
 ```
