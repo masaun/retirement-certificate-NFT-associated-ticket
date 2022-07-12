@@ -8,9 +8,9 @@ pragma solidity ^0.8.7;
 library DataTypes {
 
     /**
-     * @notice - Data of RetirementNFT's Metadata
+     * @notice - Data of RetirementCertificateNFT's Metadata
      */ 
-    struct RetirementNFTAssociatedTicketMetadata {
+    struct RetirementCertificateNFTAssociatedTicketMetadata {
         address ticketCreator;
         //address ticketHolder; 
         uint256 ticketNumber;    //@dev - Random number generated (RNG) via Chainlink VRF will be stored into here 

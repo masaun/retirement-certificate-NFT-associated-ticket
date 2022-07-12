@@ -18,9 +18,9 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
     ? 1
     : VERIFICATION_BLOCK_CONFIRMATIONS
 
-  //@dev - Deploy the MockRetirementNFTAssociatedTicketGatedService contract
+  //@dev - Deploy the MockRetirementCertificateNFTAssociatedTicketGatedService contract
   const args: any = []  // [NOTE]: Argument values for constructor
-  const retirementNFTAssociatedTicketGatedService = await deploy(`MockRetirementNFTAssociatedTicketGatedService`, {
+  const retirementCertificateNFTAssociatedTicketGatedService = await deploy(`MockRetirementCertificateNFTAssociatedTicketGatedService`, {
     from: deployer,
     args: args,
     log: true,
@@ -29,13 +29,13 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
 
   if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
     log("Verifying...")
-    await verify(retirementNFTAssociatedTicketGatedService.address, args)
+    await verify(retirementCertificateNFTAssociatedTicketGatedService.address, args)
   }
 
   
-  log(`Run RetirementNFTAssociatedTicketGatedService contract with following command:`)
+  log(`Run RetirementCertificateNFTAssociatedTicketGatedService contract with following command:`)
   const networkName: string = network.name == "hardhat" ? "localhost" : network.name
-  log(`yarn hardhat request-data --contract ${ retirementNFTAssociatedTicketGatedService.address } --network ${networkName}`)
+  log(`yarn hardhat request-data --contract ${ retirementCertificateNFTAssociatedTicketGatedService.address } --network ${networkName}`)
   log(`----------------------------------------------------`)
 }
 

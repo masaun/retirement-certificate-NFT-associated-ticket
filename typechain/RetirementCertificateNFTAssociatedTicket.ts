@@ -18,20 +18,20 @@ import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
 export declare namespace DataTypes {
-  export type RetirementNFTAssociatedTicketMetadataStruct = {
+  export type RetirementCertificateNFTAssociatedTicketMetadataStruct = {
     ticketCreator: string;
     ticketNumber: BigNumberish;
   };
 
-  export type RetirementNFTAssociatedTicketMetadataStructOutput = [
+  export type RetirementCertificateNFTAssociatedTicketMetadataStructOutput = [
     string,
     BigNumber
   ] & { ticketCreator: string; ticketNumber: BigNumber };
 }
 
-export interface RetirementNFTAssociatedTicketInterface
+export interface RetirementCertificateNFTAssociatedTicketInterface
   extends utils.Interface {
-  contractName: "RetirementNFTAssociatedTicket";
+  contractName: "RetirementCertificateNFTAssociatedTicket";
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "TICKET_CREATOR()": FunctionFragment;
@@ -39,7 +39,7 @@ export interface RetirementNFTAssociatedTicketInterface
     "URI_SETTER_ROLE()": FunctionFragment;
     "balanceOf(address,uint256)": FunctionFragment;
     "balanceOfBatch(address[],uint256[])": FunctionFragment;
-    "getRetirementNFTAssociatedTicketMetadata(address)": FunctionFragment;
+    "getRetirementCertificateNFTAssociatedTicketMetadata(address)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
@@ -47,14 +47,14 @@ export interface RetirementNFTAssociatedTicketInterface
     "mint(address,uint256,uint256)": FunctionFragment;
     "mintBatch(address,uint256[],uint256[])": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
-    "retirementNFT()": FunctionFragment;
-    "retirementNFTAssociatedTicketBalanceOf(address,uint256)": FunctionFragment;
-    "retirementNFTAssociatedTicketBalanceOfBatch(address[],uint256[])": FunctionFragment;
+    "retirementCertificateNFT()": FunctionFragment;
+    "retirementCertificateNFTAssociatedTicketBalanceOf(address,uint256)": FunctionFragment;
+    "retirementCertificateNFTAssociatedTicketBalanceOfBatch(address[],uint256[])": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "rngV2()": FunctionFragment;
     "safeBatchTransferFrom(address,address,uint256[],uint256[],bytes)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,uint256,bytes)": FunctionFragment;
-    "saveRetirementNFTAssociatedTicketMetadata(address)": FunctionFragment;
+    "saveRetirementCertificateNFTAssociatedTicketMetadata(address)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "uri(uint256)": FunctionFragment;
@@ -86,7 +86,7 @@ export interface RetirementNFTAssociatedTicketInterface
     values: [string[], BigNumberish[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "getRetirementNFTAssociatedTicketMetadata",
+    functionFragment: "getRetirementCertificateNFTAssociatedTicketMetadata",
     values: [string]
   ): string;
   encodeFunctionData(
@@ -118,15 +118,15 @@ export interface RetirementNFTAssociatedTicketInterface
     values: [BytesLike, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "retirementNFT",
+    functionFragment: "retirementCertificateNFT",
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "retirementNFTAssociatedTicketBalanceOf",
+    functionFragment: "retirementCertificateNFTAssociatedTicketBalanceOf",
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "retirementNFTAssociatedTicketBalanceOfBatch",
+    functionFragment: "retirementCertificateNFTAssociatedTicketBalanceOfBatch",
     values: [string[], BigNumberish[]]
   ): string;
   encodeFunctionData(
@@ -143,7 +143,7 @@ export interface RetirementNFTAssociatedTicketInterface
     values: [string, string, BigNumberish, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(
-    functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
+    functionFragment: "saveRetirementCertificateNFTAssociatedTicketMetadata",
     values: [string]
   ): string;
   encodeFunctionData(
@@ -182,7 +182,7 @@ export interface RetirementNFTAssociatedTicketInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getRetirementNFTAssociatedTicketMetadata",
+    functionFragment: "getRetirementCertificateNFTAssociatedTicketMetadata",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -202,15 +202,15 @@ export interface RetirementNFTAssociatedTicketInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retirementNFT",
+    functionFragment: "retirementCertificateNFT",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retirementNFTAssociatedTicketBalanceOf",
+    functionFragment: "retirementCertificateNFTAssociatedTicketBalanceOf",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retirementNFTAssociatedTicketBalanceOfBatch",
+    functionFragment: "retirementCertificateNFTAssociatedTicketBalanceOfBatch",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
@@ -224,7 +224,7 @@ export interface RetirementNFTAssociatedTicketInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "saveRetirementNFTAssociatedTicketMetadata",
+    functionFragment: "saveRetirementCertificateNFTAssociatedTicketMetadata",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -322,13 +322,13 @@ export type URIEvent = TypedEvent<
 
 export type URIEventFilter = TypedEventFilter<URIEvent>;
 
-export interface RetirementNFTAssociatedTicket extends BaseContract {
-  contractName: "RetirementNFTAssociatedTicket";
+export interface RetirementCertificateNFTAssociatedTicket extends BaseContract {
+  contractName: "RetirementCertificateNFTAssociatedTicket";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: RetirementNFTAssociatedTicketInterface;
+  interface: RetirementCertificateNFTAssociatedTicketInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -370,12 +370,14 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber[]]>;
 
-    getRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
+    getRetirementCertificateNFTAssociatedTicketMetadata(
+      retirementCertificateNFT: string,
       overrides?: CallOverrides
     ): Promise<
-      [DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput] & {
-        _retirementNFTAssociatedTicketMetadata: DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput;
+      [
+        DataTypes.RetirementCertificateNFTAssociatedTicketMetadataStructOutput
+      ] & {
+        _retirementCertificateNFTAssociatedTicketMetadata: DataTypes.RetirementCertificateNFTAssociatedTicketMetadataStructOutput;
       }
     >;
 
@@ -419,22 +421,26 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    retirementNFT(overrides?: CallOverrides): Promise<[string]>;
+    retirementCertificateNFT(overrides?: CallOverrides): Promise<[string]>;
 
-    retirementNFTAssociatedTicketBalanceOf(
+    retirementCertificateNFTAssociatedTicketBalanceOf(
       walletAddress: string,
       ticketType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber] & { _numberOfRetirementNFTAssociatedTickets: BigNumber }
+      [BigNumber] & {
+        _numberOfRetirementCertificateNFTAssociatedTickets: BigNumber;
+      }
     >;
 
-    retirementNFTAssociatedTicketBalanceOfBatch(
+    retirementCertificateNFTAssociatedTicketBalanceOfBatch(
       walletAddresses: string[],
       ticketTypes: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<
-      [BigNumber[]] & { _numberOfRetirementNFTAssociatedTickets: BigNumber[] }
+      [BigNumber[]] & {
+        _numberOfRetirementCertificateNFTAssociatedTickets: BigNumber[];
+      }
     >;
 
     revokeRole(
@@ -463,8 +469,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    saveRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
+    saveRetirementCertificateNFTAssociatedTicketMetadata(
+      retirementCertificateNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -504,10 +510,10 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber[]>;
 
-  getRetirementNFTAssociatedTicketMetadata(
-    retirementNFT: string,
+  getRetirementCertificateNFTAssociatedTicketMetadata(
+    retirementCertificateNFT: string,
     overrides?: CallOverrides
-  ): Promise<DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput>;
+  ): Promise<DataTypes.RetirementCertificateNFTAssociatedTicketMetadataStructOutput>;
 
   getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -549,15 +555,15 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  retirementNFT(overrides?: CallOverrides): Promise<string>;
+  retirementCertificateNFT(overrides?: CallOverrides): Promise<string>;
 
-  retirementNFTAssociatedTicketBalanceOf(
+  retirementCertificateNFTAssociatedTicketBalanceOf(
     walletAddress: string,
     ticketType: BigNumberish,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  retirementNFTAssociatedTicketBalanceOfBatch(
+  retirementCertificateNFTAssociatedTicketBalanceOfBatch(
     walletAddresses: string[],
     ticketTypes: BigNumberish[],
     overrides?: CallOverrides
@@ -589,8 +595,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  saveRetirementNFTAssociatedTicketMetadata(
-    retirementNFT: string,
+  saveRetirementCertificateNFTAssociatedTicketMetadata(
+    retirementCertificateNFT: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -630,10 +636,10 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber[]>;
 
-    getRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
+    getRetirementCertificateNFTAssociatedTicketMetadata(
+      retirementCertificateNFT: string,
       overrides?: CallOverrides
-    ): Promise<DataTypes.RetirementNFTAssociatedTicketMetadataStructOutput>;
+    ): Promise<DataTypes.RetirementCertificateNFTAssociatedTicketMetadataStructOutput>;
 
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -675,15 +681,15 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    retirementNFT(overrides?: CallOverrides): Promise<string>;
+    retirementCertificateNFT(overrides?: CallOverrides): Promise<string>;
 
-    retirementNFTAssociatedTicketBalanceOf(
+    retirementCertificateNFTAssociatedTicketBalanceOf(
       walletAddress: string,
       ticketType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    retirementNFTAssociatedTicketBalanceOfBatch(
+    retirementCertificateNFTAssociatedTicketBalanceOfBatch(
       walletAddresses: string[],
       ticketTypes: BigNumberish[],
       overrides?: CallOverrides
@@ -715,8 +721,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    saveRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
+    saveRetirementCertificateNFTAssociatedTicketMetadata(
+      retirementCertificateNFT: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -839,8 +845,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    getRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
+    getRetirementCertificateNFTAssociatedTicketMetadata(
+      retirementCertificateNFT: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -887,15 +893,15 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    retirementNFT(overrides?: CallOverrides): Promise<BigNumber>;
+    retirementCertificateNFT(overrides?: CallOverrides): Promise<BigNumber>;
 
-    retirementNFTAssociatedTicketBalanceOf(
+    retirementCertificateNFTAssociatedTicketBalanceOf(
       walletAddress: string,
       ticketType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    retirementNFTAssociatedTicketBalanceOfBatch(
+    retirementCertificateNFTAssociatedTicketBalanceOfBatch(
       walletAddresses: string[],
       ticketTypes: BigNumberish[],
       overrides?: CallOverrides
@@ -927,8 +933,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    saveRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
+    saveRetirementCertificateNFTAssociatedTicketMetadata(
+      retirementCertificateNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -973,8 +979,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
+    getRetirementCertificateNFTAssociatedTicketMetadata(
+      retirementCertificateNFT: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1021,15 +1027,17 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    retirementNFT(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    retirementCertificateNFT(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
 
-    retirementNFTAssociatedTicketBalanceOf(
+    retirementCertificateNFTAssociatedTicketBalanceOf(
       walletAddress: string,
       ticketType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    retirementNFTAssociatedTicketBalanceOfBatch(
+    retirementCertificateNFTAssociatedTicketBalanceOfBatch(
       walletAddresses: string[],
       ticketTypes: BigNumberish[],
       overrides?: CallOverrides
@@ -1061,8 +1069,8 @@ export interface RetirementNFTAssociatedTicket extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    saveRetirementNFTAssociatedTicketMetadata(
-      retirementNFT: string,
+    saveRetirementCertificateNFTAssociatedTicketMetadata(
+      retirementCertificateNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

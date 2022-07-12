@@ -5,9 +5,9 @@
 import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
 import type {
-  IRetirementNFTAssociatedTicketFactory,
-  IRetirementNFTAssociatedTicketFactoryInterface,
-} from "../IRetirementNFTAssociatedTicketFactory";
+  IRetirementCertificateNFTAssociatedTicketFactory,
+  IRetirementCertificateNFTAssociatedTicketFactoryInterface,
+} from "../IRetirementCertificateNFTAssociatedTicketFactory";
 
 const _abi = [
   {
@@ -15,8 +15,8 @@ const _abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "contract RetirementNFTAssociatedTicket",
-        name: "retirementNFTAssociatedTicket",
+        internalType: "contract RetirementCertificateNFTAssociatedTicket",
+        name: "retirementCertificateNFTAssociatedTicket",
         type: "address",
       },
       {
@@ -39,8 +39,8 @@ const _abi = [
       },
       {
         indexed: false,
-        internalType: "contract IRetirementNFT",
-        name: "retirementNFT",
+        internalType: "contract IRetirementCertificateNFT",
+        name: "retirementCertificateNFT",
         type: "address",
       },
       {
@@ -50,7 +50,7 @@ const _abi = [
         type: "string",
       },
     ],
-    name: "BatchRetirementNFTAssociatedTicketCreated",
+    name: "BatchRetirementCertificateNFTAssociatedTicketCreated",
     type: "event",
   },
   {
@@ -58,8 +58,8 @@ const _abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "contract RetirementNFTAssociatedTicket",
-        name: "retirementNFTAssociatedTicket",
+        internalType: "contract RetirementCertificateNFTAssociatedTicket",
+        name: "retirementCertificateNFTAssociatedTicket",
         type: "address",
       },
       {
@@ -82,8 +82,8 @@ const _abi = [
       },
       {
         indexed: false,
-        internalType: "contract IRetirementNFT",
-        name: "retirementNFT",
+        internalType: "contract IRetirementCertificateNFT",
+        name: "retirementCertificateNFT",
         type: "address",
       },
       {
@@ -93,7 +93,7 @@ const _abi = [
         type: "string",
       },
     ],
-    name: "RetirementNFTAssociatedTicketCreated",
+    name: "RetirementCertificateNFTAssociatedTicketCreated",
     type: "event",
   },
   {
@@ -114,8 +114,8 @@ const _abi = [
         type: "uint256[]",
       },
       {
-        internalType: "contract IRetirementNFT",
-        name: "retirementNFT",
+        internalType: "contract IRetirementCertificateNFT",
+        name: "retirementCertificateNFT",
         type: "address",
       },
       {
@@ -124,7 +124,7 @@ const _abi = [
         type: "string",
       },
     ],
-    name: "createBatchRetirementNFTAssociatedTicket",
+    name: "createBatchRetirementCertificateNFTAssociatedTicket",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -147,8 +147,8 @@ const _abi = [
         type: "uint256",
       },
       {
-        internalType: "contract IRetirementNFT",
-        name: "retirementNFT",
+        internalType: "contract IRetirementCertificateNFT",
+        name: "retirementCertificateNFT",
         type: "address",
       },
       {
@@ -157,28 +157,28 @@ const _abi = [
         type: "string",
       },
     ],
-    name: "createRetirementNFTAssociatedTicket",
+    name: "createRetirementCertificateNFTAssociatedTicket",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
 ];
 
-export class IRetirementNFTAssociatedTicketFactory__factory {
+export class IRetirementCertificateNFTAssociatedTicketFactory__factory {
   static readonly abi = _abi;
-  static createInterface(): IRetirementNFTAssociatedTicketFactoryInterface {
+  static createInterface(): IRetirementCertificateNFTAssociatedTicketFactoryInterface {
     return new utils.Interface(
       _abi
-    ) as IRetirementNFTAssociatedTicketFactoryInterface;
+    ) as IRetirementCertificateNFTAssociatedTicketFactoryInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): IRetirementNFTAssociatedTicketFactory {
+  ): IRetirementCertificateNFTAssociatedTicketFactory {
     return new Contract(
       address,
       _abi,
       signerOrProvider
-    ) as IRetirementNFTAssociatedTicketFactory;
+    ) as IRetirementCertificateNFTAssociatedTicketFactory;
   }
 }

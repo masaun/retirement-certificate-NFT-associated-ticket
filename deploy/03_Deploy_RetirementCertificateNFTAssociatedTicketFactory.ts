@@ -18,7 +18,7 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
   const { deploy, log, get } = deployments
 
   const { deployer } = await getNamedAccounts()
-  console.log(`####### Deployer address of the RetirementNFTAssociatedTicketFactory.sol: ${ deployer } #######`)
+  console.log(`####### Deployer address of the RetirementCertificateNFTAssociatedTicketFactory.sol: ${ deployer } #######`)
 
   const chainId: number | undefined = network.config.chainId
   if (!chainId) return
@@ -64,13 +64,13 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
     waitConfirmations: waitBlockConfirmations1,
   })
 
-  //@dev - Deploy the RetirementNFTAssociatedTicketFactory contract
+  //@dev - Deploy the RetirementCertificateNFTAssociatedTicketFactory contract
   const waitBlockConfirmations2: number = developmentChains.includes(network.name)
     ? 1
     : VERIFICATION_BLOCK_CONFIRMATIONS
 
   const args2: any = [randomNumberGeneratorV2.address, vrfCoordinatorAddress]  // [NOTE]: Argument values for constructor
-  const retirementNFTAssociatedTicketFactory = await deploy(`RetirementNFTAssociatedTicketFactory`, {
+  const retirementCertificateNFTAssociatedTicketFactory = await deploy(`RetirementCertificateNFTAssociatedTicketFactory`, {
     from: deployer,
     args: args2,
     log: true,
@@ -79,13 +79,13 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
 
   if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
     log("Verifying...")
-    await verify(retirementNFTAssociatedTicketFactory.address, args2)
+    await verify(retirementCertificateNFTAssociatedTicketFactory.address, args2)
   }
 
   
-  log(`Run RetirementNFTAssociatedTicketFactory contract with following command:`)
+  log(`Run RetirementCertificateNFTAssociatedTicketFactory contract with following command:`)
   const networkName: string = network.name == "hardhat" ? "localhost" : network.name
-  log(`yarn hardhat request-data --contract ${retirementNFTAssociatedTicketFactory.address} --network ${networkName}`)
+  log(`yarn hardhat request-data --contract ${retirementCertificateNFTAssociatedTicketFactory.address} --network ${networkName}`)
   log(`----------------------------------------------------`)
 }
 

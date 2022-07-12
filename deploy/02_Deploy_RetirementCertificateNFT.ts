@@ -18,9 +18,9 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
     ? 1
     : VERIFICATION_BLOCK_CONFIRMATIONS
 
-  //@dev - Deploy the RetirementNFT contract
+  //@dev - Deploy the RetirementCertificateNFT contract
   const args: any = []  // [NOTE]: Argument values for constructor
-  const retirementNFT = await deploy(`RetirementNFT`, {
+  const retirementCertificateNFT = await deploy(`RetirementCertificateNFT`, {
     from: deployer,
     args: args,
     log: true,
@@ -29,13 +29,13 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
 
   if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
     log("Verifying...")
-    await verify(retirementNFT.address, args)
+    await verify(retirementCertificateNFT.address, args)
   }
 
   
-  log(`Run RetirementNFT contract with following command:`)
+  log(`Run RetirementCertificateNFT contract with following command:`)
   const networkName: string = network.name == "hardhat" ? "localhost" : network.name
-  log(`yarn hardhat request-data --contract ${retirementNFT.address} --network ${networkName}`)
+  log(`yarn hardhat request-data --contract ${retirementCertificateNFT.address} --network ${networkName}`)
   log(`----------------------------------------------------`)
 }
 

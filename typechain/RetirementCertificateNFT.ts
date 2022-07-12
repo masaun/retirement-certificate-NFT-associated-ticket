@@ -17,8 +17,8 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface RetirementNFTInterface extends utils.Interface {
-  contractName: "RetirementNFT";
+export interface RetirementCertificateNFTInterface extends utils.Interface {
+  contractName: "RetirementCertificateNFT";
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
@@ -28,12 +28,12 @@ export interface RetirementNFTInterface extends utils.Interface {
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
-    "mintNewRetirementNFT(address,uint256)": FunctionFragment;
+    "mintNewRetirementCertificateNFT(address,uint256)": FunctionFragment;
     "name()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
-    "retirementNFTBalanceOf(address)": FunctionFragment;
-    "retirementNFTOwnerOf(uint256)": FunctionFragment;
+    "retirementCertificateNFTBalanceOf(address)": FunctionFragment;
+    "retirementCertificateNFTOwnerOf(uint256)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
@@ -73,7 +73,7 @@ export interface RetirementNFTInterface extends utils.Interface {
     values: [string, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "mintNewRetirementNFT",
+    functionFragment: "mintNewRetirementCertificateNFT",
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "name", values?: undefined): string;
@@ -86,11 +86,11 @@ export interface RetirementNFTInterface extends utils.Interface {
     values: [BytesLike, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "retirementNFTBalanceOf",
+    functionFragment: "retirementCertificateNFTBalanceOf",
     values: [string]
   ): string;
   encodeFunctionData(
-    functionFragment: "retirementNFTOwnerOf",
+    functionFragment: "retirementCertificateNFTOwnerOf",
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
@@ -140,7 +140,7 @@ export interface RetirementNFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "mintNewRetirementNFT",
+    functionFragment: "mintNewRetirementCertificateNFT",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
@@ -150,11 +150,11 @@ export interface RetirementNFTInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retirementNFTBalanceOf",
+    functionFragment: "retirementCertificateNFTBalanceOf",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "retirementNFTOwnerOf",
+    functionFragment: "retirementCertificateNFTOwnerOf",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
@@ -237,13 +237,13 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface RetirementNFT extends BaseContract {
-  contractName: "RetirementNFT";
+export interface RetirementCertificateNFT extends BaseContract {
+  contractName: "RetirementCertificateNFT";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: RetirementNFTInterface;
+  interface: RetirementCertificateNFTInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -300,7 +300,7 @@ export interface RetirementNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    mintNewRetirementNFT(
+    mintNewRetirementCertificateNFT(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -319,12 +319,12 @@ export interface RetirementNFT extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    retirementNFTBalanceOf(
+    retirementCertificateNFTBalanceOf(
       walletAddress: string,
       overrides?: CallOverrides
-    ): Promise<[BigNumber] & { _numberOfRetirementNFTs: BigNumber }>;
+    ): Promise<[BigNumber] & { _numberOfRetirementCertificateNFTs: BigNumber }>;
 
-    retirementNFTOwnerOf(
+    retirementCertificateNFTOwnerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string] & { _owner: string }>;
@@ -411,7 +411,7 @@ export interface RetirementNFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  mintNewRetirementNFT(
+  mintNewRetirementCertificateNFT(
     to: string,
     tokenId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -427,12 +427,12 @@ export interface RetirementNFT extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  retirementNFTBalanceOf(
+  retirementCertificateNFTBalanceOf(
     walletAddress: string,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  retirementNFTOwnerOf(
+  retirementCertificateNFTOwnerOf(
     tokenId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
@@ -516,7 +516,7 @@ export interface RetirementNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    mintNewRetirementNFT(
+    mintNewRetirementCertificateNFT(
       to: string,
       tokenId: BigNumberish,
       overrides?: CallOverrides
@@ -532,12 +532,12 @@ export interface RetirementNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    retirementNFTBalanceOf(
+    retirementCertificateNFTBalanceOf(
       walletAddress: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    retirementNFTOwnerOf(
+    retirementCertificateNFTOwnerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
@@ -693,7 +693,7 @@ export interface RetirementNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    mintNewRetirementNFT(
+    mintNewRetirementCertificateNFT(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -712,12 +712,12 @@ export interface RetirementNFT extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    retirementNFTBalanceOf(
+    retirementCertificateNFTBalanceOf(
       walletAddress: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    retirementNFTOwnerOf(
+    retirementCertificateNFTOwnerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -813,7 +813,7 @@ export interface RetirementNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    mintNewRetirementNFT(
+    mintNewRetirementCertificateNFT(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -832,12 +832,12 @@ export interface RetirementNFT extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    retirementNFTBalanceOf(
+    retirementCertificateNFTBalanceOf(
       walletAddress: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    retirementNFTOwnerOf(
+    retirementCertificateNFTOwnerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

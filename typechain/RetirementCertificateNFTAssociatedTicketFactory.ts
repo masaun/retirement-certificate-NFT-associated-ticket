@@ -17,14 +17,14 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface RetirementNFTAssociatedTicketFactoryInterface
+export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
   extends utils.Interface {
-  contractName: "RetirementNFTAssociatedTicketFactory";
+  contractName: "RetirementCertificateNFTAssociatedTicketFactory";
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
     "TICKET_CREATOR_ROLE()": FunctionFragment;
-    "createBatchRetirementNFTAssociatedTicket(address,uint256[],uint256[],address,string)": FunctionFragment;
-    "createRetirementNFTAssociatedTicket(address,uint256,uint256,address,string)": FunctionFragment;
+    "createBatchRetirementCertificateNFTAssociatedTicket(address,uint256[],uint256[],address,string)": FunctionFragment;
+    "createRetirementCertificateNFTAssociatedTicket(address,uint256,uint256,address,string)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
@@ -44,11 +44,11 @@ export interface RetirementNFTAssociatedTicketFactoryInterface
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "createBatchRetirementNFTAssociatedTicket",
+    functionFragment: "createBatchRetirementCertificateNFTAssociatedTicket",
     values: [string, BigNumberish[], BigNumberish[], string, string]
   ): string;
   encodeFunctionData(
-    functionFragment: "createRetirementNFTAssociatedTicket",
+    functionFragment: "createRetirementCertificateNFTAssociatedTicket",
     values: [string, BigNumberish, BigNumberish, string, string]
   ): string;
   encodeFunctionData(
@@ -90,11 +90,11 @@ export interface RetirementNFTAssociatedTicketFactoryInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "createBatchRetirementNFTAssociatedTicket",
+    functionFragment: "createBatchRetirementCertificateNFTAssociatedTicket",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "createRetirementNFTAssociatedTicket",
+    functionFragment: "createRetirementCertificateNFTAssociatedTicket",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -119,53 +119,54 @@ export interface RetirementNFTAssociatedTicketFactoryInterface
   ): Result;
 
   events: {
-    "BatchRetirementNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)": EventFragment;
-    "RetirementNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)": EventFragment;
+    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)": EventFragment;
+    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
   };
 
   getEvent(
-    nameOrSignatureOrTopic: "BatchRetirementNFTAssociatedTicketCreated"
+    nameOrSignatureOrTopic: "BatchRetirementCertificateNFTAssociatedTicketCreated"
   ): EventFragment;
   getEvent(
-    nameOrSignatureOrTopic: "RetirementNFTAssociatedTicketCreated"
+    nameOrSignatureOrTopic: "RetirementCertificateNFTAssociatedTicketCreated"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
 }
 
-export type BatchRetirementNFTAssociatedTicketCreatedEvent = TypedEvent<
-  [string, string, BigNumber[], BigNumber[], string, string],
-  {
-    retirementNFTAssociatedTicket: string;
-    to: string;
-    ticketTypes: BigNumber[];
-    mintAmounts: BigNumber[];
-    retirementNFT: string;
-    uri: string;
-  }
->;
+export type BatchRetirementCertificateNFTAssociatedTicketCreatedEvent =
+  TypedEvent<
+    [string, string, BigNumber[], BigNumber[], string, string],
+    {
+      retirementCertificateNFTAssociatedTicket: string;
+      to: string;
+      ticketTypes: BigNumber[];
+      mintAmounts: BigNumber[];
+      retirementCertificateNFT: string;
+      uri: string;
+    }
+  >;
 
-export type BatchRetirementNFTAssociatedTicketCreatedEventFilter =
-  TypedEventFilter<BatchRetirementNFTAssociatedTicketCreatedEvent>;
+export type BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter =
+  TypedEventFilter<BatchRetirementCertificateNFTAssociatedTicketCreatedEvent>;
 
-export type RetirementNFTAssociatedTicketCreatedEvent = TypedEvent<
+export type RetirementCertificateNFTAssociatedTicketCreatedEvent = TypedEvent<
   [string, string, BigNumber, BigNumber, string, string],
   {
-    retirementNFTAssociatedTicket: string;
+    retirementCertificateNFTAssociatedTicket: string;
     to: string;
     ticketType: BigNumber;
     mintAmount: BigNumber;
-    retirementNFT: string;
+    retirementCertificateNFT: string;
     uri: string;
   }
 >;
 
-export type RetirementNFTAssociatedTicketCreatedEventFilter =
-  TypedEventFilter<RetirementNFTAssociatedTicketCreatedEvent>;
+export type RetirementCertificateNFTAssociatedTicketCreatedEventFilter =
+  TypedEventFilter<RetirementCertificateNFTAssociatedTicketCreatedEvent>;
 
 export type RoleAdminChangedEvent = TypedEvent<
   [string, string, string],
@@ -189,13 +190,14 @@ export type RoleRevokedEvent = TypedEvent<
 
 export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
-export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
-  contractName: "RetirementNFTAssociatedTicketFactory";
+export interface RetirementCertificateNFTAssociatedTicketFactory
+  extends BaseContract {
+  contractName: "RetirementCertificateNFTAssociatedTicketFactory";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: RetirementNFTAssociatedTicketFactoryInterface;
+  interface: RetirementCertificateNFTAssociatedTicketFactoryInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -221,20 +223,20 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
 
     TICKET_CREATOR_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
-    createBatchRetirementNFTAssociatedTicket(
+    createBatchRetirementCertificateNFTAssociatedTicket(
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      retirementNFT: string,
+      retirementCertificateNFT: string,
       uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    createRetirementNFTAssociatedTicket(
+    createRetirementCertificateNFTAssociatedTicket(
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      retirementNFT: string,
+      retirementCertificateNFT: string,
       uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -279,20 +281,20 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
 
   TICKET_CREATOR_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  createBatchRetirementNFTAssociatedTicket(
+  createBatchRetirementCertificateNFTAssociatedTicket(
     to: string,
     ticketTypes: BigNumberish[],
     mintAmounts: BigNumberish[],
-    retirementNFT: string,
+    retirementCertificateNFT: string,
     uri: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  createRetirementNFTAssociatedTicket(
+  createRetirementCertificateNFTAssociatedTicket(
     to: string,
     ticketType: BigNumberish,
     mintAmount: BigNumberish,
-    retirementNFT: string,
+    retirementCertificateNFT: string,
     uri: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -337,20 +339,20 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
 
     TICKET_CREATOR_ROLE(overrides?: CallOverrides): Promise<string>;
 
-    createBatchRetirementNFTAssociatedTicket(
+    createBatchRetirementCertificateNFTAssociatedTicket(
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      retirementNFT: string,
+      retirementCertificateNFT: string,
       uri: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    createRetirementNFTAssociatedTicket(
+    createRetirementCertificateNFTAssociatedTicket(
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      retirementNFT: string,
+      retirementCertificateNFT: string,
       uri: string,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -392,39 +394,39 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
   };
 
   filters: {
-    "BatchRetirementNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)"(
-      retirementNFTAssociatedTicket?: null,
+    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)"(
+      retirementCertificateNFTAssociatedTicket?: null,
       to?: null,
       ticketTypes?: null,
       mintAmounts?: null,
-      retirementNFT?: null,
+      retirementCertificateNFT?: null,
       uri?: null
-    ): BatchRetirementNFTAssociatedTicketCreatedEventFilter;
-    BatchRetirementNFTAssociatedTicketCreated(
-      retirementNFTAssociatedTicket?: null,
+    ): BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter;
+    BatchRetirementCertificateNFTAssociatedTicketCreated(
+      retirementCertificateNFTAssociatedTicket?: null,
       to?: null,
       ticketTypes?: null,
       mintAmounts?: null,
-      retirementNFT?: null,
+      retirementCertificateNFT?: null,
       uri?: null
-    ): BatchRetirementNFTAssociatedTicketCreatedEventFilter;
+    ): BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter;
 
-    "RetirementNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)"(
-      retirementNFTAssociatedTicket?: null,
+    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)"(
+      retirementCertificateNFTAssociatedTicket?: null,
       to?: null,
       ticketType?: null,
       mintAmount?: null,
-      retirementNFT?: null,
+      retirementCertificateNFT?: null,
       uri?: null
-    ): RetirementNFTAssociatedTicketCreatedEventFilter;
-    RetirementNFTAssociatedTicketCreated(
-      retirementNFTAssociatedTicket?: null,
+    ): RetirementCertificateNFTAssociatedTicketCreatedEventFilter;
+    RetirementCertificateNFTAssociatedTicketCreated(
+      retirementCertificateNFTAssociatedTicket?: null,
       to?: null,
       ticketType?: null,
       mintAmount?: null,
-      retirementNFT?: null,
+      retirementCertificateNFT?: null,
       uri?: null
-    ): RetirementNFTAssociatedTicketCreatedEventFilter;
+    ): RetirementCertificateNFTAssociatedTicketCreatedEventFilter;
 
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: BytesLike | null,
@@ -465,20 +467,20 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
 
     TICKET_CREATOR_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    createBatchRetirementNFTAssociatedTicket(
+    createBatchRetirementCertificateNFTAssociatedTicket(
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      retirementNFT: string,
+      retirementCertificateNFT: string,
       uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    createRetirementNFTAssociatedTicket(
+    createRetirementCertificateNFTAssociatedTicket(
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      retirementNFT: string,
+      retirementCertificateNFT: string,
       uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -531,20 +533,20 @@ export interface RetirementNFTAssociatedTicketFactory extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    createBatchRetirementNFTAssociatedTicket(
+    createBatchRetirementCertificateNFTAssociatedTicket(
       to: string,
       ticketTypes: BigNumberish[],
       mintAmounts: BigNumberish[],
-      retirementNFT: string,
+      retirementCertificateNFT: string,
       uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    createRetirementNFTAssociatedTicket(
+    createRetirementCertificateNFTAssociatedTicket(
       to: string,
       ticketType: BigNumberish,
       mintAmount: BigNumberish,
-      retirementNFT: string,
+      retirementCertificateNFT: string,
       uri: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

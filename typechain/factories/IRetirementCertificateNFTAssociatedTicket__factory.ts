@@ -5,20 +5,20 @@
 import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
 import type {
-  IRetirementNFTAssociatedTicket,
-  IRetirementNFTAssociatedTicketInterface,
-} from "../IRetirementNFTAssociatedTicket";
+  IRetirementCertificateNFTAssociatedTicket,
+  IRetirementCertificateNFTAssociatedTicketInterface,
+} from "../IRetirementCertificateNFTAssociatedTicket";
 
 const _abi = [
   {
     inputs: [
       {
-        internalType: "contract IRetirementNFT",
-        name: "retirementNFT",
+        internalType: "contract IRetirementCertificateNFT",
+        name: "retirementCertificateNFT",
         type: "address",
       },
     ],
-    name: "getRetirementNFTAssociatedTicketMetadata",
+    name: "getRetirementCertificateNFTAssociatedTicketMetadata",
     outputs: [
       {
         components: [
@@ -33,8 +33,9 @@ const _abi = [
             type: "uint256",
           },
         ],
-        internalType: "struct DataTypes.RetirementNFTAssociatedTicketMetadata",
-        name: "_retirementNFTAssociatedTicketMetadata",
+        internalType:
+          "struct DataTypes.RetirementCertificateNFTAssociatedTicketMetadata",
+        name: "_retirementCertificateNFTAssociatedTicketMetadata",
         type: "tuple",
       },
     ],
@@ -100,11 +101,11 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "retirementNFTAssociatedTicketBalanceOf",
+    name: "retirementCertificateNFTAssociatedTicketBalanceOf",
     outputs: [
       {
         internalType: "uint256",
-        name: "_numberOfRetirementNFTAssociatedTickets",
+        name: "_numberOfRetirementCertificateNFTAssociatedTickets",
         type: "uint256",
       },
     ],
@@ -124,11 +125,11 @@ const _abi = [
         type: "uint256[]",
       },
     ],
-    name: "retirementNFTAssociatedTicketBalanceOfBatch",
+    name: "retirementCertificateNFTAssociatedTicketBalanceOfBatch",
     outputs: [
       {
         internalType: "uint256[]",
-        name: "_numberOfEachRetirementNFTAssociatedTickets",
+        name: "_numberOfEachRetirementCertificateNFTAssociatedTickets",
         type: "uint256[]",
       },
     ],
@@ -138,31 +139,33 @@ const _abi = [
   {
     inputs: [
       {
-        internalType: "contract IRetirementNFT",
-        name: "retirementNFT",
+        internalType: "contract IRetirementCertificateNFT",
+        name: "retirementCertificateNFT",
         type: "address",
       },
     ],
-    name: "saveRetirementNFTAssociatedTicketMetadata",
+    name: "saveRetirementCertificateNFTAssociatedTicketMetadata",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },
 ];
 
-export class IRetirementNFTAssociatedTicket__factory {
+export class IRetirementCertificateNFTAssociatedTicket__factory {
   static readonly abi = _abi;
-  static createInterface(): IRetirementNFTAssociatedTicketInterface {
-    return new utils.Interface(_abi) as IRetirementNFTAssociatedTicketInterface;
+  static createInterface(): IRetirementCertificateNFTAssociatedTicketInterface {
+    return new utils.Interface(
+      _abi
+    ) as IRetirementCertificateNFTAssociatedTicketInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): IRetirementNFTAssociatedTicket {
+  ): IRetirementCertificateNFTAssociatedTicket {
     return new Contract(
       address,
       _abi,
       signerOrProvider
-    ) as IRetirementNFTAssociatedTicket;
+    ) as IRetirementCertificateNFTAssociatedTicket;
   }
 }

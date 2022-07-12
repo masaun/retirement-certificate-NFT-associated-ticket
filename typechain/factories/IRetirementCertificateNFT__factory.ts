@@ -5,9 +5,9 @@
 import { Contract, Signer, utils } from "ethers";
 import { Provider } from "@ethersproject/providers";
 import type {
-  IRetirementNFT,
-  IRetirementNFTInterface,
-} from "../IRetirementNFT";
+  IRetirementCertificateNFT,
+  IRetirementCertificateNFTInterface,
+} from "../IRetirementCertificateNFT";
 
 const _abi = [
   {
@@ -23,7 +23,7 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "mintNewRetirementNFT",
+    name: "mintNewRetirementCertificateNFT",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -36,7 +36,7 @@ const _abi = [
         type: "address",
       },
     ],
-    name: "retirementNFTBalanceOf",
+    name: "retirementCertificateNFTBalanceOf",
     outputs: [
       {
         internalType: "uint256",
@@ -55,7 +55,7 @@ const _abi = [
         type: "uint256",
       },
     ],
-    name: "retirementNFTOwnerOf",
+    name: "retirementCertificateNFTOwnerOf",
     outputs: [
       {
         internalType: "address",
@@ -68,15 +68,19 @@ const _abi = [
   },
 ];
 
-export class IRetirementNFT__factory {
+export class IRetirementCertificateNFT__factory {
   static readonly abi = _abi;
-  static createInterface(): IRetirementNFTInterface {
-    return new utils.Interface(_abi) as IRetirementNFTInterface;
+  static createInterface(): IRetirementCertificateNFTInterface {
+    return new utils.Interface(_abi) as IRetirementCertificateNFTInterface;
   }
   static connect(
     address: string,
     signerOrProvider: Signer | Provider
-  ): IRetirementNFT {
-    return new Contract(address, _abi, signerOrProvider) as IRetirementNFT;
+  ): IRetirementCertificateNFT {
+    return new Contract(
+      address,
+      _abi,
+      signerOrProvider
+    ) as IRetirementCertificateNFT;
   }
 }

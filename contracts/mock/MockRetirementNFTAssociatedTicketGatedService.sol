@@ -2,37 +2,37 @@
 // An example of a consumer contract that relies on a subscription for funding.
 pragma solidity ^0.8.7;
 
-//import { IRetirementNFTAssociatedTicket } from "../interfaces/IRetirementNFTAssociatedTicket.sol";
-import { RetirementNFTAssociatedTicket } from "../RetirementNFTAssociatedTicket.sol";
+//import { IRetirementCertificateNFTAssociatedTicket } from "../interfaces/IRetirementCertificateNFTAssociatedTicket.sol";
+import { RetirementCertificateNFTAssociatedTicket } from "../RetirementCertificateNFTAssociatedTicket.sol";
 
 import "hardhat/console.sol";
 
 
 /**
- * @title - The MockRetirementNFTAssociatedTicketGatedService contract
+ * @title - The MockRetirementCertificateNFTAssociatedTicketGatedService contract
  * @notice - This is a service smart contract that only only a Retirement NFT Associated Ticket holder can access.
  */
-contract MockRetirementNFTAssociatedTicketGatedService {
+contract MockRetirementCertificateNFTAssociatedTicketGatedService {
 
     constructor() {
         //[TODO]: 
     }
 
     /**
-     * @notice - Check whether a caller (msg.sender) has a RetirementNFTAssociatedTicket or not
+     * @notice - Check whether a caller (msg.sender) has a RetirementCertificateNFTAssociatedTicket or not
      */ 
-    modifier onlyRetirementNFTAssociatedTicketHolder(address caller, RetirementNFTAssociatedTicket _retirementNFTAssociatedTicket, uint256 ticketType) {
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket = _retirementNFTAssociatedTicket;
-        uint numberOfTicket = retirementNFTAssociatedTicket.balanceOf(caller, ticketType);
-        require(numberOfTicket > 0, "A caller should has more than 1 of the RetirementNFTAssociatedTicket");
+    modifier onlyRetirementCertificateNFTAssociatedTicketHolder(address caller, RetirementCertificateNFTAssociatedTicket _retirementCertificateNFTAssociatedTicket, uint256 ticketType) {
+        RetirementCertificateNFTAssociatedTicket retirementCertificateNFTAssociatedTicket = _retirementCertificateNFTAssociatedTicket;
+        uint numberOfTicket = retirementCertificateNFTAssociatedTicket.balanceOf(caller, ticketType);
+        require(numberOfTicket > 0, "A caller should has more than 1 of the RetirementCertificateNFTAssociatedTicket");
         _;
     }
 
     /**
      * @notice - Access a special content that only only a Retirement NFT Associated Ticket holder can access.
-     * @dev - If a caller (msg.sender) pass onlyRetirementNFTAssociatedTicketHolder() modifier, that caller can access special content
+     * @dev - If a caller (msg.sender) pass onlyRetirementCertificateNFTAssociatedTicketHolder() modifier, that caller can access special content
      */ 
-    function accessSpecialContent(RetirementNFTAssociatedTicket retirementNFTAssociatedTicket, uint256 ticketType) public onlyRetirementNFTAssociatedTicketHolder(msg.sender, retirementNFTAssociatedTicket, ticketType) returns (bool) {
+    function accessSpecialContent(RetirementCertificateNFTAssociatedTicket retirementCertificateNFTAssociatedTicket, uint256 ticketType) public onlyRetirementCertificateNFTAssociatedTicketHolder(msg.sender, retirementCertificateNFTAssociatedTicket, ticketType) returns (bool) {
         console.log("%s is successful to access special content", msg.sender);
     }
 
