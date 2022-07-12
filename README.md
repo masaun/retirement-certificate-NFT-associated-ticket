@@ -18,6 +18,7 @@
 <br>
 
 ### Specifications
+- Random Number generated via Chainlink VRF is associated with Retirement Certificate NFT-associated Ticket
 
 <br>
 
