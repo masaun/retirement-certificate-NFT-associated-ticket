@@ -31,7 +31,7 @@ import { RetirementCertificateNFT, LinkToken, MockOracle } from "../../typechain
           let mockOracle: MockOracle
 
           //@dev - Variables for assigning deployed-addresses
-          let RETIREMENT_NFT: string
+          let RETIREMENT_CERTIFICATE_NFT: string
 
           beforeEach(async () => {
               //@dev - Get signers and wallet addresses for this tests 

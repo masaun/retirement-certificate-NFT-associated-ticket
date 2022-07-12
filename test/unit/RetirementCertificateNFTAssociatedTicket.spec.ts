@@ -37,9 +37,9 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let mockOracle: MockOracle
 
           //@dev - Variables for assigning deployed-addresses
-          let RETIREMENT_NFT: string
-          let RETIREMENT_NFT_ASSOCIATED_TICKET: string
-          let RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY: string
+          let RETIREMENT_CERTIFICATE_NFT: string
+          let RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET: string
+          let RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_FACTORY: string
 
           before(async () => {
               //@dev - Get signers and wallet addresses for this tests 
@@ -61,20 +61,20 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
 
               //@dev - Create the contract instance of the RetirementCertificateNFT.sol
               retirementCertificateNFT = await ethers.getContract("RetirementCertificateNFT")
-              RETIREMENT_NFT = retirementCertificateNFT.address
-              console.log(`##### Deployed-contract address of the RetirementCertificateNFT.sol: ${ RETIREMENT_NFT } ######`)
+              RETIREMENT_CERTIFICATE_NFT = retirementCertificateNFT.address
+              console.log(`##### Deployed-contract address of the RetirementCertificateNFT.sol: ${ RETIREMENT_CERTIFICATE_NFT } ######`)
 
               //@dev - Create the contract instance of the RetirementCertificateNFTAssociatedTicketFactory.sol
               retirementCertificateNFTAssociatedTicketFactory = await ethers.getContract("RetirementCertificateNFTAssociatedTicketFactory")
-              RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY = retirementCertificateNFTAssociatedTicketFactory.address
-              console.log(`##### Deployed-contract address of the RetirementCertificateNFTAssociatedTicketFactory.sol: ${ RETIREMENT_NFT_ASSOCIATED_TICKET_FACTORY } ######`)
+              RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_FACTORY = retirementCertificateNFTAssociatedTicketFactory.address
+              console.log(`##### Deployed-contract address of the RetirementCertificateNFTAssociatedTicketFactory.sol: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_FACTORY } ######`)
 
               //@dev - Create a new RetirementCertificateNFTAssociatedTicket
               const to: string = TICKET_HOLDER_1
               const ticketType: number = 0 
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
               const uri: string = "https://gateway.pinata.cloud/ipfs/QmPK1s3pNYLi9ERiq3BDxKa4XosgWwFRQUydHUtz4YgpqB"
-              let tx: any = await retirementCertificateNFTAssociatedTicketFactory.connect(ticketCreator).createRetirementCertificateNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_NFT, uri)
+              let tx: any = await retirementCertificateNFTAssociatedTicketFactory.connect(ticketCreator).createRetirementCertificateNFTAssociatedTicket(to, ticketType, mintAmount, RETIREMENT_CERTIFICATE_NFT, uri)
               let txReceipt: any = await tx.wait()
 
               //@dev - Retrieve an eventLog emitted (NOTE: Event name is "RetirementCertificateNFTAssociatedTicketCreated")
@@ -83,9 +83,9 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               console.log(`Emitted-EventLog of "RetirementCertificateNFTAssociatedTicketCreated": ${ eventLog }`)
 
               //@dev - Create a RetirementCertificateNFTAssociatedTicket instance by assigning contract address retrieved above
-              RETIREMENT_NFT_ASSOCIATED_TICKET = eventLog[0]
-              retirementCertificateNFTAssociatedTicket = await ethers.getContractAt("RetirementCertificateNFTAssociatedTicket", RETIREMENT_NFT_ASSOCIATED_TICKET)
-              console.log(`Deployed-address of RetirementCertificateNFTAssociatedTicket: ${ RETIREMENT_NFT_ASSOCIATED_TICKET }`)
+              RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET = eventLog[0]
+              retirementCertificateNFTAssociatedTicket = await ethers.getContractAt("RetirementCertificateNFTAssociatedTicket", RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET)
+              console.log(`Deployed-address of RetirementCertificateNFTAssociatedTicket: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET }`)
 
               await run("fund-link", { contract: retirementCertificateNFTAssociatedTicket.address, linkaddress: linkTokenAddress })
           })
@@ -98,7 +98,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           })
 
           it(`getRetirementCertificateNFTAssociatedTicketMetadata() - Should be successful that retrieve a metadata of the RetirementCertificateNFTAssociatedTicket specified`, async () => {
-              let retirementCertificateNFTAssociatedTicketMetadata: any = await retirementCertificateNFTAssociatedTicket.getRetirementCertificateNFTAssociatedTicketMetadata(RETIREMENT_NFT)
+              let retirementCertificateNFTAssociatedTicketMetadata: any = await retirementCertificateNFTAssociatedTicket.getRetirementCertificateNFTAssociatedTicketMetadata(RETIREMENT_CERTIFICATE_NFT)
               console.log(`RetirementCertificateNFTAssociatedTicketMetadata retrieved: ${ retirementCertificateNFTAssociatedTicketMetadata }`)
           })
 
