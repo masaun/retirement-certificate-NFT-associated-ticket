@@ -2,32 +2,32 @@
 
 pragma solidity ^0.8.7;
 
-//@dev - RetirementNFT-associated ticket
-import { RetirementNFTAssociatedTicket } from "../RetirementNFTAssociatedTicket.sol";
+//@dev - RetirementCertificateNFT-associated ticket
+import { RetirementCertificateNFTAssociatedTicket } from "../RetirementCertificateNFTAssociatedTicket.sol";
 
 //@dev - Retirement NFT
-import { IRetirementNFT } from "../interfaces/IRetirementNFT.sol";
+import { IRetirementCertificateNFT } from "../interfaces/IRetirementCertificateNFT.sol";
 
 import { DataTypes } from './DataTypes.sol';
 
 
 library Events {
 
-    event RetirementNFTAssociatedTicketCreated(
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket,
+    event RetirementCertificateNFTAssociatedTicketCreated(
+        RetirementCertificateNFTAssociatedTicket retirementCertificateNFTAssociatedTicket,
         address to, 
         uint ticketType, 
         uint mintAmount, 
-        IRetirementNFT retirementNFT, 
+        IRetirementCertificateNFT retirementCertificateNFT, 
         string uri
     );
 
-    event BatchRetirementNFTAssociatedTicketCreated(
-        RetirementNFTAssociatedTicket retirementNFTAssociatedTicket,
+    event BatchRetirementCertificateNFTAssociatedTicketCreated(
+        RetirementCertificateNFTAssociatedTicket retirementCertificateNFTAssociatedTicket,
         address to, 
         uint256[] ticketTypes, 
         uint256[] mintAmounts,
-        IRetirementNFT retirementNFT, 
+        IRetirementCertificateNFT retirementCertificateNFT, 
         string uri
     );
 

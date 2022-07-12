@@ -17,9 +17,9 @@ import { FunctionFragment, Result } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface MockRetirementNFTAssociatedTicketGatedServiceInterface
+export interface MockRetirementCertificateNFTAssociatedTicketGatedServiceInterface
   extends utils.Interface {
-  contractName: "MockRetirementNFTAssociatedTicketGatedService";
+  contractName: "MockRetirementCertificateNFTAssociatedTicketGatedService";
   functions: {
     "accessSpecialContent(address,uint256)": FunctionFragment;
   };
@@ -37,14 +37,14 @@ export interface MockRetirementNFTAssociatedTicketGatedServiceInterface
   events: {};
 }
 
-export interface MockRetirementNFTAssociatedTicketGatedService
+export interface MockRetirementCertificateNFTAssociatedTicketGatedService
   extends BaseContract {
-  contractName: "MockRetirementNFTAssociatedTicketGatedService";
+  contractName: "MockRetirementCertificateNFTAssociatedTicketGatedService";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: MockRetirementNFTAssociatedTicketGatedServiceInterface;
+  interface: MockRetirementCertificateNFTAssociatedTicketGatedServiceInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -67,21 +67,21 @@ export interface MockRetirementNFTAssociatedTicketGatedService
 
   functions: {
     accessSpecialContent(
-      retirementNFTAssociatedTicket: string,
+      retirementCertificateNFTAssociatedTicket: string,
       ticketType: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
 
   accessSpecialContent(
-    retirementNFTAssociatedTicket: string,
+    retirementCertificateNFTAssociatedTicket: string,
     ticketType: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     accessSpecialContent(
-      retirementNFTAssociatedTicket: string,
+      retirementCertificateNFTAssociatedTicket: string,
       ticketType: BigNumberish,
       overrides?: CallOverrides
     ): Promise<boolean>;
@@ -91,7 +91,7 @@ export interface MockRetirementNFTAssociatedTicketGatedService
 
   estimateGas: {
     accessSpecialContent(
-      retirementNFTAssociatedTicket: string,
+      retirementCertificateNFTAssociatedTicket: string,
       ticketType: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -99,7 +99,7 @@ export interface MockRetirementNFTAssociatedTicketGatedService
 
   populateTransaction: {
     accessSpecialContent(
-      retirementNFTAssociatedTicket: string,
+      retirementCertificateNFTAssociatedTicket: string,
       ticketType: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;

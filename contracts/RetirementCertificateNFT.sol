@@ -2,7 +2,7 @@
 pragma solidity ^0.8.7;
 
 //@dev - Interfaces
-import { IRetirementNFT } from "./interfaces/IRetirementNFT.sol";
+import { IRetirementCertificateNFT } from "./interfaces/IRetirementCertificateNFT.sol";
 
 //@dev - NFT
 import { ERC721 } from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -10,9 +10,9 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
 
 
 /**
- * @title The Retirement NFT contract
+ * @title - The Retirement Certificate NFT contract (based on ERC721)
  */
-contract RetirementNFT is IRetirementNFT, ERC721, AccessControl {
+contract RetirementCertificateNFT is IRetirementCertificateNFT, ERC721, AccessControl {
 
     constructor() ERC721("Retirement NFT", "RNFT") {
         //@dev - Grant admin role to caller (msg.sender)
@@ -20,25 +20,25 @@ contract RetirementNFT is IRetirementNFT, ERC721, AccessControl {
     }
 
     /**
-     * @notice - Mint a new RetirementNFT with RNG via Chainlink VRF
+     * @notice - Mint a new RetirementCertificateNFT with RNG via Chainlink VRF
      */ 
-    function mintNewRetirementNFT(address to, uint256 tokenId) public override onlyRole(DEFAULT_ADMIN_ROLE) {
-        //@dev - Mint a new RetirementNFT
+    function mintNewRetirementCertificateNFT(address to, uint256 tokenId) public override onlyRole(DEFAULT_ADMIN_ROLE) {
+        //@dev - Mint a new RetirementCertificateNFT
         _safeMint(to, tokenId);
     }
 
     /**
      * @dev - Get the number of tokens in an account of walletAddress.
-     * @return _numberOfRetirementNFTs - Number of RetirementNFTs that a wallet address has
+     * @return _numberOfRetirementCertificateNFTs - Number of RetirementCertificateNFTs that a wallet address has
      */
-    function retirementNFTBalanceOf(address walletAddress) public override view returns (uint256 _numberOfRetirementNFTs) {
+    function retirementCertificateNFTBalanceOf(address walletAddress) public override view returns (uint256 _numberOfRetirementCertificateNFTs) {
         return balanceOf(walletAddress);
     }
 
     /**
-     * @dev - Get the owner of the `tokenId` of Retirment NFT.
+     * @dev - Get the owner of the `tokenId` of a Retirement Certificate NFT.
      */
-    function retirementNFTOwnerOf(uint256 tokenId) public override view returns (address _owner) {
+    function retirementCertificateNFTOwnerOf(uint256 tokenId) public override view returns (address _owner) {
         return ownerOf(tokenId);
     }
 

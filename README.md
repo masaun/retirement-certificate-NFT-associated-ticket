@@ -2,8 +2,12 @@
 ### Overview
 - This is the smart contract that associate retirement NFTs with as `"Retirement NFT-associated Ticket"`
   - This ticket is in order to incentivize users who offset carbons in the Voluntary Carbon Market.
-  - On the assumption that, retirement NFTs are minted via existing ReFi protocols such as Toucan Protocol.  
+  - On the assumption that, Retirement NFTs (Retirement Certificate) are minted via existing ReFi protocols such as Toucan Protocol.  
     https://docs.toucan.earth/protocol/bridge/carbon-bridge/retire-on-verra
+    ↓
+    - `Retirement Certificate` has minted as a `NFT` (= `ERC-721` ) on Toucan Protocol
+       https://polygonscan.com/token/0x5e377f16e4ec6001652befd737341a28889af002
+
   - Retirement NFT-associated Ticket holders are able to access special contents, event, etc. (This is Retirement NFT-associated Ticket-gated access)
 
 <br>

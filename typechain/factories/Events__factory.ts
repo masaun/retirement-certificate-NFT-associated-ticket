@@ -11,8 +11,8 @@ const _abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "contract RetirementNFTAssociatedTicket",
-        name: "retirementNFTAssociatedTicket",
+        internalType: "contract RetirementCertificateNFTAssociatedTicket",
+        name: "retirementCertificateNFTAssociatedTicket",
         type: "address",
       },
       {
@@ -35,8 +35,8 @@ const _abi = [
       },
       {
         indexed: false,
-        internalType: "contract IRetirementNFT",
-        name: "retirementNFT",
+        internalType: "contract IRetirementCertificateNFT",
+        name: "retirementCertificateNFT",
         type: "address",
       },
       {
@@ -46,7 +46,7 @@ const _abi = [
         type: "string",
       },
     ],
-    name: "BatchRetirementNFTAssociatedTicketCreated",
+    name: "BatchRetirementCertificateNFTAssociatedTicketCreated",
     type: "event",
   },
   {
@@ -54,8 +54,8 @@ const _abi = [
     inputs: [
       {
         indexed: false,
-        internalType: "contract RetirementNFTAssociatedTicket",
-        name: "retirementNFTAssociatedTicket",
+        internalType: "contract RetirementCertificateNFTAssociatedTicket",
+        name: "retirementCertificateNFTAssociatedTicket",
         type: "address",
       },
       {
@@ -78,8 +78,8 @@ const _abi = [
       },
       {
         indexed: false,
-        internalType: "contract IRetirementNFT",
-        name: "retirementNFT",
+        internalType: "contract IRetirementCertificateNFT",
+        name: "retirementCertificateNFT",
         type: "address",
       },
       {
@@ -89,13 +89,13 @@ const _abi = [
         type: "string",
       },
     ],
-    name: "RetirementNFTAssociatedTicketCreated",
+    name: "RetirementCertificateNFTAssociatedTicketCreated",
     type: "event",
   },
 ];
 
 const _bytecode =
-  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220162566fc9540a1624717296dd035344d8fdfe1c99ec83d7cdd418e2f0adf221264736f6c63430008070033";
+  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220f34162b432d6c699422aef1f252be6fd52f32f7967480194edee3c7f3b5bdde964736f6c63430008070033";
 
 type EventsConstructorParams =
   | [signer?: Signer]
