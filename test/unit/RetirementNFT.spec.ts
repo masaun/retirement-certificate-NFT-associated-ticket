@@ -3,15 +3,15 @@ import { assert, expect } from "chai"
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
 import { network, deployments, ethers, run } from "hardhat"
 import { developmentChains } from "../../helper-hardhat-config"
-import { RetirementNFT, LinkToken, MockOracle } from "../../typechain"
+import { RetirementCertificateNFT, LinkToken, MockOracle } from "../../typechain"
 
 
 /**
- * @title - Unit test of the RetirementNFT.sol
+ * @title - Unit test of the RetirementCertificateNFT.sol
  */ 
 !developmentChains.includes(network.name)
     ? describe.skip
-    : describe("RetirementNFT Unit Tests", async function () {
+    : describe("RetirementCertificateNFT Unit Tests", async function () {
           //@dev - Signer of wallet addresses
           let deployer: any
           let ticketCreator: any
@@ -26,7 +26,7 @@ import { RetirementNFT, LinkToken, MockOracle } from "../../typechain"
           let TICKET_HOLDER_2: string
 
           //@dev - Variables for assigning contract instances
-          let retirementNFT: RetirementNFT
+          let retirementCertificateNFT: RetirementCertificateNFT
           let linkToken: LinkToken
           let mockOracle: MockOracle
 
@@ -48,16 +48,16 @@ import { RetirementNFT, LinkToken, MockOracle } from "../../typechain"
 
               linkToken = await ethers.getContract("LinkToken")
               const linkTokenAddress: string = linkToken.address
-              retirementNFT = await ethers.getContract("RetirementNFT")
+              retirementCertificateNFT = await ethers.getContract("RetirementCertificateNFT")
               mockOracle = await ethers.getContract("MockOracle")
 
-              await run("fund-link", { contract: retirementNFT.address, linkaddress: linkTokenAddress })
+              await run("fund-link", { contract: retirementCertificateNFT.address, linkaddress: linkTokenAddress })
           })
 
-          it(`Should be successful to mint a RetirementNFT`, async () => {
+          it(`Should be successful to mint a RetirementCertificateNFT`, async () => {
               const to: string = TICKET_HOLDER_1
               const tokenId: number = 0
-              let tx = await retirementNFT.connect(deployer).mintNewRetirementNFT(to, tokenId)
+              let tx = await retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId)
               let txReceipt = await tx.wait()
           })
 
