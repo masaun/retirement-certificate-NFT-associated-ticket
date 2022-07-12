@@ -1,4 +1,26 @@
 # Retirement NFT-gated (associated) ticket 🎫
+### Overview
+- This is the smart contract that associate retirement NFTs with as `"Retirement NFT-associated Ticket"`
+  - This ticket is in order to incentivize users who offset carbons in the Voluntary Carbon Market.
+  - On the assumption that, retirement NFTs are minted via existing ReFi protocols such as Toucan Protocol.  
+    https://docs.toucan.earth/protocol/bridge/carbon-bridge/retire-on-verra
+  - Retirement NFT-associated Ticket holders are able to access special contents, event, etc. (This is Retirement NFT-associated Ticket-gated access)
+
+<br>
+
+- Retirement NFT is simply implemented by using ERC721 in this time.
+  - For the long term, it's better for this smart contract to use retirement NFT such as Toucan Protocol.
+
+<br>
+
+### Specifications
+
+<br>
+
+### Use case of Retirement NFT-associated ticket
+
+<br>
+
 ### Test (Retirement NFT associated ticket) 
 - Scenario test
 ```
@@ -60,6 +82,16 @@ yarn script-kovan:readPrice
 ($ `yarn hardhat run ./scripts/readPrice.ts --network kovan` )
 
 <br/>
+
+### References
+- The Voluntary Carbon Market  
+  https://docs.toucan.earth/protocol/introduction/carbon-markets
+
+- Retirement NFT in Toucan Protocol (In the middle of implementation)
+  https://docs.toucan.earth/protocol/bridge/carbon-bridge/retire-on-verra
+
+
+
 
 <hr>
 
