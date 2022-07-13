@@ -1,5 +1,6 @@
 import { expect } from "chai"
 import { ethers } from "hardhat"
+import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
 
 
 function convertHexToString(hex: string) {

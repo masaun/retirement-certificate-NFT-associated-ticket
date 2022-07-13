@@ -37,7 +37,7 @@
 
 ### Workflow
 - Diagram of workflow
-  ![diagram_Retirement-Certificate-NFT-associated-Ticket](https://user-images.githubusercontent.com/19357502/178473379-4742aedf-09f4-496e-8121-cbef10c326ed.jpeg)
+  ![diagram_retirement-certificate-NFT-associated-ticket](https://user-images.githubusercontent.com/19357502/178716431-e1281060-87f3-492c-87d3-14d450b4c3fe.jpeg)
 
 
 
