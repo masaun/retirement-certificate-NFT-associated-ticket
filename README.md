@@ -1,19 +1,17 @@
 # Retirement Certificate NFT-associated Ticket 🎫
 ### Overview
-- This is the smart contract that associate retirement NFTs with as `"Retirement Certificate NFT-associated Ticket"`
+- This is the smart contract that associate Retirement Certificate NFTs with special tickets that includes special privilege as `"Retirement Certificate NFT-associated Ticket"`
   - This ticket is in order to incentivize users who offset carbons in the Voluntary Carbon Market.
   - On the assumption that, Retirement Certificate NFT are minted via existing ReFi protocols such as Toucan Protocol.  
     https://docs.toucan.earth/protocol/bridge/carbon-bridge/retire-on-verra
     ↓
-    - `Retirement Certificate` has minted as a `NFT` (= `ERC-721` ) on Toucan Protocol
-       https://polygonscan.com/token/0x5e377f16e4ec6001652befd737341a28889af002
-
-  - Retirement Certificate NFT-associated Ticket holders are able to access special contents, event, etc. (This is Retirement NFT-associated Ticket-gated access)
+    - `Retirement Certificate NFT` (=ERC-721) are minted to users who offset and retire their carbon on Toucan Protocol. 
+       - An example of Retirement Certificate NFT on Toucan Protocol: https://polygonscan.com/token/0x5e377f16e4ec6001652befd737341a28889af002 
+       - NOTE: This time, I use mock of Retirement Certificate NFT instead of Toucan Protocol's one above because of limitation of time to implement this smart contract. Ideally, Retirement Certificate NFT on ReFi protocols (such as Toucan Protocol) is better in the future. 
 
 <br>
 
-- Retirement Certificate NFT is simply implemented by using ERC721 in this time.
-  - For the long term, it's better for this smart contract to use retirement NFT such as Toucan Protocol.
+  - Retirement Certificate NFT-associated Ticket holders are able to access special contents, events, etc as privilege. (This is like `"Retirement NFT-associated Ticket-gated access"` )
 
 <br>
 
@@ -106,11 +104,15 @@ yarn script-kovan:readPrice
 <br/>
 
 ### References
+- Chainlink prize in the Sustainable Blockchain Hackathon. (Best Use Of Chainlink In A Sustainability Project)
+  https://gitcoin.co/issue/29019
+
 - The Voluntary Carbon Market  
   https://docs.toucan.earth/protocol/introduction/carbon-markets
 
 - Retirement NFT in Toucan Protocol (In the middle of implementation)
   https://docs.toucan.earth/protocol/bridge/carbon-bridge/retire-on-verra
+
 
 
 
