@@ -117,6 +117,13 @@ yarn script-kovan:readPrice
 
 <br>
 
+- KlimaDAO  
+  - The offsetting page (as retirement aggregator): https://app.klimadao.finance/#/offset  
+  - Retirement Aggregator Contracts: https://docs.klimadao.finance/references/developers/retirement-aggregator-contracts  
+  - Polygon goes carbon neutral via KlimaDAO - The Green Manifesto in action: https://www.klimadao.finance/blog/  polygon-goes-carbon-neutral-via-klimadao
+
+<br>
+
 - The Voluntary Carbon Market  
   https://docs.toucan.earth/protocol/introduction/carbon-markets
 
