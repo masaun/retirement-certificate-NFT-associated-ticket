@@ -107,6 +107,15 @@ yarn script-kovan:readPrice
 - Chainlink prize in the Sustainable Blockchain Hackathon. (Best Use Of Chainlink In A Sustainability Project)
   https://gitcoin.co/issue/29019
 
+- Toucan Protocol:  
+  - Retirement on Verra: https://docs.toucan.earth/protocol/bridge/carbon-bridge/retire-on-verra
+  - Workflow of Carbon Pools: https://docs.toucan.earth/protocol/pool/key-concepts  
+  - Example of Carbon Retirement Certificate (for ETH Amsterdam)  
+    https://medium.com/@ToucanProtocol/toucan-offset-ethamsterdam-emissions-506df8223c84  
+    https://blog.toucan.earth/content/files/2022/05/Certificate_ETHAms_220429-1400.pdf  
+
+<br>
+
 - The Voluntary Carbon Market  
   https://docs.toucan.earth/protocol/introduction/carbon-markets
 
