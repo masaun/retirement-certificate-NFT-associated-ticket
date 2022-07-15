@@ -1,7 +1,8 @@
 # Retirement Certificate NFT-associated Ticket 🎫
 ### Overview
 - This is the smart contract that associate Retirement Certificate NFTs with special tickets that includes special privilege as `"Retirement Certificate NFT-associated Ticket"`
-  - This ticket is in order to incentivize users who offset carbons in the Voluntary Carbon Market.
+  - This ticket is in order to incentivize people who try to offset carbons as individual climate action in the Voluntary Carbon Market (VCM).
+    (For example of individual climate action, people calculate carbon that they are emitted when they travel to foreign countries and they try to offset its carbon calculated via BCT token on Toucan Protocol)
   - On the assumption that, Retirement Certificate NFT are minted via existing ReFi protocols such as Toucan Protocol.  
     https://docs.toucan.earth/protocol/bridge/carbon-bridge/retire-on-verra
     ↓
