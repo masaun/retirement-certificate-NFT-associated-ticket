@@ -19,11 +19,10 @@
 <br>
 
 - Retirement Certificate NFT-associated Ticket holders are able to access special contents, events, etc as privilege. (This is like `"Retirement NFT-associated Ticket-gated access"` )
+  - In this repo, `"Retirement NFT-associated Ticket-gated access"` is tested by using `accessSpecialContent()` method defined in the mock of RetirementCertificateNFTAssociatedTicketGatedService contract. 
+    https://github.com/masaun/retirement-certificate-NFT-associated-ticket/blob/main/contracts/mock/MockRetirementNFTAssociatedTicketGatedService.sol#L35-L37
 
 <br>
-
-
-
 
 ### Use case of Retirement Certificate NFT-associated Ticket
 - Ticket sales of professional sports teams
