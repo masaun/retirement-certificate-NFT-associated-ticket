@@ -65,7 +65,7 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               //@dev - Create the contract instance of the RetirementCertificateNFT.sol
               retirementCertificateNFT = await ethers.getContract("RetirementCertificateNFT")
               RETIREMENT_CERTIFICATE_NFT = retirementCertificateNFT.address
-              console.log(`##### Deployed-contract address of the RetirementCertificateNFT.sol: ${ RETIREMENT_CERTIFICATE_NFT } ######`)
+              console.log(`\n##### Deployed-contract address of the RetirementCertificateNFT.sol: ${ RETIREMENT_CERTIFICATE_NFT } ######`)
 
               //@dev - Create the contract instance of the RetirementCertificateNFTAssociatedTicketFactory.sol
               retirementCertificateNFTAssociatedTicketFactory = await ethers.getContract("RetirementCertificateNFTAssociatedTicketFactory")
@@ -76,6 +76,10 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               retirementCertificateNFTAssociatedTicketGatedService = await ethers.getContract("MockRetirementCertificateNFTAssociatedTicketGatedService")
               RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_GATED_SERVICE = retirementCertificateNFTAssociatedTicketGatedService.address
               console.log(`##### Deployed-contract address of the MockRetirementCertificateNFTAssociatedTicketGatedService.sol: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_GATED_SERVICE } ######`)
+          })
+
+          it(`Should be successful that 1 LINK Token is funded into the RetirementCertificateNFTAssociatedTicketFactory.sol in order to call Chainlink VRF for generating random number and retrieve it`, async () => {
+              const linkTokenAddress: string = linkToken.address
 
               await run("fund-link", { contract: retirementCertificateNFTAssociatedTicketFactory.address, linkaddress: linkTokenAddress })
           })

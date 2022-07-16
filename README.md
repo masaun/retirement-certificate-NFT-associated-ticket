@@ -1,6 +1,7 @@
 # Retirement Certificate NFT-associated Ticket 🎫
 ### Overview
 - This is the smart contract that associate Retirement Certificate NFTs with special tickets that includes special privilege as `"Retirement Certificate NFT-associated Ticket"`
+  - ERC-1155 type of NFT is used for this Retirement Certificate NFT-associated Ticket.
 
   - This ticket is in order to incentivize people who try to offset carbons as individual climate action and increase these people in the Voluntary Carbon Market (VCM).
     - For example of individual climate action, people calculate carbon that they are emitted when they travel to foreign countries and they try to offset its carbon calculated with $BCT tokens on Toucan Protocol.
@@ -13,10 +14,16 @@
 <br>
 
 - Random Number generated via Chainlink VRF is associated with each Retirement Certificate NFT-associated Tickets as kind of serial number of tickets in order to avoid that fraud tickets are used in secondry market. (It's also in order to prevent being manipulated by any single entity including oracle operators, miners, users, or smart contract developers)
+  - Random Number is called via Chainlink VRF and saved as a metadata in the RetirementCertificateNFTAssociatedTicket.sol
+
+<br>
 
 - Retirement Certificate NFT-associated Ticket holders are able to access special contents, events, etc as privilege. (This is like `"Retirement NFT-associated Ticket-gated access"` )
 
 <br>
+
+
+
 
 ### Use case of Retirement Certificate NFT-associated Ticket
 - Ticket sales of professional sports teams
