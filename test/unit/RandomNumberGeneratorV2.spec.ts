@@ -10,7 +10,7 @@ import { RandomNumberGeneratorV2, VRFCoordinatorV2Mock } from "../../typechain"
       let randomNumberGeneratorV2: RandomNumberGeneratorV2
       let vrfCoordinatorV2Mock: VRFCoordinatorV2Mock
 
-      beforeEach(async () => {
+      before(async () => {
         await deployments.fixture(["mocks", "vrf"])
         randomNumberGeneratorV2 = await ethers.getContract("RandomNumberGeneratorV2")
         vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
