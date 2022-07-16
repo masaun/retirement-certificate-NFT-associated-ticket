@@ -121,13 +121,12 @@ contract RetirementCertificateNFTAssociatedTicket is IRetirementCertificateNFTAs
         console.log("-------------- randomNumber: %s --------------", randomNumber);
         uint256[] memory randomNumbers = rngV2.getSRandomWords();
 
-        //@dev - Bundle (Save) a RN retrieved with RetirementCertificateNFT Ticket
+        //@dev - Save a RN (Random Number) retrieved via Chainlink VRF with RetirementCertificateNFT Ticket
         address RETIREMENT_CERTIFICATE_NFT = address(retirementCertificateNFT);
         console.log("-------------- RETIREMENT_CERTIFICATE_NFT: %s --------------", RETIREMENT_CERTIFICATE_NFT);
 
         DataTypes.RetirementCertificateNFTAssociatedTicketMetadata storage retirementCertificateNFTAssociatedTicketMetadata = retirementCertificateNFTAssociatedTicketMetadatas[RETIREMENT_CERTIFICATE_NFT];
         retirementCertificateNFTAssociatedTicketMetadata.ticketCreator = TICKET_CREATOR;
-        //retirementCertificateNFTAssociatedTicketMetadata.ticketHolder = 0x0000000000000000000000000000000000000000; 
         //retirementCertificateNFTAssociatedTicketMetadata.ticketNumber = randomNumber;
         retirementCertificateNFTAssociatedTicketMetadata.ticketNumber = randomNumbers[0];
     }

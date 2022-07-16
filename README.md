@@ -52,6 +52,21 @@ yarn test-unit:retirement-certificate-NFT-associated-ticket
 
 <br/>
 
+### Deployment files (for using `hardhat-deploy` module)
+- https://github.com/masaun/retirement-certificate-NFT-associated-ticket/tree/main/deploy
+
+<br>
+
+### Technical Stack
+- Solidity
+- ethers.js (v5)
+- Hardhat
+  - Modules:
+    - hardhat-deploy, etc
+- TypeChain
+
+<br>
+
 ### References
 - Chainlink:
   - Chainlink Documentation: https://docs.chain.link/
