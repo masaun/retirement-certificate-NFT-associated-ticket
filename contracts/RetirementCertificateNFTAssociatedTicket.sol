@@ -111,22 +111,21 @@ contract RetirementCertificateNFTAssociatedTicket is IRetirementCertificateNFTAs
 
         //@dev - Get requestId
         uint256 requestId = rngV2.getSRequestId();
-        console.log("-------------- requestId: %d --------------", requestId);  // [Result]:Success to retrieve value
+        console.log("-------------- requestId: %d --------------", requestId);
 
         //@dev - Execute fulfillRandomWords() method to get callback
         vrfCoordinatorV2.fulfillRandomWords(requestId, address(rngV2));
 
         //@dev - Get value of RNs (random nubmers) that is stored in s_randomWords by above
         uint256 randomNumber = rngV2.getSRandomWord();
-        console.log("-------------- randomNumber: %s --------------", randomNumber);  // [Result]: Success
-
+        console.log("-------------- randomNumber: %s --------------", randomNumber);
         uint256[] memory randomNumbers = rngV2.getSRandomWords();
 
         //@dev - Bundle (Save) a RN retrieved with RetirementCertificateNFT Ticket
-        address RETIREMENT_NFT = address(retirementCertificateNFT);
-        console.log("-------------- RETIREMENT_NFT: %s --------------", RETIREMENT_NFT);  // [Result]: Success to retrieve value
+        address RETIREMENT_CERTIFICATE_NFT = address(retirementCertificateNFT);
+        console.log("-------------- RETIREMENT_CERTIFICATE_NFT: %s --------------", RETIREMENT_CERTIFICATE_NFT);
 
-        DataTypes.RetirementCertificateNFTAssociatedTicketMetadata storage retirementCertificateNFTAssociatedTicketMetadata = retirementCertificateNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
+        DataTypes.RetirementCertificateNFTAssociatedTicketMetadata storage retirementCertificateNFTAssociatedTicketMetadata = retirementCertificateNFTAssociatedTicketMetadatas[RETIREMENT_CERTIFICATE_NFT];
         retirementCertificateNFTAssociatedTicketMetadata.ticketCreator = TICKET_CREATOR;
         //retirementCertificateNFTAssociatedTicketMetadata.ticketHolder = 0x0000000000000000000000000000000000000000; 
         //retirementCertificateNFTAssociatedTicketMetadata.ticketNumber = randomNumber;
@@ -137,8 +136,8 @@ contract RetirementCertificateNFTAssociatedTicket is IRetirementCertificateNFTAs
      * @notice - Get a metadata of RetirementCertificateNFTAssociatedTicket
      */ 
     function getRetirementCertificateNFTAssociatedTicketMetadata(IRetirementCertificateNFT retirementCertificateNFT) public view override returns (DataTypes.RetirementCertificateNFTAssociatedTicketMetadata memory _retirementCertificateNFTAssociatedTicketMetadata) {
-        address RETIREMENT_NFT = address(retirementCertificateNFT);
-        DataTypes.RetirementCertificateNFTAssociatedTicketMetadata storage retirementCertificateNFTAssociatedTicketMetadata = retirementCertificateNFTAssociatedTicketMetadatas[RETIREMENT_NFT];
+        address RETIREMENT_CERTIFICATE_NFT = address(retirementCertificateNFT);
+        DataTypes.RetirementCertificateNFTAssociatedTicketMetadata storage retirementCertificateNFTAssociatedTicketMetadata = retirementCertificateNFTAssociatedTicketMetadatas[RETIREMENT_CERTIFICATE_NFT];
         return retirementCertificateNFTAssociatedTicketMetadata;
     }
 
