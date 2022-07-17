@@ -1,5 +1,5 @@
 # Retirement Certificate NFT-associated Ticket 🎫
-### Overview
+## Overview
 - This is the smart contract that associate Retirement Certificate NFTs with special tickets that includes special privilege as `"Retirement Certificate NFT-associated Ticket"`
   - ERC-1155 type of NFT is used for this Retirement Certificate NFT-associated Ticket.
 
@@ -24,7 +24,7 @@
 
 <br>
 
-### Use case of Retirement Certificate NFT-associated Ticket
+## Use case of Retirement Certificate NFT-associated Ticket
 - Ticket sales of professional sports teams
   - Retirement Certificate NFT-associated Ticket gated access 
     - eg). Only Retirement Certificate NFT-associated Ticket holders can access special space or events in their home stadium.
@@ -37,7 +37,7 @@
 
 <br>
 
-### Workflow
+## Workflow
 - Diagram of workflow  
   ![diagram-of-workflow_retirement-certificate-NFT-associated-ticket](https://user-images.githubusercontent.com/19357502/179401593-9db1b279-bfc3-4b7b-a438-842cbd1c3838.jpeg)
 
@@ -71,7 +71,7 @@ yarn typechain
 
 <br>
 
-### Test (Mainnet-forking test)
+## Test (Mainnet-forking test)
 - Scenario test
 ```
 yarn test-scenario:retirement-certificate-NFT-associated-ticket
@@ -86,12 +86,12 @@ yarn test-unit:retirement-certificate-NFT-associated-ticket
 
 <br/>
 
-### Deployment files (for using `hardhat-deploy` module)
+## Deployment files (for using `hardhat-deploy` module)
 - https://github.com/masaun/retirement-certificate-NFT-associated-ticket/tree/main/deploy
 
 <br>
 
-### Technical Stack
+## Technical Stack
 - Solidity
 - ethers.js (v5)
 - Hardhat
@@ -101,7 +101,7 @@ yarn test-unit:retirement-certificate-NFT-associated-ticket
 
 <br>
 
-### References
+## References
 - Chainlink:
   - Chainlink Documentation: https://docs.chain.link/
     - Chainlink VRF: https://docs.chain.link/docs/chainlink-vrf/ 
