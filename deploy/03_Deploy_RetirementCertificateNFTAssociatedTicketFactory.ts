@@ -18,7 +18,7 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
   const { deploy, log, get } = deployments
 
   const { deployer } = await getNamedAccounts()
-  console.log(`####### Deployer address of the RetirementCertificateNFTAssociatedTicketFactory.sol: ${ deployer } #######`)
+  //console.log(`####### Deployer address of the RetirementCertificateNFTAssociatedTicketFactory.sol: ${ deployer } #######`)
 
   const chainId: number | undefined = network.config.chainId
   if (!chainId) return
@@ -27,7 +27,6 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
   //@dev - Deploy the RandomNumberGeneratorV2 contract
   let linkTokenAddress: string | undefined
   let vrfCoordinatorAddress: string | undefined
-  //let ticketCreator: string | undefined  // [TODO]: Need to assign a ticket creator's address when deploying on Mainnet/Testnet
   let subscriptionId: BigNumber
 
   if (chainId === 31337) {

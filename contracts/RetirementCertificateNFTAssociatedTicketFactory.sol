@@ -67,12 +67,8 @@ contract RetirementCertificateNFTAssociatedTicketFactory is IRetirementCertifica
         //@dev - Save a metadata of RetirementCertificateNFTAssociatedTicket
         retirementCertificateNFTAssociatedTicket.saveRetirementCertificateNFTAssociatedTicketMetadata(retirementCertificateNFT);
 
-        //@dev - Mint a new RetirementCertificateNFTAssociatedTicket
-        //retirementCertificateNFTAssociatedTicket.mint(to, ticketType, mintAmount, "");
-
         //@dev - Emit information of a new RetirementCertificateNFTAssociatedTicket created
         emit RetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketType, mintAmount, retirementCertificateNFT, uri);
-        //emit Events.RetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketType, mintAmount, retirementCertificateNFT, uri);
     }
 
     /**
@@ -86,11 +82,7 @@ contract RetirementCertificateNFTAssociatedTicketFactory is IRetirementCertifica
         //@dev - Save a metadata of RetirementCertificateNFTAssociatedTicket
         retirementCertificateNFTAssociatedTicket.saveRetirementCertificateNFTAssociatedTicketMetadata(retirementCertificateNFT);
 
-        //@dev - Mint batch of RetirementCertificateNFTAssociatedTickets
-        //retirementCertificateNFTAssociatedTicket.mintBatch(to, ticketTypes, mintAmounts, "");
-
         //@dev - Emit information of a new RetirementCertificateNFTAssociatedTicket created
-        //emit BatchRetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementCertificateNFT, uri);
         emit Events.BatchRetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementCertificateNFT, uri);
     }
 

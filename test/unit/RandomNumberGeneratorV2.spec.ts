@@ -6,7 +6,7 @@ import { RandomNumberGeneratorV2, VRFCoordinatorV2Mock } from "../../typechain"
 
 !developmentChains.includes(network.name)
   ? describe.skip
-  : describe("RandomNumberGeneratorV2 Unit Tests", async function () {
+  : describe("\n RandomNumberGeneratorV2 Unit Tests", async function () {
       let randomNumberGeneratorV2: RandomNumberGeneratorV2
       let vrfCoordinatorV2Mock: VRFCoordinatorV2Mock
 
