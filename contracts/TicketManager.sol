@@ -7,6 +7,8 @@ import { IRetirementCertificateNFT } from "./interfaces/IRetirementCertificateNF
 import { IRetirementCertificateNFTAssociatedTicket } from "./interfaces/IRetirementCertificateNFTAssociatedTicket.sol";
 
 //@dev - OpenZeppeling
+import { ERC1155Holder } from "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol";
+import { ERC1155Receiver } from "@openzeppelin/contracts/token/ERC1155/utils/ERC1155Receiver.sol";
 import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol";
 
 
@@ -14,7 +16,8 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
  * @title - The Ticket Manager contract
  * @dev - [NOTE]: Implementation of Access Control (Role Management) is still in progress
  */
-contract TicketManager is ITicketManager, AccessControl {
+contract TicketManager is ITicketManager, ERC1155Holder, AccessControl {
+//contract TicketManager is ITicketManager, ERC1155Receiver, AccessControl {
 
     IRetirementCertificateNFTAssociatedTicket public retirementCertificateNFTAssociatedTicket;
 
@@ -76,6 +79,18 @@ contract TicketManager is ITicketManager, AccessControl {
     function checkWhetherRetirementCertificateNFTAssociatedTicketHasAlreadyBeenRedeemedOrNot(IRetirementCertificateNFT retirementCertificateNFT, uint256 tokenIdOfRetirementCertificateNFT) public override view returns (bool) {
         //[TODO]: 
         //return something;
+    }
+
+    /**
+     * @notice - This method is required for Role-based access control of ERC1155 by using OpenZeppelin's AccessControl.sol
+     */ 
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(ERC1155Receiver, AccessControl)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
     }
 
 }
