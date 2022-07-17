@@ -43,6 +43,28 @@
 
 <br>
 
+## Installation
+- Install modules
+```
+yarn
+```
+
+<br>
+
+- Compile smart contracts
+```
+yarn compile
+```
+
+<br>
+
+- Generate typescript files of smart contracts for Typechain
+```
+yarn typechain
+```
+
+<br>
+
 ### Test
 - Scenario test
 ```

@@ -149,6 +149,72 @@ const _abi = [
     stateMutability: "nonpayable",
     type: "function",
   },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256[]",
+        name: "ticketTypes",
+        type: "uint256[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "numberOfTickets",
+        type: "uint256[]",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+    ],
+    name: "transferBatchRetirementCertificateNFTAssociatedTicket",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "from",
+        type: "address",
+      },
+      {
+        internalType: "address",
+        name: "to",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "ticketType",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "numberOfTicket",
+        type: "uint256",
+      },
+      {
+        internalType: "bytes",
+        name: "data",
+        type: "bytes",
+      },
+    ],
+    name: "transferRetirementCertificateNFTAssociatedTicket",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
 ];
 
 export class IRetirementCertificateNFTAssociatedTicket__factory {

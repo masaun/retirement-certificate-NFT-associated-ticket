@@ -48,12 +48,14 @@ export type { IRandomNumberGeneratorV2 } from "./IRandomNumberGeneratorV2";
 export type { IRetirementCertificateNFT } from "./IRetirementCertificateNFT";
 export type { IRetirementCertificateNFTAssociatedTicket } from "./IRetirementCertificateNFTAssociatedTicket";
 export type { IRetirementCertificateNFTAssociatedTicketFactory } from "./IRetirementCertificateNFTAssociatedTicketFactory";
+export type { ITicketManager } from "./ITicketManager";
 export type { Events } from "./Events";
 export type { MockRetirementCertificateNFTAssociatedTicketGatedService } from "./MockRetirementCertificateNFTAssociatedTicketGatedService";
 export type { RandomNumberGeneratorV2 } from "./RandomNumberGeneratorV2";
 export type { RetirementCertificateNFT } from "./RetirementCertificateNFT";
 export type { RetirementCertificateNFTAssociatedTicket } from "./RetirementCertificateNFTAssociatedTicket";
 export type { RetirementCertificateNFTAssociatedTicketFactory } from "./RetirementCertificateNFTAssociatedTicketFactory";
+export type { TicketManager } from "./TicketManager";
 
 export { AggregatorInterface__factory } from "./factories/AggregatorInterface__factory";
 export { AggregatorV2V3Interface__factory } from "./factories/AggregatorV2V3Interface__factory";
@@ -102,9 +104,11 @@ export { IRandomNumberGeneratorV2__factory } from "./factories/IRandomNumberGene
 export { IRetirementCertificateNFT__factory } from "./factories/IRetirementCertificateNFT__factory";
 export { IRetirementCertificateNFTAssociatedTicket__factory } from "./factories/IRetirementCertificateNFTAssociatedTicket__factory";
 export { IRetirementCertificateNFTAssociatedTicketFactory__factory } from "./factories/IRetirementCertificateNFTAssociatedTicketFactory__factory";
+export { ITicketManager__factory } from "./factories/ITicketManager__factory";
 export { Events__factory } from "./factories/Events__factory";
 export { MockRetirementCertificateNFTAssociatedTicketGatedService__factory } from "./factories/MockRetirementCertificateNFTAssociatedTicketGatedService__factory";
 export { RandomNumberGeneratorV2__factory } from "./factories/RandomNumberGeneratorV2__factory";
 export { RetirementCertificateNFT__factory } from "./factories/RetirementCertificateNFT__factory";
 export { RetirementCertificateNFTAssociatedTicket__factory } from "./factories/RetirementCertificateNFTAssociatedTicket__factory";
 export { RetirementCertificateNFTAssociatedTicketFactory__factory } from "./factories/RetirementCertificateNFTAssociatedTicketFactory__factory";
+export { TicketManager__factory } from "./factories/TicketManager__factory";

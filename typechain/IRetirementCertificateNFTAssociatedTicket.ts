@@ -39,6 +39,8 @@ export interface IRetirementCertificateNFTAssociatedTicketInterface
     "retirementCertificateNFTAssociatedTicketBalanceOf(address,uint256)": FunctionFragment;
     "retirementCertificateNFTAssociatedTicketBalanceOfBatch(address[],uint256[])": FunctionFragment;
     "saveRetirementCertificateNFTAssociatedTicketMetadata(address)": FunctionFragment;
+    "transferBatchRetirementCertificateNFTAssociatedTicket(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "transferRetirementCertificateNFTAssociatedTicket(address,address,uint256,uint256,bytes)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -65,6 +67,14 @@ export interface IRetirementCertificateNFTAssociatedTicketInterface
     functionFragment: "saveRetirementCertificateNFTAssociatedTicketMetadata",
     values: [string]
   ): string;
+  encodeFunctionData(
+    functionFragment: "transferBatchRetirementCertificateNFTAssociatedTicket",
+    values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferRetirementCertificateNFTAssociatedTicket",
+    values: [string, string, BigNumberish, BigNumberish, BytesLike]
+  ): string;
 
   decodeFunctionResult(
     functionFragment: "getRetirementCertificateNFTAssociatedTicketMetadata",
@@ -82,6 +92,14 @@ export interface IRetirementCertificateNFTAssociatedTicketInterface
   ): Result;
   decodeFunctionResult(
     functionFragment: "saveRetirementCertificateNFTAssociatedTicketMetadata",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferBatchRetirementCertificateNFTAssociatedTicket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferRetirementCertificateNFTAssociatedTicket",
     data: BytesLike
   ): Result;
 
@@ -166,6 +184,24 @@ export interface IRetirementCertificateNFTAssociatedTicket
       retirementCertificateNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    transferBatchRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    transferRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketType: BigNumberish,
+      numberOfTicket: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
   };
 
   getRetirementCertificateNFTAssociatedTicketMetadata(
@@ -204,6 +240,24 @@ export interface IRetirementCertificateNFTAssociatedTicket
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  transferBatchRetirementCertificateNFTAssociatedTicket(
+    from: string,
+    to: string,
+    ticketTypes: BigNumberish[],
+    numberOfTickets: BigNumberish[],
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  transferRetirementCertificateNFTAssociatedTicket(
+    from: string,
+    to: string,
+    ticketType: BigNumberish,
+    numberOfTicket: BigNumberish,
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   callStatic: {
     getRetirementCertificateNFTAssociatedTicketMetadata(
       retirementCertificateNFT: string,
@@ -238,6 +292,24 @@ export interface IRetirementCertificateNFTAssociatedTicket
 
     saveRetirementCertificateNFTAssociatedTicketMetadata(
       retirementCertificateNFT: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    transferBatchRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    transferRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketType: BigNumberish,
+      numberOfTicket: BigNumberish,
+      data: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -280,6 +352,24 @@ export interface IRetirementCertificateNFTAssociatedTicket
       retirementCertificateNFT: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    transferBatchRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    transferRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketType: BigNumberish,
+      numberOfTicket: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -316,6 +406,24 @@ export interface IRetirementCertificateNFTAssociatedTicket
 
     saveRetirementCertificateNFTAssociatedTicketMetadata(
       retirementCertificateNFT: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    transferBatchRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    transferRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketType: BigNumberish,
+      numberOfTicket: BigNumberish,
+      data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
   };

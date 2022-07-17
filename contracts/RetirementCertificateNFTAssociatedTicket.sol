@@ -103,6 +103,26 @@ contract RetirementCertificateNFTAssociatedTicket is IRetirementCertificateNFTAs
     }
 
     /**
+     * @notice - Transfer a RetirementCertificateNFTAssociatedTicket
+     */ 
+    function transferRetirementCertificateNFTAssociatedTicket(address from, address to, uint256 ticketType, uint256 numberOfTicket, bytes memory data)
+        public 
+        override
+    {
+        safeTransferFrom(from, to, ticketType, numberOfTicket, data);
+    }
+
+    /**
+     * @notice - Transfer batch RetirementCertificateNFTAssociatedTickets
+     */ 
+    function transferBatchRetirementCertificateNFTAssociatedTicket(address from, address to, uint256[] memory ticketTypes, uint256[] memory numberOfTickets, bytes memory data)
+        public 
+        override
+    {
+        safeBatchTransferFrom(from, to, ticketTypes, numberOfTickets, data);
+    }
+
+    /**
      * @notice - Save a metadata of RetirementCertificateNFTAssociatedTicket
      */ 
     function saveRetirementCertificateNFTAssociatedTicketMetadata(IRetirementCertificateNFT retirementCertificateNFT) public override {
