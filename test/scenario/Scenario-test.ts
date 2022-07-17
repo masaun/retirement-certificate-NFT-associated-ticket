@@ -253,10 +253,14 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
           ///------------------------------------------------------------------------------------------
 
           it(`\n accessSpecialContent() - Should be successful to access a special content that only a RetirementCertificateNFT-Associated Ticket holder can access.`, async () => {
-              const ticketType: number = 0
+              const ticketType_0: number = 0
+              const ticketType_1: number = 1
 
-              let tx: any = await retirementCertificateNFTAssociatedTicketGatedService.connect(ticketHolder1).accessSpecialContent(RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET, ticketType)
-              let txReceipt = await tx.wait() 
+              let tx1: any = await retirementCertificateNFTAssociatedTicketGatedService.connect(ticketHolder1).accessSpecialContent(RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET, ticketType_0)
+              let txReceipt1 = await tx1.wait() 
+
+              let tx2: any = await retirementCertificateNFTAssociatedTicketGatedService.connect(ticketHolder2).accessSpecialContent(RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET, ticketType_1)
+              let txReceipt2 = await tx2.wait() 
           })
 
       })
