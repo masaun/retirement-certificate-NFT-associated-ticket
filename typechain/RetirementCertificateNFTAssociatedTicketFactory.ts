@@ -32,6 +32,7 @@ export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
     "revokeRole(bytes32,address)": FunctionFragment;
     "rngV2()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
+    "ticketManagerFactory()": FunctionFragment;
     "vrfCoordinatorV2()": FunctionFragment;
   };
 
@@ -77,6 +78,10 @@ export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
     values: [BytesLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "ticketManagerFactory",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "vrfCoordinatorV2",
     values?: undefined
   ): string;
@@ -111,6 +116,10 @@ export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
   decodeFunctionResult(functionFragment: "rngV2", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "ticketManagerFactory",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -274,6 +283,8 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    ticketManagerFactory(overrides?: CallOverrides): Promise<[string]>;
+
     vrfCoordinatorV2(overrides?: CallOverrides): Promise<[string]>;
   };
 
@@ -332,6 +343,8 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  ticketManagerFactory(overrides?: CallOverrides): Promise<string>;
+
   vrfCoordinatorV2(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
@@ -389,6 +402,8 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    ticketManagerFactory(overrides?: CallOverrides): Promise<string>;
 
     vrfCoordinatorV2(overrides?: CallOverrides): Promise<string>;
   };
@@ -521,6 +536,8 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    ticketManagerFactory(overrides?: CallOverrides): Promise<BigNumber>;
+
     vrfCoordinatorV2(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
@@ -584,6 +601,10 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
 
     supportsInterface(
       interfaceId: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    ticketManagerFactory(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
