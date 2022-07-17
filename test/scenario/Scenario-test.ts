@@ -135,7 +135,7 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
               //@dev - TicketManager contract instance (deployed-address) by assigning contract address retrieved above
               TICKET_MANAGER = eventLog[6]
               console.log(`\n Deployed-address of TicketManager: ${ TICKET_MANAGER }`)
-              ticketCreator = await ethers.getContractAt("TicketManager", TICKET_MANAGER)
+              ticketManager = await ethers.getContractAt("TicketManager", TICKET_MANAGER)
           })
 
           // it(`Should be successful to retrieve an emitted-event log of "TicketManagerCreated"`, async () => {
@@ -213,7 +213,13 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
               console.log(`\n Number of each RetirementCertificateNFTAssociatedTickets (that are batch minted): ${ numberOfEachRetirementCertificateNFTAssociatedTickets }`)
           })
 
-          it(`\n accessSpecialContent() - Should be successful to access a special content that only a Retirement NFT Associated Ticket holder can access.`, async () => {
+
+
+          ///------------------------------------------------------------------------------------------
+          /// Test of a RetirementCertificateNFT-Associated Ticket gated access
+          ///------------------------------------------------------------------------------------------
+
+          it(`\n accessSpecialContent() - Should be successful to access a special content that only a RetirementCertificateNFT-Associated Ticket holder can access.`, async () => {
               const ticketType: number = 0
 
               let tx: any = await retirementCertificateNFTAssociatedTicketGatedService.connect(ticketHolder1).accessSpecialContent(RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET, ticketType)
