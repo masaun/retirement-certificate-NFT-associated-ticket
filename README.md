@@ -84,6 +84,13 @@ yarn test-scenario:retirement-certificate-NFT-associated-ticket
 yarn test-unit:retirement-certificate-NFT-associated-ticket
 ```
 
+<br>
+
+## Demo (of Scenario test)
+- This is the demo of Scenario test above:  
+  https://youtu.be/nEVJD2Eqhd4
+
+
 <br/>
 
 ## Deployment files (for using `hardhat-deploy` module)

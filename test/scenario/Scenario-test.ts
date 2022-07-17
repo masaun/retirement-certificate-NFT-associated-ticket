@@ -197,7 +197,7 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
 
 
           ///------------------------------------------------------------------------------------------
-          /// mint() method - Mint multi-type of RetirementCertificateNFTAssociatedTickets
+          /// mintBatch() method - Mint multi-type of RetirementCertificateNFTAssociatedTickets
           ///------------------------------------------------------------------------------------------
 
           it(`Should be successful to mint 3 RetirementCertificateNFTs to user2 (after this part, use2 will become RetirementCertificateNFT_holder_2)`, async () => {
