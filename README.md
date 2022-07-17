@@ -38,12 +38,18 @@
 <br>
 
 ### Workflow
-- Diagram of workflow
-  ![diagram_retirement-certificate-NFT-associated-ticket](https://user-images.githubusercontent.com/19357502/178716431-e1281060-87f3-492c-87d3-14d450b4c3fe.jpeg)
+- Diagram of workflow  
+  ![diagram-of-workflow_retirement-certificate-NFT-associated-ticket](https://user-images.githubusercontent.com/19357502/179401593-9db1b279-bfc3-4b7b-a438-842cbd1c3838.jpeg)
+
 
 <br>
 
 ## Installation
+- Write `.env` by referencing `.env.example`
+  - Then, adding `.env` to the root directory. 
+
+<br>
+
 - Install modules
 ```
 yarn
@@ -65,7 +71,7 @@ yarn typechain
 
 <br>
 
-### Test
+### Test (Mainnet-forking test)
 - Scenario test
 ```
 yarn test-scenario:retirement-certificate-NFT-associated-ticket
