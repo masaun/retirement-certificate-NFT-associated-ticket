@@ -21,6 +21,7 @@ export interface ITicketManagerInterface extends utils.Interface {
   contractName: "ITicketManager";
   functions: {
     "checkWhetherRetirementCertificateNFTAssociatedTicketHasAlreadyBeenRedeemedOrNot(address,uint256)": FunctionFragment;
+    "claimBatchRetirementCertificateNFTAssociatedTicket(address,uint256,uint256[],uint256[])": FunctionFragment;
     "claimRetirementCertificateNFTAssociatedTicket(address,uint256,uint256)": FunctionFragment;
   };
 
@@ -29,12 +30,20 @@ export interface ITicketManagerInterface extends utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "claimBatchRetirementCertificateNFTAssociatedTicket",
+    values: [string, BigNumberish, BigNumberish[], BigNumberish[]]
+  ): string;
+  encodeFunctionData(
     functionFragment: "claimRetirementCertificateNFTAssociatedTicket",
     values: [string, BigNumberish, BigNumberish]
   ): string;
 
   decodeFunctionResult(
     functionFragment: "checkWhetherRetirementCertificateNFTAssociatedTicketHasAlreadyBeenRedeemedOrNot",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "claimBatchRetirementCertificateNFTAssociatedTicket",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -79,6 +88,14 @@ export interface ITicketManager extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    claimBatchRetirementCertificateNFTAssociatedTicket(
+      retirementCertificateNFT: string,
+      tokenIdOfRetirementCertificateNFT: BigNumberish,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     claimRetirementCertificateNFTAssociatedTicket(
       retirementCertificateNFT: string,
       tokenIdOfRetirementCertificateNFT: BigNumberish,
@@ -93,6 +110,14 @@ export interface ITicketManager extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  claimBatchRetirementCertificateNFTAssociatedTicket(
+    retirementCertificateNFT: string,
+    tokenIdOfRetirementCertificateNFT: BigNumberish,
+    ticketTypes: BigNumberish[],
+    numberOfTickets: BigNumberish[],
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   claimRetirementCertificateNFTAssociatedTicket(
     retirementCertificateNFT: string,
     tokenIdOfRetirementCertificateNFT: BigNumberish,
@@ -104,6 +129,14 @@ export interface ITicketManager extends BaseContract {
     checkWhetherRetirementCertificateNFTAssociatedTicketHasAlreadyBeenRedeemedOrNot(
       retirementCertificateNFT: string,
       tokenIdOfRetirementCertificateNFT: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    claimBatchRetirementCertificateNFTAssociatedTicket(
+      retirementCertificateNFT: string,
+      tokenIdOfRetirementCertificateNFT: BigNumberish,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -124,6 +157,14 @@ export interface ITicketManager extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    claimBatchRetirementCertificateNFTAssociatedTicket(
+      retirementCertificateNFT: string,
+      tokenIdOfRetirementCertificateNFT: BigNumberish,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     claimRetirementCertificateNFTAssociatedTicket(
       retirementCertificateNFT: string,
       tokenIdOfRetirementCertificateNFT: BigNumberish,
@@ -137,6 +178,14 @@ export interface ITicketManager extends BaseContract {
       retirementCertificateNFT: string,
       tokenIdOfRetirementCertificateNFT: BigNumberish,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    claimBatchRetirementCertificateNFTAssociatedTicket(
+      retirementCertificateNFT: string,
+      tokenIdOfRetirementCertificateNFT: BigNumberish,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     claimRetirementCertificateNFTAssociatedTicket(

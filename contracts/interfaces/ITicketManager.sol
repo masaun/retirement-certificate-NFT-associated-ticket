@@ -9,10 +9,16 @@ import { DataTypes } from '../libraries/DataTypes.sol';
 interface ITicketManager {
 
     /**
-     * @notice - Claim a RetirementCertificateNFTAssociatedTicket. Then a RetirementCertificateNFT of claimer is redeemed with a RetirementCertificateNFTAssociatedTicket.
+     * @notice - Claim single type of RetirementCertificateNFTAssociatedTicket
      * @dev - Only a RetirementCertificateNFT holder can claim by using this method
      */ 
     function claimRetirementCertificateNFTAssociatedTicket(IRetirementCertificateNFT retirementCertificateNFT, uint256 tokenIdOfRetirementCertificateNFT, uint256 ticketType) external returns (bool);
+
+    /**
+     * @notice - Claim multi-type of RetirementCertificateNFTAssociatedTicket
+     * @dev - Only a RetirementCertificateNFT holder can claim by using this method
+     */ 
+    function claimBatchRetirementCertificateNFTAssociatedTicket(IRetirementCertificateNFT retirementCertificateNFT, uint256 tokenIdOfRetirementCertificateNFT, uint256[] memory ticketTypes, uint256[] memory numberOfTickets) external returns (bool);
 
     /**
      * @notice - Check whether a RetirementCertificateNFTAssociatedTicket has already been redeemed or not

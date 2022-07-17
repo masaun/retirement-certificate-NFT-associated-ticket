@@ -26,7 +26,7 @@ contract TicketManager is ITicketManager, AccessControl {
     }
 
     /**
-     * @notice - Claim a RetirementCertificateNFTAssociatedTicket
+     * @notice - Claim single type of RetirementCertificateNFTAssociatedTicket
      * @dev - Only a RetirementCertificateNFT holder can claim by using this method
      */ 
     function claimRetirementCertificateNFTAssociatedTicket(IRetirementCertificateNFT retirementCertificateNFT, uint256 tokenIdOfRetirementCertificateNFT, uint256 ticketType) public override returns (bool) {
@@ -35,7 +35,16 @@ contract TicketManager is ITicketManager, AccessControl {
     }
 
     /**
-     * @notice - Redeem a RetirementCertificateNFT with a RetirementCertificateNFTAssociatedTicket.
+     * @notice - Claim multi-type of RetirementCertificateNFTAssociatedTicket
+     * @dev - Only a RetirementCertificateNFT holder can claim by using this method
+     */ 
+    function claimBatchRetirementCertificateNFTAssociatedTicket(IRetirementCertificateNFT retirementCertificateNFT, uint256 tokenIdOfRetirementCertificateNFT, uint256[] memory ticketTypes, uint256[] memory numberOfTickets) public override returns (bool) {
+        require(retirementCertificateNFT.retirementCertificateNFTBalanceOf(msg.sender) > 0, "A claimer (msg.sender) must has more than 1 Retirement NFT");
+        _redeemWithBatchRetirementCertificateNFTAssociatedTicket(ticketTypes, numberOfTickets);
+    }
+
+    /**
+     * @notice - Redeem a RetirementCertificateNFT with single type of RetirementCertificateNFTAssociatedTicket.
      * @dev - The redemption rate of ticket is 1 RetirementCertificateNFT per 1 RetirementCertificateNFTAssociatedTicket.
      * @param ticketType - Prefer RetirementCertificateNFTAssociatedTicket type that a claimer choose.
      */
@@ -47,6 +56,19 @@ contract TicketManager is ITicketManager, AccessControl {
         bytes memory data = "";
         retirementCertificateNFTAssociatedTicket.transferRetirementCertificateNFTAssociatedTicket(from, to, ticketType, numberOfTicket, data);
     }
+
+    /**
+     * @notice - Redeem RetirementCertificateNFTs with multi-type of RetirementCertificateNFTAssociatedTicket.
+     * @dev - The redemption rate of ticket is 1 RetirementCertificateNFT per 1 RetirementCertificateNFTAssociatedTicket.
+     * @param ticketTypes - Prefer RetirementCertificateNFTAssociatedTicket type that a claimer choose.
+     */
+    function _redeemWithBatchRetirementCertificateNFTAssociatedTicket(uint256[] memory ticketTypes, uint256[] memory numberOfTickets) internal returns (bool) {
+        address from = address(this);
+        address to = msg.sender; // [NOTE]: Need to check whether msg.sender has a RetirementCertificateNFT and has not been redeemed yet
+        bytes memory data = "";
+        retirementCertificateNFTAssociatedTicket.transferBatchRetirementCertificateNFTAssociatedTicket(from, to, ticketTypes, numberOfTickets, data);
+    }
+
 
     /**
      * @notice - Check whether a RetirementCertificateNFTAssociatedTicket has already been redeemed or not

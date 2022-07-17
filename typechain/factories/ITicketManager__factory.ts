@@ -47,6 +47,40 @@ const _abi = [
         type: "uint256",
       },
       {
+        internalType: "uint256[]",
+        name: "ticketTypes",
+        type: "uint256[]",
+      },
+      {
+        internalType: "uint256[]",
+        name: "numberOfTickets",
+        type: "uint256[]",
+      },
+    ],
+    name: "claimBatchRetirementCertificateNFTAssociatedTicket",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "contract IRetirementCertificateNFT",
+        name: "retirementCertificateNFT",
+        type: "address",
+      },
+      {
+        internalType: "uint256",
+        name: "tokenIdOfRetirementCertificateNFT",
+        type: "uint256",
+      },
+      {
         internalType: "uint256",
         name: "ticketType",
         type: "uint256",
