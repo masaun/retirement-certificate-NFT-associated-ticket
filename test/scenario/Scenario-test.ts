@@ -3,10 +3,12 @@ import { assert, expect } from "chai"
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
 import { network, deployments, ethers, run } from "hardhat"
 import { developmentChains } from "../../helper-hardhat-config"
-import { RetirementCertificateNFT, RetirementCertificateNFTAssociatedTicket, RetirementCertificateNFTAssociatedTicketFactory, MockRetirementCertificateNFTAssociatedTicketGatedService, LinkToken, MockOracle } from "../../typechain"
+import { RetirementCertificateNFT, RetirementCertificateNFTAssociatedTicket, RetirementCertificateNFTAssociatedTicketFactory, TicketManager, TicketManagerFactory,MockRetirementCertificateNFTAssociatedTicketGatedService, LinkToken, MockOracle, RandomNumberGeneratorV2, VRFCoordinatorV2Mock } from "../../typechain"
 
 //@dev - Helper of ethers.js for retrieving eventLogs emitted, etc.
 import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
+import { toWei } from "../ethersjs-helper/ethersjsHelper"
+import { fromWei } from "../ethersjs-helper/ethersjsHelper"
 //import { convertHexToString, convertStringToHex, toWei, fromWei, getEventLog, getCurrentBlock, getCurrentTimestamp } from "../ethersjs-helper/ethersjsHelper"
 
 
@@ -33,15 +35,23 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let retirementCertificateNFT: RetirementCertificateNFT
           let retirementCertificateNFTAssociatedTicket: RetirementCertificateNFTAssociatedTicket
           let retirementCertificateNFTAssociatedTicketFactory: RetirementCertificateNFTAssociatedTicketFactory
-          let retirementCertificateNFTAssociatedTicketGatedService: MockRetirementCertificateNFTAssociatedTicketGatedService
+          let ticketManager: TicketManager
+          let ticketManagerFactory: TicketManagerFactory
+          let retirementCertificateNFTAssociatedTicketGatedService: MockRetirementCertificateNFTAssociatedTicketGatedService          
           let linkToken: LinkToken
           let mockOracle: MockOracle
+          let randomNumberGeneratorV2: RandomNumberGeneratorV2
+          let vrfCoordinatorV2Mock: VRFCoordinatorV2Mock
 
           //@dev - Variables for assigning deployed-addresses
           let RETIREMENT_CERTIFICATE_NFT: string
           let RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET: string
           let RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_FACTORY: string
+          let TICKET_MANAGER: string
+          let TICKET_MANAGER_FACTORY: string
           let RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_GATED_SERVICE: string
+          let RANDOM_NUMBER_GENERATOR_V2: string
+          let VRF_COORDINATOR_V2_MOCK: string
 
           let tx: any
           let txReceipt: any
@@ -62,15 +72,28 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               linkToken = await ethers.getContract("LinkToken")
               const linkTokenAddress: string = linkToken.address
 
-              //@dev - Create the contract instance of the RetirementCertificateNFT.sol
-              retirementCertificateNFT = await ethers.getContract("RetirementCertificateNFT")
-              RETIREMENT_CERTIFICATE_NFT = retirementCertificateNFT.address
-              console.log(`\n##### Deployed-contract address of the RetirementCertificateNFT.sol: ${ RETIREMENT_CERTIFICATE_NFT } ######`)
+              randomNumberGeneratorV2 = await ethers.getContract("RandomNumberGeneratorV2")
+              RANDOM_NUMBER_GENERATOR_V2 = randomNumberGeneratorV2.address
+              console.log(`\n##### Deployed-contract address of the RandomNumberGeneratorV2.sol: ${ RANDOM_NUMBER_GENERATOR_V2 } ######`)
+
+              vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
+              VRF_COORDINATOR_V2_MOCK = vrfCoordinatorV2Mock.address
+              console.log(`\n##### Deployed-contract address of the VRFCoordinatorV2Mock.sol: ${ VRF_COORDINATOR_V2_MOCK } ######`)
+
+              //@dev - Create the contract instance of the TicketManagerFactory.sol
+              ticketManagerFactory = await ethers.getContract("TicketManagerFactory")
+              TICKET_MANAGER_FACTORY = ticketManagerFactory.address
+              console.log(`\n##### Deployed-contract address of the TicketManagerFactory.sol: ${ TICKET_MANAGER_FACTORY } ######`)
 
               //@dev - Create the contract instance of the RetirementCertificateNFTAssociatedTicketFactory.sol
               retirementCertificateNFTAssociatedTicketFactory = await ethers.getContract("RetirementCertificateNFTAssociatedTicketFactory")
               RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_FACTORY = retirementCertificateNFTAssociatedTicketFactory.address
               console.log(`##### Deployed-contract address of the RetirementCertificateNFTAssociatedTicketFactory.sol: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_FACTORY } ######`)
+
+              //@dev - Create the contract instance of the RetirementCertificateNFT.sol
+              retirementCertificateNFT = await ethers.getContract("RetirementCertificateNFT")
+              RETIREMENT_CERTIFICATE_NFT = retirementCertificateNFT.address
+              console.log(`\n##### Deployed-contract address of the RetirementCertificateNFT.sol: ${ RETIREMENT_CERTIFICATE_NFT } ######`)
 
               //@dev - Create the contract instance of the MockRetirementCertificateNFTAssociatedTicketGatedService.sol
               retirementCertificateNFTAssociatedTicketGatedService = await ethers.getContract("MockRetirementCertificateNFTAssociatedTicketGatedService")

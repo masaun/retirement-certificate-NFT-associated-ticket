@@ -8,7 +8,7 @@ import {
 import { autoFundCheck, verify } from "../helper-functions"
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
 
-import { VRFCoordinatorV2Mock } from "../typechain"
+import { VRFCoordinatorV2Mock, TicketManagerFactory } from "../typechain"
 
 
 /**
@@ -27,16 +27,17 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
   //@dev - Deploy the RandomNumberGeneratorV2 contract
   let linkTokenAddress: string | undefined
   let vrfCoordinatorAddress: string | undefined
+  let ticketManagerFactoryAddress: string | undefined  
   let subscriptionId: BigNumber
 
   if (chainId === 31337) {
     const linkToken = await get("LinkToken")
-    const VRFCoordinatorV2Mock: VRFCoordinatorV2Mock = await ethers.getContract(
-      "VRFCoordinatorV2Mock"
-    )
+    const VRFCoordinatorV2Mock: VRFCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
+    const ticketManagerFactory: TicketManagerFactory = await ethers.getContract("TicketManagerFactory")
 
-    vrfCoordinatorAddress = VRFCoordinatorV2Mock.address
     linkTokenAddress = linkToken.address
+    vrfCoordinatorAddress = VRFCoordinatorV2Mock.address
+    ticketManagerFactoryAddress = ticketManagerFactory.address
 
     const fundAmount: BigNumber = networkConfig[chainId].fundAmount
     const transaction: ContractTransaction = await VRFCoordinatorV2Mock.createSubscription()
@@ -68,7 +69,7 @@ const deployFunction: DeployFunction = async ({ getNamedAccounts, deployments })
     ? 1
     : VERIFICATION_BLOCK_CONFIRMATIONS
 
-  const args2: any = [randomNumberGeneratorV2.address, vrfCoordinatorAddress]  // [NOTE]: Argument values for constructor
+  const args2: any = [randomNumberGeneratorV2.address, vrfCoordinatorAddress, ticketManagerFactoryAddress]  // [NOTE]: Argument values for constructor
   const retirementCertificateNFTAssociatedTicketFactory = await deploy(`RetirementCertificateNFTAssociatedTicketFactory`, {
     from: deployer,
     args: args2,
