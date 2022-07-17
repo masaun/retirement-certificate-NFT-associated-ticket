@@ -135,6 +135,7 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
               //@dev - TicketManager contract instance (deployed-address) by assigning contract address retrieved above
               TICKET_MANAGER = eventLog[6]
               console.log(`\n Deployed-address of TicketManager: ${ TICKET_MANAGER }`)
+              ticketCreator = await ethers.getContractAt("TicketManager", TICKET_MANAGER)
           })
 
           // it(`Should be successful to retrieve an emitted-event log of "TicketManagerCreated"`, async () => {
@@ -152,6 +153,12 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
               let retirementCertificateNFTAssociatedTicketMetadata: any = await retirementCertificateNFTAssociatedTicket.getRetirementCertificateNFTAssociatedTicketMetadata(RETIREMENT_CERTIFICATE_NFT)
               console.log(`\n RetirementCertificateNFTAssociatedTicketMetadata retrieved: ${ retirementCertificateNFTAssociatedTicketMetadata }`)
           })
+
+
+
+          ///------------------------------------------------------------------------------------------
+          /// mint() method - Mint a single type of RetirementCertificateNFTAssociatedTickets
+          ///------------------------------------------------------------------------------------------
 
           it(`\n mint() - Should be successful that 100 RetirementCertificateNFTAssociatedTickets are minted to the TicketManager contract. [NOTE]: This tickets minted are signle type of ticket`, async () => {
               const to: string = TICKET_MANAGER
@@ -185,9 +192,9 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
 
 
 
-          ///------------------
-          /// mintBatch()
-          ///------------------
+          ///------------------------------------------------------------------------------------------
+          /// mint() method - Mint multi-type of RetirementCertificateNFTAssociatedTickets
+          ///------------------------------------------------------------------------------------------
 
           it(`mintBatch() - Should be successful that RetirementCertificateNFTAssociatedTickets are batch minted. [NOTE]: This tickets minted are multi-type of ticket`, async () => {
               const to: string = TICKET_HOLDER_1
