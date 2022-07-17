@@ -38,7 +38,13 @@ const _abi = [
       },
     ],
     name: "createTicketManager",
-    outputs: [],
+    outputs: [
+      {
+        internalType: "contract TicketManager",
+        name: "_ticketManager",
+        type: "address",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "function",
   },

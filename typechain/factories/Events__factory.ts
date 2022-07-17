@@ -45,6 +45,12 @@ const _abi = [
         name: "uri",
         type: "string",
       },
+      {
+        indexed: false,
+        internalType: "contract ITicketManager",
+        name: "ticketManager",
+        type: "address",
+      },
     ],
     name: "BatchRetirementCertificateNFTAssociatedTicketCreated",
     type: "event",
@@ -88,6 +94,12 @@ const _abi = [
         name: "uri",
         type: "string",
       },
+      {
+        indexed: false,
+        internalType: "contract ITicketManager",
+        name: "ticketManager",
+        type: "address",
+      },
     ],
     name: "RetirementCertificateNFTAssociatedTicketCreated",
     type: "event",
@@ -114,7 +126,7 @@ const _abi = [
 ];
 
 const _bytecode =
-  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220555997353bc83480b2d88254813d1a0d5a65e16292a1921a51a9b2811c6a8b3b64736f6c63430008070033";
+  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea2646970667358221220ca96ef309bcf4f7bf88747935c0bd7da101671453faa5a300fcfd21bc70359f764736f6c63430008070033";
 
 type EventsConstructorParams =
   | [signer?: Signer]

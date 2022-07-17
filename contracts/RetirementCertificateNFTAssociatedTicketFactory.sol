@@ -14,6 +14,7 @@ import { RetirementCertificateNFTAssociatedTicket } from "./RetirementCertificat
 import { IRetirementCertificateNFT } from "./interfaces/IRetirementCertificateNFT.sol";
 
 //@dev - Ticket Manager Factory
+import { ITicketManager } from "./interfaces/ITicketManager.sol";
 import { ITicketManagerFactory } from "./interfaces/ITicketManagerFactory.sol";
 
 //@dev - Chainlink VRF
@@ -73,10 +74,10 @@ contract RetirementCertificateNFTAssociatedTicketFactory is IRetirementCertifica
         retirementCertificateNFTAssociatedTicket.saveRetirementCertificateNFTAssociatedTicketMetadata(retirementCertificateNFT);
 
         //@dev - Create a new Ticket Manager contract to manage a RetirementCertificateNFTAssociatedTicket created above
-        ticketManagerFactory.createTicketManager(retirementCertificateNFTAssociatedTicket);
+        ITicketManager ticketManager = ticketManagerFactory.createTicketManager(retirementCertificateNFTAssociatedTicket);
 
         //@dev - Emit information of a new RetirementCertificateNFTAssociatedTicket created
-        emit RetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketType, mintAmount, retirementCertificateNFT, uri);
+        emit Events.RetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketType, mintAmount, retirementCertificateNFT, uri, ticketManager);
     }
 
     /**
@@ -90,8 +91,11 @@ contract RetirementCertificateNFTAssociatedTicketFactory is IRetirementCertifica
         //@dev - Save a metadata of RetirementCertificateNFTAssociatedTicket
         retirementCertificateNFTAssociatedTicket.saveRetirementCertificateNFTAssociatedTicketMetadata(retirementCertificateNFT);
 
+        //@dev - Create a new Ticket Manager contract to manage a RetirementCertificateNFTAssociatedTicket created above
+        ITicketManager ticketManager = ticketManagerFactory.createTicketManager(retirementCertificateNFTAssociatedTicket);
+
         //@dev - Emit information of a new RetirementCertificateNFTAssociatedTicket created
-        emit Events.BatchRetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementCertificateNFT, uri);
+        emit Events.BatchRetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementCertificateNFT, uri, ticketManager);
     }
 
 }

@@ -90,7 +90,7 @@ export interface ITicketManagerFactory extends BaseContract {
     createTicketManager(
       _retirementCertificateNFTAssociatedTicket: string,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<string>;
   };
 
   filters: {

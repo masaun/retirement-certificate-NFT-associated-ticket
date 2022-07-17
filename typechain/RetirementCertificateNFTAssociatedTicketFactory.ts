@@ -128,8 +128,8 @@ export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
   ): Result;
 
   events: {
-    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)": EventFragment;
-    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)": EventFragment;
+    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string,address)": EventFragment;
+    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string,address)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
@@ -148,7 +148,7 @@ export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
 
 export type BatchRetirementCertificateNFTAssociatedTicketCreatedEvent =
   TypedEvent<
-    [string, string, BigNumber[], BigNumber[], string, string],
+    [string, string, BigNumber[], BigNumber[], string, string, string],
     {
       retirementCertificateNFTAssociatedTicket: string;
       to: string;
@@ -156,6 +156,7 @@ export type BatchRetirementCertificateNFTAssociatedTicketCreatedEvent =
       mintAmounts: BigNumber[];
       retirementCertificateNFT: string;
       uri: string;
+      ticketManager: string;
     }
   >;
 
@@ -163,7 +164,7 @@ export type BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter =
   TypedEventFilter<BatchRetirementCertificateNFTAssociatedTicketCreatedEvent>;
 
 export type RetirementCertificateNFTAssociatedTicketCreatedEvent = TypedEvent<
-  [string, string, BigNumber, BigNumber, string, string],
+  [string, string, BigNumber, BigNumber, string, string, string],
   {
     retirementCertificateNFTAssociatedTicket: string;
     to: string;
@@ -171,6 +172,7 @@ export type RetirementCertificateNFTAssociatedTicketCreatedEvent = TypedEvent<
     mintAmount: BigNumber;
     retirementCertificateNFT: string;
     uri: string;
+    ticketManager: string;
   }
 >;
 
@@ -409,13 +411,14 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
   };
 
   filters: {
-    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)"(
+    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string,address)"(
       retirementCertificateNFTAssociatedTicket?: null,
       to?: null,
       ticketTypes?: null,
       mintAmounts?: null,
       retirementCertificateNFT?: null,
-      uri?: null
+      uri?: null,
+      ticketManager?: null
     ): BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter;
     BatchRetirementCertificateNFTAssociatedTicketCreated(
       retirementCertificateNFTAssociatedTicket?: null,
@@ -423,16 +426,18 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       ticketTypes?: null,
       mintAmounts?: null,
       retirementCertificateNFT?: null,
-      uri?: null
+      uri?: null,
+      ticketManager?: null
     ): BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter;
 
-    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)"(
+    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string,address)"(
       retirementCertificateNFTAssociatedTicket?: null,
       to?: null,
       ticketType?: null,
       mintAmount?: null,
       retirementCertificateNFT?: null,
-      uri?: null
+      uri?: null,
+      ticketManager?: null
     ): RetirementCertificateNFTAssociatedTicketCreatedEventFilter;
     RetirementCertificateNFTAssociatedTicketCreated(
       retirementCertificateNFTAssociatedTicket?: null,
@@ -440,7 +445,8 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       ticketType?: null,
       mintAmount?: null,
       retirementCertificateNFT?: null,
-      uri?: null
+      uri?: null,
+      ticketManager?: null
     ): RetirementCertificateNFTAssociatedTicketCreatedEventFilter;
 
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(

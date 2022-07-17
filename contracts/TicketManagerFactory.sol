@@ -30,14 +30,16 @@ contract TicketManagerFactory is ITicketManagerFactory, AccessControl {
      * @notice - Create a new TicketManager contract
      * @param _retirementCertificateNFTAssociatedTicket - RetirementCertificateNFTAssociatedTicket that is managed by new TicketManager contract
      */
-    function createTicketManager(IRetirementCertificateNFTAssociatedTicket _retirementCertificateNFTAssociatedTicket) public override {
+    function createTicketManager(IRetirementCertificateNFTAssociatedTicket _retirementCertificateNFTAssociatedTicket) public override returns (TicketManager _ticketManager) {
         //@dev - Create a new TicketManager contract
         TicketManager ticketManager = new TicketManager(_retirementCertificateNFTAssociatedTicket);
 
         //@dev - [TODO]: Save a metadata of new TicketManager created above
 
         //@dev - Emit information of a new TicketManager contract created
-        emit Events.TicketManagerCreated(ticketManager, _retirementCertificateNFTAssociatedTicket);
+        emit TicketManagerCreated(ticketManager, _retirementCertificateNFTAssociatedTicket);
+
+        return ticketManager;
     }
 
 }

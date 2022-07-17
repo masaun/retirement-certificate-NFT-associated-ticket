@@ -4,6 +4,7 @@ pragma solidity ^0.8.7;
 import { DataTypes } from '../libraries/DataTypes.sol';
 import { Events } from "../libraries/Events.sol";
 
+import { ITicketManager } from "./ITicketManager.sol";
 import { IRetirementCertificateNFT } from "./IRetirementCertificateNFT.sol";
 
 //@dev - RetirementCertificateNFT-associated ticket
@@ -25,7 +26,8 @@ interface IRetirementCertificateNFTAssociatedTicketFactory {
         uint ticketType, 
         uint mintAmount, 
         IRetirementCertificateNFT retirementCertificateNFT, 
-        string uri
+        string uri,
+        ITicketManager ticketManager
     );
 
     event BatchRetirementCertificateNFTAssociatedTicketCreated(
@@ -34,7 +36,8 @@ interface IRetirementCertificateNFTAssociatedTicketFactory {
         uint256[] ticketTypes, 
         uint256[] mintAmounts,
         IRetirementCertificateNFT retirementCertificateNFT, 
-        string uri
+        string uri,
+        ITicketManager ticketManager
     );
 
 }

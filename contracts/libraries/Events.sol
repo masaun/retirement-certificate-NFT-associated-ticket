@@ -21,7 +21,8 @@ library Events {
         uint ticketType, 
         uint mintAmount, 
         IRetirementCertificateNFT retirementCertificateNFT, 
-        string uri
+        string uri,
+        ITicketManager ticketManager
     );
 
     event BatchRetirementCertificateNFTAssociatedTicketCreated(
@@ -30,7 +31,8 @@ library Events {
         uint256[] ticketTypes, 
         uint256[] mintAmounts,
         IRetirementCertificateNFT retirementCertificateNFT, 
-        string uri
+        string uri,
+        ITicketManager ticketManager
     );
 
     //@dev - Event of information of a new TicketManager contract created

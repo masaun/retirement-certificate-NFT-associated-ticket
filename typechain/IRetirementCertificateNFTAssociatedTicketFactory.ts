@@ -44,8 +44,8 @@ export interface IRetirementCertificateNFTAssociatedTicketFactoryInterface
   ): Result;
 
   events: {
-    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)": EventFragment;
-    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)": EventFragment;
+    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string,address)": EventFragment;
+    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string,address)": EventFragment;
   };
 
   getEvent(
@@ -58,7 +58,7 @@ export interface IRetirementCertificateNFTAssociatedTicketFactoryInterface
 
 export type BatchRetirementCertificateNFTAssociatedTicketCreatedEvent =
   TypedEvent<
-    [string, string, BigNumber[], BigNumber[], string, string],
+    [string, string, BigNumber[], BigNumber[], string, string, string],
     {
       retirementCertificateNFTAssociatedTicket: string;
       to: string;
@@ -66,6 +66,7 @@ export type BatchRetirementCertificateNFTAssociatedTicketCreatedEvent =
       mintAmounts: BigNumber[];
       retirementCertificateNFT: string;
       uri: string;
+      ticketManager: string;
     }
   >;
 
@@ -73,7 +74,7 @@ export type BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter =
   TypedEventFilter<BatchRetirementCertificateNFTAssociatedTicketCreatedEvent>;
 
 export type RetirementCertificateNFTAssociatedTicketCreatedEvent = TypedEvent<
-  [string, string, BigNumber, BigNumber, string, string],
+  [string, string, BigNumber, BigNumber, string, string, string],
   {
     retirementCertificateNFTAssociatedTicket: string;
     to: string;
@@ -81,6 +82,7 @@ export type RetirementCertificateNFTAssociatedTicketCreatedEvent = TypedEvent<
     mintAmount: BigNumber;
     retirementCertificateNFT: string;
     uri: string;
+    ticketManager: string;
   }
 >;
 
@@ -174,13 +176,14 @@ export interface IRetirementCertificateNFTAssociatedTicketFactory
   };
 
   filters: {
-    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)"(
+    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string,address)"(
       retirementCertificateNFTAssociatedTicket?: null,
       to?: null,
       ticketTypes?: null,
       mintAmounts?: null,
       retirementCertificateNFT?: null,
-      uri?: null
+      uri?: null,
+      ticketManager?: null
     ): BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter;
     BatchRetirementCertificateNFTAssociatedTicketCreated(
       retirementCertificateNFTAssociatedTicket?: null,
@@ -188,16 +191,18 @@ export interface IRetirementCertificateNFTAssociatedTicketFactory
       ticketTypes?: null,
       mintAmounts?: null,
       retirementCertificateNFT?: null,
-      uri?: null
+      uri?: null,
+      ticketManager?: null
     ): BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter;
 
-    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)"(
+    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string,address)"(
       retirementCertificateNFTAssociatedTicket?: null,
       to?: null,
       ticketType?: null,
       mintAmount?: null,
       retirementCertificateNFT?: null,
-      uri?: null
+      uri?: null,
+      ticketManager?: null
     ): RetirementCertificateNFTAssociatedTicketCreatedEventFilter;
     RetirementCertificateNFTAssociatedTicketCreated(
       retirementCertificateNFTAssociatedTicket?: null,
@@ -205,7 +210,8 @@ export interface IRetirementCertificateNFTAssociatedTicketFactory
       ticketType?: null,
       mintAmount?: null,
       retirementCertificateNFT?: null,
-      uri?: null
+      uri?: null,
+      ticketManager?: null
     ): RetirementCertificateNFTAssociatedTicketCreatedEventFilter;
   };
 

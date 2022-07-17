@@ -131,7 +131,22 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
               RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET = eventLog[0]
               retirementCertificateNFTAssociatedTicket = await ethers.getContractAt("RetirementCertificateNFTAssociatedTicket", RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET)
               console.log(`\n Deployed-address of RetirementCertificateNFTAssociatedTicket: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET }`)
+
+              //@dev - TicketManager contract instance (deployed-address) by assigning contract address retrieved above
+              TICKET_MANAGER = eventLog[6]
+              console.log(`\n Deployed-address of TicketManager: ${ TICKET_MANAGER }`)
           })
+
+          // it(`Should be successful to retrieve an emitted-event log of "TicketManagerCreated"`, async () => {
+          //     const eventName: string = "TicketManagerCreated"
+          //     let eventLog: any = await getEventLog(txReceipt, eventName)
+          //     console.log(`\n Emitted-EventLog of "TicketManagerCreated": ${ eventLog }`)
+
+          //     //@dev - Create a TicketManager contract instance by assigning contract address retrieved above
+          //     TICKET_MANAGER = eventLog[0]
+          //     ticketManager = await ethers.getContractAt("TicketManager", TICKET_MANAGER)
+          //     console.log(`\n Deployed-address of TicketManager contract: ${ TICKET_MANAGER }`)
+          // })
 
           it(`getRetirementCertificateNFTAssociatedTicketMetadata() - Should be successful that retrieve a metadata of the RetirementCertificateNFTAssociatedTicket specified`, async () => {
               let retirementCertificateNFTAssociatedTicketMetadata: any = await retirementCertificateNFTAssociatedTicket.getRetirementCertificateNFTAssociatedTicketMetadata(RETIREMENT_CERTIFICATE_NFT)

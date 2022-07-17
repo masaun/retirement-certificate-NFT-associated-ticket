@@ -240,7 +240,7 @@ export interface TicketManagerFactory extends BaseContract {
     createTicketManager(
       _retirementCertificateNFTAssociatedTicket: string,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<string>;
 
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
