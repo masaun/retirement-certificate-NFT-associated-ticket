@@ -30,6 +30,7 @@ contract TicketManager is ITicketManager, AccessControl {
      * @dev - Only a RetirementCertificateNFT holder can claim by using this method
      */ 
     function claimRetirementCertificateNFTAssociatedTicket(IRetirementCertificateNFT retirementCertificateNFT, uint256 tokenIdOfRetirementCertificateNFT, uint256 ticketType) public override returns (bool) {
+        require(retirementCertificateNFT.retirementCertificateNFTBalanceOf(msg.sender) > 0, "A claimer (msg.sender) must has more than 1 Retirement NFT");
         _redeemWithRetirementCertificateNFTAssociatedTicket(ticketType);
     }
 
