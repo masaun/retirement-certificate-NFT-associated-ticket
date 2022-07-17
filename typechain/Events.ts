@@ -13,6 +13,7 @@ export interface EventsInterface extends utils.Interface {
   events: {
     "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string)": EventFragment;
     "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string)": EventFragment;
+    "TicketManagerCreated(address,address)": EventFragment;
   };
 
   getEvent(
@@ -21,6 +22,7 @@ export interface EventsInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "RetirementCertificateNFTAssociatedTicketCreated"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TicketManagerCreated"): EventFragment;
 }
 
 export type BatchRetirementCertificateNFTAssociatedTicketCreatedEvent =
@@ -53,6 +55,14 @@ export type RetirementCertificateNFTAssociatedTicketCreatedEvent = TypedEvent<
 
 export type RetirementCertificateNFTAssociatedTicketCreatedEventFilter =
   TypedEventFilter<RetirementCertificateNFTAssociatedTicketCreatedEvent>;
+
+export type TicketManagerCreatedEvent = TypedEvent<
+  [string, string],
+  { ticketManager: string; retirementCertificateNFTAssociatedTicket: string }
+>;
+
+export type TicketManagerCreatedEventFilter =
+  TypedEventFilter<TicketManagerCreatedEvent>;
 
 export interface Events extends BaseContract {
   contractName: "Events";
@@ -119,6 +129,15 @@ export interface Events extends BaseContract {
       retirementCertificateNFT?: null,
       uri?: null
     ): RetirementCertificateNFTAssociatedTicketCreatedEventFilter;
+
+    "TicketManagerCreated(address,address)"(
+      ticketManager?: null,
+      retirementCertificateNFTAssociatedTicket?: null
+    ): TicketManagerCreatedEventFilter;
+    TicketManagerCreated(
+      ticketManager?: null,
+      retirementCertificateNFTAssociatedTicket?: null
+    ): TicketManagerCreatedEventFilter;
   };
 
   estimateGas: {};

@@ -11,7 +11,8 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
 
 
 /**
- * @title - The Retirement Certificate NFT contract (based on ERC721)
+ * @title - The Ticket Manager contract
+ * @dev - [NOTE]: Implementation of Access Control (Role Management) is still in progress
  */
 contract TicketManager is ITicketManager, AccessControl {
 
