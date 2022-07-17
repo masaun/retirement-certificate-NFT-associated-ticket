@@ -21,7 +21,7 @@ export interface ITicketManagerInterface extends utils.Interface {
   contractName: "ITicketManager";
   functions: {
     "checkWhetherRetirementCertificateNFTAssociatedTicketHasAlreadyBeenRedeemedOrNot(address,uint256)": FunctionFragment;
-    "claimBatchRetirementCertificateNFTAssociatedTicket(address,uint256,uint256[],uint256[])": FunctionFragment;
+    "claimBatchRetirementCertificateNFTAssociatedTicket(address,uint256[],uint256[],uint256[])": FunctionFragment;
     "claimRetirementCertificateNFTAssociatedTicket(address,uint256,uint256)": FunctionFragment;
   };
 
@@ -31,7 +31,7 @@ export interface ITicketManagerInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "claimBatchRetirementCertificateNFTAssociatedTicket",
-    values: [string, BigNumberish, BigNumberish[], BigNumberish[]]
+    values: [string, BigNumberish[], BigNumberish[], BigNumberish[]]
   ): string;
   encodeFunctionData(
     functionFragment: "claimRetirementCertificateNFTAssociatedTicket",
@@ -90,7 +90,7 @@ export interface ITicketManager extends BaseContract {
 
     claimBatchRetirementCertificateNFTAssociatedTicket(
       retirementCertificateNFT: string,
-      tokenIdOfRetirementCertificateNFT: BigNumberish,
+      tokenIdOfRetirementCertificateNFTs: BigNumberish[],
       ticketTypes: BigNumberish[],
       numberOfTickets: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -112,7 +112,7 @@ export interface ITicketManager extends BaseContract {
 
   claimBatchRetirementCertificateNFTAssociatedTicket(
     retirementCertificateNFT: string,
-    tokenIdOfRetirementCertificateNFT: BigNumberish,
+    tokenIdOfRetirementCertificateNFTs: BigNumberish[],
     ticketTypes: BigNumberish[],
     numberOfTickets: BigNumberish[],
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -134,7 +134,7 @@ export interface ITicketManager extends BaseContract {
 
     claimBatchRetirementCertificateNFTAssociatedTicket(
       retirementCertificateNFT: string,
-      tokenIdOfRetirementCertificateNFT: BigNumberish,
+      tokenIdOfRetirementCertificateNFTs: BigNumberish[],
       ticketTypes: BigNumberish[],
       numberOfTickets: BigNumberish[],
       overrides?: CallOverrides
@@ -159,7 +159,7 @@ export interface ITicketManager extends BaseContract {
 
     claimBatchRetirementCertificateNFTAssociatedTicket(
       retirementCertificateNFT: string,
-      tokenIdOfRetirementCertificateNFT: BigNumberish,
+      tokenIdOfRetirementCertificateNFTs: BigNumberish[],
       ticketTypes: BigNumberish[],
       numberOfTickets: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -182,7 +182,7 @@ export interface ITicketManager extends BaseContract {
 
     claimBatchRetirementCertificateNFTAssociatedTicket(
       retirementCertificateNFT: string,
-      tokenIdOfRetirementCertificateNFT: BigNumberish,
+      tokenIdOfRetirementCertificateNFTs: BigNumberish[],
       ticketTypes: BigNumberish[],
       numberOfTickets: BigNumberish[],
       overrides?: Overrides & { from?: string | Promise<string> }

@@ -42,9 +42,9 @@ const _abi = [
         type: "address",
       },
       {
-        internalType: "uint256",
-        name: "tokenIdOfRetirementCertificateNFT",
-        type: "uint256",
+        internalType: "uint256[]",
+        name: "tokenIdOfRetirementCertificateNFTs",
+        type: "uint256[]",
       },
       {
         internalType: "uint256[]",

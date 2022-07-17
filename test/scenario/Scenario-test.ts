@@ -101,7 +101,7 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
               console.log(`##### Deployed-contract address of the MockRetirementCertificateNFTAssociatedTicketGatedService.sol: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_GATED_SERVICE } ###### \n`)
           })
 
-          it(`Should be successful to mint a RetirementCertificateNFT`, async () => {
+          it(`Should be successful to mint a RetirementCertificateNFT to user1 (after this part, use1 will become RetirementCertificateNFT_holder_1)`, async () => {
               const to: string = TICKET_HOLDER_1
               const tokenId: number = 0
               retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId)
@@ -190,7 +190,7 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
               const ticketType: number = 0    // Ticket type 0
 
               let numberOfRetirementCertificateNFTAssociatedTickets: BigNumber = await retirementCertificateNFTAssociatedTicket.retirementCertificateNFTAssociatedTicketBalanceOf(walletAddress, ticketType)
-              console.log(`\n Number of RetirementCertificateNFTAssociatedTickets in the wallet of RetirementCertificateNFT holder who has already claimed: ${ numberOfRetirementCertificateNFTAssociatedTickets }`)
+              console.log(`\n Number of RetirementCertificateNFTAssociatedTickets in the wallet of RetirementCertificateNFT_holder_1 who has already claimed: ${ numberOfRetirementCertificateNFTAssociatedTickets }`)
           })
 
 
@@ -199,8 +199,20 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
           /// mint() method - Mint multi-type of RetirementCertificateNFTAssociatedTickets
           ///------------------------------------------------------------------------------------------
 
+          it(`Should be successful to mint 3 RetirementCertificateNFTs to user2 (after this part, use2 will become RetirementCertificateNFT_holder_2)`, async () => {
+              const to: string = TICKET_HOLDER_2
+              const tokenId_1: number = 1
+              retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId_1)
+
+              const tokenId_2: number = 2
+              retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId_2)
+
+              const tokenId_3: number = 3
+              retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId_3)
+          })
+
           it(`mintBatch() - Should be successful that RetirementCertificateNFTAssociatedTickets are batch minted. [NOTE]: This tickets minted are multi-type of ticket`, async () => {
-              const to: string = TICKET_HOLDER_1
+              const to: string = TICKET_MANAGER
               const ticketTypes: Array<number> = [0, 1, 2]        // Ticket type 0 and 1 and 2
               const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
 
@@ -208,13 +220,23 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
               let txReceipt: any = await tx.wait()
           })
 
-          it(`retirementCertificateNFTAssociatedTicketBalanceOfBatch() - Wallet address of "TICKET_HOLDER_1" should has each 1 RetirementCertificateNFTAssociatedTicket of each ticket type 1, 2, 3`, async () => {
-              const walletAddresses: Array<string> = [TICKET_HOLDER_1, TICKET_HOLDER_1, TICKET_HOLDER_1]
-              const ticketTypes: Array<number> = [1, 2, 3]    // Ticket type 1 and 2 and 3
+          it(`claimBatchRetirementCertificateNFTAssociatedTicket() - Should be successful that RetirementCertificateNFT_holder_2 claim multi-type of RetirementCertificateNFTAssociatedTicket`, async () => {
+              const tokenIdOfRetirementCertificateNFTs: Array<number> = [1, 2, 3]
+              const ticketTypes: Array<number> = [0, 1, 2]      // Ticket type 0 and 1 and 2
+              const numberOfTickets: Array<number> = [1, 1, 1]  
 
-              let numberOfEachRetirementCertificateNFTAssociatedTickets: Array<BigNumber> = await retirementCertificateNFTAssociatedTicket.retirementCertificateNFTAssociatedTicketBalanceOfBatch(walletAddresses, ticketTypes)
-              console.log(`\n Number of each RetirementCertificateNFTAssociatedTickets (that are batch minted): ${ numberOfEachRetirementCertificateNFTAssociatedTickets }`)
+              let tx: any = await ticketManager.connect(ticketHolder2).claimBatchRetirementCertificateNFTAssociatedTicket(RETIREMENT_CERTIFICATE_NFT, tokenIdOfRetirementCertificateNFTs, ticketTypes, numberOfTickets)
+              let txReceipt: any = await tx.wait()
           })
+
+          // it(`balance() - Wallet address of "TICKET_HOLDER_1" should has each 1 RetirementCertificateNFTAssociatedTicket of each ticket type 1, 2, 3`, async () => {
+          //     const walletAddresses: Array<string> = [TICKET_HOLDER_2, TICKET_HOLDER_2, TICKET_HOLDER_2]
+          //     const ticketTypes: Array<number> = [0, 1, 2]      // Ticket type 0 and 1 and 2
+          //     const numberOfTickets: Array<number> = [1, 1, 1]  // 
+
+          //     let numberOfEachRetirementCertificateNFTAssociatedTickets: Array<BigNumber> = await retirementCertificateNFTAssociatedTicket.connect(ticketHolder2).claimBatchRetirementCertificateNFTAssociatedTicket(RETIREMENT_CERTIFICATE_NFT, tokenIdOfRetirementCertificateNFT, ticketTypes)
+          //     console.log(`\n Number of each RetirementCertificateNFTAssociatedTickets (that are batch minted): ${ numberOfEachRetirementCertificateNFTAssociatedTickets }`)
+          // })
 
 
 

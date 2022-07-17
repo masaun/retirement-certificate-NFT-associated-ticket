@@ -18,7 +18,7 @@ interface ITicketManager {
      * @notice - Claim multi-type of RetirementCertificateNFTAssociatedTicket
      * @dev - Only a RetirementCertificateNFT holder can claim by using this method
      */ 
-    function claimBatchRetirementCertificateNFTAssociatedTicket(IRetirementCertificateNFT retirementCertificateNFT, uint256 tokenIdOfRetirementCertificateNFT, uint256[] memory ticketTypes, uint256[] memory numberOfTickets) external returns (bool);
+    function claimBatchRetirementCertificateNFTAssociatedTicket(IRetirementCertificateNFT retirementCertificateNFT, uint256[] memory tokenIdOfRetirementCertificateNFTs, uint256[] memory ticketTypes, uint256[] memory numberOfTickets) external returns (bool);
 
     /**
      * @notice - Check whether a RetirementCertificateNFTAssociatedTicket has already been redeemed or not
