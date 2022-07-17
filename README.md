@@ -19,11 +19,10 @@
 <br>
 
 - Retirement Certificate NFT-associated Ticket holders are able to access special contents, events, etc as privilege. (This is like `"Retirement NFT-associated Ticket-gated access"` )
+  - In this repo, `"Retirement NFT-associated Ticket-gated access"` is tested by using `accessSpecialContent()` method defined in the mock of RetirementCertificateNFTAssociatedTicketGatedService contract. 
+    https://github.com/masaun/retirement-certificate-NFT-associated-ticket/blob/main/contracts/mock/MockRetirementNFTAssociatedTicketGatedService.sol#L35-L37
 
 <br>
-
-
-
 
 ### Use case of Retirement Certificate NFT-associated Ticket
 - Ticket sales of professional sports teams
@@ -41,6 +40,28 @@
 ### Workflow
 - Diagram of workflow
   ![diagram_retirement-certificate-NFT-associated-ticket](https://user-images.githubusercontent.com/19357502/178716431-e1281060-87f3-492c-87d3-14d450b4c3fe.jpeg)
+
+<br>
+
+## Installation
+- Install modules
+```
+yarn
+```
+
+<br>
+
+- Compile smart contracts
+```
+yarn compile
+```
+
+<br>
+
+- Generate typescript files of smart contracts for Typechain
+```
+yarn typechain
+```
 
 <br>
 

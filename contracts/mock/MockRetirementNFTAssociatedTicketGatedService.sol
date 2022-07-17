@@ -9,7 +9,7 @@ import "hardhat/console.sol";
 
 
 /**
- * @title - The MockRetirementCertificateNFTAssociatedTicketGatedService contract
+ * @title - The Mock of RetirementCertificateNFTAssociatedTicketGatedService contract
  * @notice - This is a service smart contract that only only a Retirement NFT Associated Ticket holder can access.
  */
 contract MockRetirementCertificateNFTAssociatedTicketGatedService {

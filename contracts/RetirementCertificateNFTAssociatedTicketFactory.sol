@@ -10,8 +10,12 @@ import { IRandomNumberGeneratorV2 } from "./interfaces/IRandomNumberGeneratorV2.
 //@dev - RetirementCertificateNFT-associated ticket
 import { RetirementCertificateNFTAssociatedTicket } from "./RetirementCertificateNFTAssociatedTicket.sol";
 
-//@dev - Retirement NFT
+//@dev - Retirement Certificate NFT
 import { IRetirementCertificateNFT } from "./interfaces/IRetirementCertificateNFT.sol";
+
+//@dev - Ticket Manager Factory
+import { ITicketManager } from "./interfaces/ITicketManager.sol";
+import { ITicketManagerFactory } from "./interfaces/ITicketManagerFactory.sol";
 
 //@dev - Chainlink VRF
 import { VRFCoordinatorV2Mock } from "./chainlink-examples/test/VRFCoordinatorV2Mock.sol";
@@ -32,6 +36,7 @@ contract RetirementCertificateNFTAssociatedTicketFactory is IRetirementCertifica
     //@dev - contract instances
     IRandomNumberGeneratorV2 public rngV2;
     VRFCoordinatorV2Mock public vrfCoordinatorV2;
+    ITicketManagerFactory public ticketManagerFactory;
 
     //@dev - Storages
     mapping (address => DataTypes.RetirementCertificateNFTAssociatedTicketMetadata) retirementCertificateNFTAssociatedTicketMetadatas;
@@ -44,9 +49,10 @@ contract RetirementCertificateNFTAssociatedTicketFactory is IRetirementCertifica
     /**
      * @notice - Constructor
      */ 
-    constructor(IRandomNumberGeneratorV2 _rngV2, VRFCoordinatorV2Mock _vrfCoordinatorV2) {
+    constructor(IRandomNumberGeneratorV2 _rngV2, VRFCoordinatorV2Mock _vrfCoordinatorV2, ITicketManagerFactory _ticketManagerFactory) {
         rngV2 = _rngV2;
         vrfCoordinatorV2 = _vrfCoordinatorV2;
+        ticketManagerFactory = _ticketManagerFactory;
 
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);  // Deployer address
@@ -67,8 +73,11 @@ contract RetirementCertificateNFTAssociatedTicketFactory is IRetirementCertifica
         //@dev - Save a metadata of RetirementCertificateNFTAssociatedTicket
         retirementCertificateNFTAssociatedTicket.saveRetirementCertificateNFTAssociatedTicketMetadata(retirementCertificateNFT);
 
+        //@dev - Create a new Ticket Manager contract to manage a RetirementCertificateNFTAssociatedTicket created above
+        ITicketManager ticketManager = ticketManagerFactory.createTicketManager(retirementCertificateNFTAssociatedTicket);
+
         //@dev - Emit information of a new RetirementCertificateNFTAssociatedTicket created
-        emit RetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketType, mintAmount, retirementCertificateNFT, uri);
+        emit Events.RetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketType, mintAmount, retirementCertificateNFT, uri, ticketManager);
     }
 
     /**
@@ -82,8 +91,11 @@ contract RetirementCertificateNFTAssociatedTicketFactory is IRetirementCertifica
         //@dev - Save a metadata of RetirementCertificateNFTAssociatedTicket
         retirementCertificateNFTAssociatedTicket.saveRetirementCertificateNFTAssociatedTicketMetadata(retirementCertificateNFT);
 
+        //@dev - Create a new Ticket Manager contract to manage a RetirementCertificateNFTAssociatedTicket created above
+        ITicketManager ticketManager = ticketManagerFactory.createTicketManager(retirementCertificateNFTAssociatedTicket);
+
         //@dev - Emit information of a new RetirementCertificateNFTAssociatedTicket created
-        emit Events.BatchRetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementCertificateNFT, uri);
+        emit Events.BatchRetirementCertificateNFTAssociatedTicketCreated(retirementCertificateNFTAssociatedTicket, to, ticketTypes, mintAmounts, retirementCertificateNFT, uri, ticketManager);
     }
 
 }

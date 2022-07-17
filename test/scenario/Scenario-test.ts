@@ -3,10 +3,12 @@ import { assert, expect } from "chai"
 import { BigNumber, ContractReceipt, ContractTransaction } from "ethers"
 import { network, deployments, ethers, run } from "hardhat"
 import { developmentChains } from "../../helper-hardhat-config"
-import { RetirementCertificateNFT, RetirementCertificateNFTAssociatedTicket, RetirementCertificateNFTAssociatedTicketFactory, MockRetirementCertificateNFTAssociatedTicketGatedService, LinkToken, MockOracle } from "../../typechain"
+import { RetirementCertificateNFT, RetirementCertificateNFTAssociatedTicket, RetirementCertificateNFTAssociatedTicketFactory, TicketManager, TicketManagerFactory,MockRetirementCertificateNFTAssociatedTicketGatedService, LinkToken, MockOracle, RandomNumberGeneratorV2, VRFCoordinatorV2Mock } from "../../typechain"
 
 //@dev - Helper of ethers.js for retrieving eventLogs emitted, etc.
 import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
+import { toWei } from "../ethersjs-helper/ethersjsHelper"
+import { fromWei } from "../ethersjs-helper/ethersjsHelper"
 //import { convertHexToString, convertStringToHex, toWei, fromWei, getEventLog, getCurrentBlock, getCurrentTimestamp } from "../ethersjs-helper/ethersjsHelper"
 
 
@@ -33,15 +35,23 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           let retirementCertificateNFT: RetirementCertificateNFT
           let retirementCertificateNFTAssociatedTicket: RetirementCertificateNFTAssociatedTicket
           let retirementCertificateNFTAssociatedTicketFactory: RetirementCertificateNFTAssociatedTicketFactory
-          let retirementCertificateNFTAssociatedTicketGatedService: MockRetirementCertificateNFTAssociatedTicketGatedService
+          let ticketManager: TicketManager
+          let ticketManagerFactory: TicketManagerFactory
+          let retirementCertificateNFTAssociatedTicketGatedService: MockRetirementCertificateNFTAssociatedTicketGatedService          
           let linkToken: LinkToken
           let mockOracle: MockOracle
+          let randomNumberGeneratorV2: RandomNumberGeneratorV2
+          let vrfCoordinatorV2Mock: VRFCoordinatorV2Mock
 
           //@dev - Variables for assigning deployed-addresses
           let RETIREMENT_CERTIFICATE_NFT: string
           let RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET: string
           let RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_FACTORY: string
+          let TICKET_MANAGER: string
+          let TICKET_MANAGER_FACTORY: string
           let RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_GATED_SERVICE: string
+          let RANDOM_NUMBER_GENERATOR_V2: string
+          let VRF_COORDINATOR_V2_MOCK: string
 
           let tx: any
           let txReceipt: any
@@ -62,32 +72,44 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               linkToken = await ethers.getContract("LinkToken")
               const linkTokenAddress: string = linkToken.address
 
-              //@dev - Create the contract instance of the RetirementCertificateNFT.sol
-              retirementCertificateNFT = await ethers.getContract("RetirementCertificateNFT")
-              RETIREMENT_CERTIFICATE_NFT = retirementCertificateNFT.address
-              console.log(`\n##### Deployed-contract address of the RetirementCertificateNFT.sol: ${ RETIREMENT_CERTIFICATE_NFT } ######`)
+              randomNumberGeneratorV2 = await ethers.getContract("RandomNumberGeneratorV2")
+              RANDOM_NUMBER_GENERATOR_V2 = randomNumberGeneratorV2.address
+              console.log(`\n##### Deployed-contract address of the RandomNumberGeneratorV2.sol: ${ RANDOM_NUMBER_GENERATOR_V2 } ######`)
+
+              vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
+              VRF_COORDINATOR_V2_MOCK = vrfCoordinatorV2Mock.address
+              console.log(`\n##### Deployed-contract address of the VRFCoordinatorV2Mock.sol: ${ VRF_COORDINATOR_V2_MOCK } ######`)
+
+              //@dev - Create the contract instance of the TicketManagerFactory.sol
+              ticketManagerFactory = await ethers.getContract("TicketManagerFactory")
+              TICKET_MANAGER_FACTORY = ticketManagerFactory.address
+              console.log(`\n##### Deployed-contract address of the TicketManagerFactory.sol: ${ TICKET_MANAGER_FACTORY } ######`)
 
               //@dev - Create the contract instance of the RetirementCertificateNFTAssociatedTicketFactory.sol
               retirementCertificateNFTAssociatedTicketFactory = await ethers.getContract("RetirementCertificateNFTAssociatedTicketFactory")
               RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_FACTORY = retirementCertificateNFTAssociatedTicketFactory.address
               console.log(`##### Deployed-contract address of the RetirementCertificateNFTAssociatedTicketFactory.sol: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_FACTORY } ######`)
 
+              //@dev - Create the contract instance of the RetirementCertificateNFT.sol
+              retirementCertificateNFT = await ethers.getContract("RetirementCertificateNFT")
+              RETIREMENT_CERTIFICATE_NFT = retirementCertificateNFT.address
+              console.log(`\n##### Deployed-contract address of the RetirementCertificateNFT.sol: ${ RETIREMENT_CERTIFICATE_NFT } ######`)
+
               //@dev - Create the contract instance of the MockRetirementCertificateNFTAssociatedTicketGatedService.sol
               retirementCertificateNFTAssociatedTicketGatedService = await ethers.getContract("MockRetirementCertificateNFTAssociatedTicketGatedService")
               RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_GATED_SERVICE = retirementCertificateNFTAssociatedTicketGatedService.address
-              console.log(`##### Deployed-contract address of the MockRetirementCertificateNFTAssociatedTicketGatedService.sol: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_GATED_SERVICE } ######`)
+              console.log(`##### Deployed-contract address of the MockRetirementCertificateNFTAssociatedTicketGatedService.sol: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET_GATED_SERVICE } ###### \n`)
+          })
+
+          it(`Should be successful to mint a RetirementCertificateNFT to user1 (after this part, use1 will become RetirementCertificateNFT_holder_1)`, async () => {
+              const to: string = TICKET_HOLDER_1
+              const tokenId: number = 0
+              retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId)
           })
 
           it(`Should be successful that 1 LINK Token is funded into the RetirementCertificateNFTAssociatedTicketFactory.sol in order to call Chainlink VRF for generating random number and retrieve it`, async () => {
               const linkTokenAddress: string = linkToken.address
-
               await run("fund-link", { contract: retirementCertificateNFTAssociatedTicketFactory.address, linkaddress: linkTokenAddress })
-          })
-
-          it(`Should be successful to mint a RetirementCertificateNFT`, async () => {
-              const to: string = TICKET_HOLDER_1
-              const tokenId: number = 0
-              retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId)
           })
 
           it(`Should be successful that a new RetirementCertificateNFTAssociatedTicket is created`, async () => {
@@ -103,21 +125,44 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
           it(`Should be successful to retrieve an emitted-event log of "RetirementCertificateNFTAssociatedTicketCreated"`, async () => {
               const eventName: string = "RetirementCertificateNFTAssociatedTicketCreated"
               let eventLog: any = await getEventLog(txReceipt, eventName)
-              console.log(`Emitted-EventLog of "RetirementCertificateNFTAssociatedTicketCreated": ${ eventLog }`)
+              console.log(`\n Emitted-EventLog of "RetirementCertificateNFTAssociatedTicketCreated": ${ eventLog }`)
 
               //@dev - Create a RetirementCertificateNFTAssociatedTicket instance by assigning contract address retrieved above
               RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET = eventLog[0]
               retirementCertificateNFTAssociatedTicket = await ethers.getContractAt("RetirementCertificateNFTAssociatedTicket", RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET)
-              console.log(`Deployed-address of RetirementCertificateNFTAssociatedTicket: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET }`)
+              console.log(`\n Deployed-address of RetirementCertificateNFTAssociatedTicket: ${ RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET }`)
+
+              //@dev - TicketManager contract instance (deployed-address) by assigning contract address retrieved above
+              TICKET_MANAGER = eventLog[6]
+              console.log(`\n Deployed-address of TicketManager: ${ TICKET_MANAGER }`)
+              ticketManager = await ethers.getContractAt("TicketManager", TICKET_MANAGER)
           })
+
+          // it(`Should be successful to retrieve an emitted-event log of "TicketManagerCreated"`, async () => {
+          //     const eventName: string = "TicketManagerCreated"
+          //     let eventLog: any = await getEventLog(txReceipt, eventName)
+          //     console.log(`\n Emitted-EventLog of "TicketManagerCreated": ${ eventLog }`)
+
+          //     //@dev - Create a TicketManager contract instance by assigning contract address retrieved above
+          //     TICKET_MANAGER = eventLog[0]
+          //     ticketManager = await ethers.getContractAt("TicketManager", TICKET_MANAGER)
+          //     console.log(`\n Deployed-address of TicketManager contract: ${ TICKET_MANAGER }`)
+          // })
 
           it(`getRetirementCertificateNFTAssociatedTicketMetadata() - Should be successful that retrieve a metadata of the RetirementCertificateNFTAssociatedTicket specified`, async () => {
               let retirementCertificateNFTAssociatedTicketMetadata: any = await retirementCertificateNFTAssociatedTicket.getRetirementCertificateNFTAssociatedTicketMetadata(RETIREMENT_CERTIFICATE_NFT)
-              console.log(`RetirementCertificateNFTAssociatedTicketMetadata retrieved: ${ retirementCertificateNFTAssociatedTicketMetadata }`)
+              console.log(`\n RetirementCertificateNFTAssociatedTicketMetadata retrieved: ${ retirementCertificateNFTAssociatedTicketMetadata }`)
           })
 
-          it(`mint() - Should be successful that a RetirementCertificateNFTAssociatedTicket is minted`, async () => {
-              const to: string = TICKET_HOLDER_1
+
+
+          ///------------------------------------------------------------------------------------------
+          /// mint() method - Mint a single type of RetirementCertificateNFTAssociatedTickets
+          ///------------------------------------------------------------------------------------------
+
+          it(`\n mint() - Should be successful that 100 RetirementCertificateNFTAssociatedTickets are minted to the TicketManager contract. [NOTE]: This tickets minted are signle type of ticket`, async () => {
+              const to: string = TICKET_MANAGER
+              //const to: string = TICKET_HOLDER_1
               const ticketType: number = 0    // Ticket type 0
               const mintAmount: number = 100  // Number of tickets to be minted (ERC1155)
 
@@ -125,16 +170,49 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               let txReceipt: any = await tx.wait()
           })
 
-          it(`retirementCertificateNFTAssociatedTicketBalanceOf() - Wallet address of "TICKET_HOLDER_1" should has 1 RetirementCertificateNFTAssociatedTicket of ticket type 1`, async () => {
+          it(`retirementCertificateNFTAssociatedTicketBalanceOf() - TicketManager contract should has 100 RetirementCertificateNFTAssociatedTickets of ticket type 1`, async () => {
+              const walletAddress: string = TICKET_MANAGER
+              const ticketType: number = 0    // Ticket type 0
+
+              let numberOfRetirementCertificateNFTAssociatedTickets: BigNumber = await retirementCertificateNFTAssociatedTicket.retirementCertificateNFTAssociatedTicketBalanceOf(walletAddress, ticketType)
+              console.log(`\n Number of single-type of RetirementCertificateNFTAssociatedTickets in the TicketManager contract: ${ numberOfRetirementCertificateNFTAssociatedTickets }`)
+          })
+
+          it(`claimRetirementCertificateNFTAssociatedTicket() - Should be successful that RetirementCertificateNFT holder 1 claim a single type of RetirementCertificateNFTAssociatedTicket`, async () => {
+              const tokenIdOfRetirementCertificateNFT: number = 0
+              const ticketType: number = 0
+              let tx: any = await ticketManager.connect(ticketHolder1).claimRetirementCertificateNFTAssociatedTicket(RETIREMENT_CERTIFICATE_NFT, tokenIdOfRetirementCertificateNFT, ticketType)
+              let txReceipt: any = await tx.wait()
+          })
+
+          it(`retirementCertificateNFTAssociatedTicketBalanceOf() - RetirementCertificateNFT_holder_1 who are claimed should received 1 RetirementCertificateNFTAssociatedTicket`, async () => {
               const walletAddress: string = TICKET_HOLDER_1
               const ticketType: number = 0    // Ticket type 0
 
               let numberOfRetirementCertificateNFTAssociatedTickets: BigNumber = await retirementCertificateNFTAssociatedTicket.retirementCertificateNFTAssociatedTicketBalanceOf(walletAddress, ticketType)
-              console.log(`Number of RetirementCertificateNFTAssociatedTickets: ${ numberOfRetirementCertificateNFTAssociatedTickets }`)
+              console.log(`\n Number of single-type of RetirementCertificateNFTAssociatedTickets in the wallet of RetirementCertificateNFT_holder_1 who has already claimed: ${ numberOfRetirementCertificateNFTAssociatedTickets }`)
           })
 
-          it(`mintBatch() - Should be successful that RetirementCertificateNFTAssociatedTickets are batch minted`, async () => {
-              const to: string = TICKET_HOLDER_1
+
+
+          ///------------------------------------------------------------------------------------------
+          /// mint() method - Mint multi-type of RetirementCertificateNFTAssociatedTickets
+          ///------------------------------------------------------------------------------------------
+
+          it(`Should be successful to mint 3 RetirementCertificateNFTs to user2 (after this part, use2 will become RetirementCertificateNFT_holder_2)`, async () => {
+              const to: string = TICKET_HOLDER_2
+              const tokenId_1: number = 1
+              retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId_1)
+
+              const tokenId_2: number = 2
+              retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId_2)
+
+              const tokenId_3: number = 3
+              retirementCertificateNFT.connect(deployer).mintNewRetirementCertificateNFT(to, tokenId_3)
+          })
+
+          it(`mintBatch() - Should be successful that RetirementCertificateNFTAssociatedTickets are batch minted. [NOTE]: This tickets minted are multi-type of ticket`, async () => {
+              const to: string = TICKET_MANAGER
               const ticketTypes: Array<number> = [1, 2, 3]        // Ticket type 0 and 1 and 2
               const mintAmounts: Array<number> = [100, 150, 200]  // Number of tickets to be minted for each ticket types (ERC1155)
 
@@ -142,20 +220,47 @@ import { getEventLog } from "../ethersjs-helper/ethersjsHelper"
               let txReceipt: any = await tx.wait()
           })
 
-          it(`retirementCertificateNFTAssociatedTicketBalanceOfBatch() - Wallet address of "TICKET_HOLDER_1" should has each 1 RetirementCertificateNFTAssociatedTicket of each ticket type 1, 2, 3`, async () => {
-              const walletAddresses: Array<string> = [TICKET_HOLDER_1, TICKET_HOLDER_1, TICKET_HOLDER_1]
-              const ticketTypes: Array<number> = [1, 2, 3]    // Ticket type 1 and 2 and 3
+          it(`retirementCertificateNFTAssociatedTicketBalanceOfBatch() - TicketManager contract should has 100, 150, 200 RetirementCertificateNFTAssociatedTickets of ticket type 1, 2, 3`, async () => {
+              const walletAddresses: Array<string> = [TICKET_MANAGER, TICKET_MANAGER, TICKET_MANAGER]
+              const ticketTypes: Array<number> = [1, 2, 3]      // Ticket type 1 and 2 and 3
 
-              let numberOfEachRetirementCertificateNFTAssociatedTickets: Array<BigNumber> = await retirementCertificateNFTAssociatedTicket.retirementCertificateNFTAssociatedTicketBalanceOfBatch(walletAddresses, ticketTypes)
-              console.log(`Number of each RetirementCertificateNFTAssociatedTickets: ${ numberOfEachRetirementCertificateNFTAssociatedTickets }`)
+              let numberOfMultiTypeOfRetirementCertificateNFTAssociatedTickets: Array<BigNumber> = await retirementCertificateNFTAssociatedTicket.connect(ticketHolder2).retirementCertificateNFTAssociatedTicketBalanceOfBatch(walletAddresses, ticketTypes)
+              console.log(`\n Number of multi-type of RetirementCertificateNFTAssociatedTickets in the TicketManager contract: ${ numberOfMultiTypeOfRetirementCertificateNFTAssociatedTickets } (of ticket type 1, 2, 3)`)
           })
 
-          it(`accessSpecialContent() - Should be successful to access a special content that only only a Retirement NFT Associated Ticket holder can access.`, async () => {
-              //[TODO]: 
-              const ticketType: number = 0
+          it(`claimBatchRetirementCertificateNFTAssociatedTicket() - Should be successful that RetirementCertificateNFT_holder_2 claim multi-type of RetirementCertificateNFTAssociatedTicket`, async () => {
+              const tokenIdOfRetirementCertificateNFTs: Array<number> = [1, 2, 3]  // 3 RetirementCertificateNFT (tokenID = 1, 2, 3)
+              const ticketTypes: Array<number> = [1, 2, 3]      // Ticket type 0 and 1 and 2
+              const numberOfTickets: Array<number> = [1, 1, 1]  // The redemption rate of ticket is 1 RetirementCertificateNFT per 1 RetirementCertificateNFTAssociatedTicket
 
-              let tx: any = await retirementCertificateNFTAssociatedTicketGatedService.connect(ticketHolder1).accessSpecialContent(RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET, ticketType)
-              let txReceipt = await tx.wait() 
+              let tx: any = await ticketManager.connect(ticketHolder2).claimBatchRetirementCertificateNFTAssociatedTicket(RETIREMENT_CERTIFICATE_NFT, tokenIdOfRetirementCertificateNFTs, ticketTypes, numberOfTickets)
+              let txReceipt: any = await tx.wait()
+          })
+
+          it(`retirementCertificateNFTAssociatedTicketBalanceOfBatch() - Should be successful that RetirementCertificateNFT_holder_2 has each 1 RetirementCertificateNFTAssociatedTicket of each ticket type 1, 2, 3`, async () => {
+              const walletAddresses: Array<string> = [TICKET_HOLDER_2, TICKET_HOLDER_2, TICKET_HOLDER_2]
+              const ticketTypes: Array<number> = [1, 2, 3]      // Ticket type 0 and 1 and 2
+              //const numberOfTickets: Array<number> = [1, 1, 1]
+
+              let numberOfMultiTypeOfRetirementCertificateNFTAssociatedTickets: Array<BigNumber> = await retirementCertificateNFTAssociatedTicket.connect(ticketHolder2).retirementCertificateNFTAssociatedTicketBalanceOfBatch(walletAddresses, ticketTypes)
+              console.log(`\n Number of multi-type of RetirementCertificateNFTAssociatedTickets in the wallet of RetirementCertificateNFT_holder_2 who has already claimed: ${ numberOfMultiTypeOfRetirementCertificateNFTAssociatedTickets }`)
+          })
+
+
+
+          ///------------------------------------------------------------------------------------------
+          /// Test of a RetirementCertificateNFT-Associated Ticket gated access
+          ///------------------------------------------------------------------------------------------
+
+          it(`\n accessSpecialContent() - Should be successful to access a special content that only a RetirementCertificateNFT-Associated Ticket holder can access.`, async () => {
+              const ticketType_0: number = 0
+              const ticketType_1: number = 1
+
+              let tx1: any = await retirementCertificateNFTAssociatedTicketGatedService.connect(ticketHolder1).accessSpecialContent(RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET, ticketType_0)
+              let txReceipt1 = await tx1.wait() 
+
+              let tx2: any = await retirementCertificateNFTAssociatedTicketGatedService.connect(ticketHolder2).accessSpecialContent(RETIREMENT_CERTIFICATE_NFT_ASSOCIATED_TICKET, ticketType_1)
+              let txReceipt2 = await tx2.wait() 
           })
 
       })

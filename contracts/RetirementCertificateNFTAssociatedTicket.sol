@@ -84,7 +84,7 @@ contract RetirementCertificateNFTAssociatedTicket is IRetirementCertificateNFTAs
         override
         onlyRole(TICKET_MINTER_ROLE)
     {
-        require(retirementCertificateNFT.retirementCertificateNFTBalanceOf(to) > 0, '"to" address must has more than 1 Retirement NFT');
+        //require(retirementCertificateNFT.retirementCertificateNFTBalanceOf(to) > 0, '"to" address must has more than 1 Retirement NFT');
         bytes memory data = "";
         _mint(to, ticketType, mintAmount, data);
     }
@@ -97,9 +97,29 @@ contract RetirementCertificateNFTAssociatedTicket is IRetirementCertificateNFTAs
         override
         onlyRole(TICKET_MINTER_ROLE)
     {
-        require(retirementCertificateNFT.retirementCertificateNFTBalanceOf(to) > 0, '"to" address must has more than 1 Retirement NFT');
+        //require(retirementCertificateNFT.retirementCertificateNFTBalanceOf(to) > 0, '"to" address must has more than 1 Retirement NFT');
         bytes memory data = "";
         _mintBatch(to, ticketTypes, mintAmounts, data);
+    }
+
+    /**
+     * @notice - Transfer a RetirementCertificateNFTAssociatedTicket
+     */ 
+    function transferRetirementCertificateNFTAssociatedTicket(address from, address to, uint256 ticketType, uint256 numberOfTicket, bytes memory data)
+        public 
+        override
+    {
+        safeTransferFrom(from, to, ticketType, numberOfTicket, data);
+    }
+
+    /**
+     * @notice - Transfer batch RetirementCertificateNFTAssociatedTickets
+     */ 
+    function transferBatchRetirementCertificateNFTAssociatedTicket(address from, address to, uint256[] memory ticketTypes, uint256[] memory numberOfTickets, bytes memory data)
+        public 
+        override
+    {
+        safeBatchTransferFrom(from, to, ticketTypes, numberOfTickets, data);
     }
 
     /**
