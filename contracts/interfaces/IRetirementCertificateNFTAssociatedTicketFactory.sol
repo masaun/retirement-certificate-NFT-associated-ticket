@@ -15,6 +15,10 @@ import { RetirementCertificateNFTAssociatedTicket } from "../RetirementCertifica
  */ 
 interface IRetirementCertificateNFTAssociatedTicketFactory {
 
+    function createRetirementCertificateNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementCertificateNFT retirementCertificateNFT, string memory uri) external;
+
+    function createBatchRetirementCertificateNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementCertificateNFT retirementCertificateNFT, string memory uri) external;
+
     event RetirementCertificateNFTAssociatedTicketCreated(
         RetirementCertificateNFTAssociatedTicket retirementCertificateNFTAssociatedTicket,
         address to, 
@@ -32,9 +36,5 @@ interface IRetirementCertificateNFTAssociatedTicketFactory {
         IRetirementCertificateNFT retirementCertificateNFT, 
         string uri
     );
-
-    function createRetirementCertificateNFTAssociatedTicket(address to, uint ticketType, uint mintAmount, IRetirementCertificateNFT retirementCertificateNFT, string memory uri) external;
-
-    function createBatchRetirementCertificateNFTAssociatedTicket(address to, uint256[] memory ticketTypes, uint256[] memory mintAmounts, IRetirementCertificateNFT retirementCertificateNFT, string memory uri) external;
 
 }

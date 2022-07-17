@@ -12,7 +12,7 @@ import {
   Signer,
   utils,
 } from "ethers";
-import { FunctionFragment, Result } from "@ethersproject/abi";
+import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
@@ -32,8 +32,20 @@ export interface ITicketManagerFactoryInterface extends utils.Interface {
     data: BytesLike
   ): Result;
 
-  events: {};
+  events: {
+    "TicketManagerCreated(address,address)": EventFragment;
+  };
+
+  getEvent(nameOrSignatureOrTopic: "TicketManagerCreated"): EventFragment;
 }
+
+export type TicketManagerCreatedEvent = TypedEvent<
+  [string, string],
+  { ticketManager: string; retirementCertificateNFTAssociatedTicket: string }
+>;
+
+export type TicketManagerCreatedEventFilter =
+  TypedEventFilter<TicketManagerCreatedEvent>;
 
 export interface ITicketManagerFactory extends BaseContract {
   contractName: "ITicketManagerFactory";
@@ -81,7 +93,16 @@ export interface ITicketManagerFactory extends BaseContract {
     ): Promise<void>;
   };
 
-  filters: {};
+  filters: {
+    "TicketManagerCreated(address,address)"(
+      ticketManager?: null,
+      retirementCertificateNFTAssociatedTicket?: null
+    ): TicketManagerCreatedEventFilter;
+    TicketManagerCreated(
+      ticketManager?: null,
+      retirementCertificateNFTAssociatedTicket?: null
+    ): TicketManagerCreatedEventFilter;
+  };
 
   estimateGas: {
     createTicketManager(

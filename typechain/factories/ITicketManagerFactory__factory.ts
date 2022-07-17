@@ -11,6 +11,25 @@ import type {
 
 const _abi = [
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "contract ITicketManager",
+        name: "ticketManager",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "contract IRetirementCertificateNFTAssociatedTicket",
+        name: "retirementCertificateNFTAssociatedTicket",
+        type: "address",
+      },
+    ],
+    name: "TicketManagerCreated",
+    type: "event",
+  },
+  {
     inputs: [
       {
         internalType: "contract IRetirementCertificateNFTAssociatedTicket",

@@ -90,11 +90,13 @@ export interface TicketManagerFactoryInterface extends utils.Interface {
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
+    "TicketManagerCreated(address,address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TicketManagerCreated"): EventFragment;
 }
 
 export type RoleAdminChangedEvent = TypedEvent<
@@ -118,6 +120,14 @@ export type RoleRevokedEvent = TypedEvent<
 >;
 
 export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
+
+export type TicketManagerCreatedEvent = TypedEvent<
+  [string, string],
+  { ticketManager: string; retirementCertificateNFTAssociatedTicket: string }
+>;
+
+export type TicketManagerCreatedEventFilter =
+  TypedEventFilter<TicketManagerCreatedEvent>;
 
 export interface TicketManagerFactory extends BaseContract {
   contractName: "TicketManagerFactory";
@@ -297,6 +307,15 @@ export interface TicketManagerFactory extends BaseContract {
       account?: string | null,
       sender?: string | null
     ): RoleRevokedEventFilter;
+
+    "TicketManagerCreated(address,address)"(
+      ticketManager?: null,
+      retirementCertificateNFTAssociatedTicket?: null
+    ): TicketManagerCreatedEventFilter;
+    TicketManagerCreated(
+      ticketManager?: null,
+      retirementCertificateNFTAssociatedTicket?: null
+    ): TicketManagerCreatedEventFilter;
   };
 
   estimateGas: {
