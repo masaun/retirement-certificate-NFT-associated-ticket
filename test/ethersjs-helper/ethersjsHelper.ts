@@ -40,4 +40,6 @@ async function getCurrentTimestamp() {}
 
 //@dev - Export methods
 export { getEventLog }
+export { toWei }
+export { fromWei }
 //export { convertHexToString, convertStringToHex, toWei, fromWei, getEventLog, getCurrentBlock, getCurrentTimestamp }

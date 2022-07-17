@@ -4,7 +4,6 @@
 import {
   BaseContract,
   BigNumber,
-  BigNumberish,
   BytesLike,
   CallOverrides,
   ContractTransaction,
@@ -17,23 +16,17 @@ import { FunctionFragment, Result, EventFragment } from "@ethersproject/abi";
 import { Listener, Provider } from "@ethersproject/providers";
 import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
-export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
-  extends utils.Interface {
-  contractName: "RetirementCertificateNFTAssociatedTicketFactory";
+export interface TicketManagerFactoryInterface extends utils.Interface {
+  contractName: "TicketManagerFactory";
   functions: {
     "DEFAULT_ADMIN_ROLE()": FunctionFragment;
-    "TICKET_CREATOR_ROLE()": FunctionFragment;
-    "createBatchRetirementCertificateNFTAssociatedTicket(address,uint256[],uint256[],address,string)": FunctionFragment;
-    "createRetirementCertificateNFTAssociatedTicket(address,uint256,uint256,address,string)": FunctionFragment;
+    "createTicketManager(address)": FunctionFragment;
     "getRoleAdmin(bytes32)": FunctionFragment;
     "grantRole(bytes32,address)": FunctionFragment;
     "hasRole(bytes32,address)": FunctionFragment;
     "renounceRole(bytes32,address)": FunctionFragment;
     "revokeRole(bytes32,address)": FunctionFragment;
-    "rngV2()": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
-    "ticketManagerFactory()": FunctionFragment;
-    "vrfCoordinatorV2()": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -41,16 +34,8 @@ export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "TICKET_CREATOR_ROLE",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "createBatchRetirementCertificateNFTAssociatedTicket",
-    values: [string, BigNumberish[], BigNumberish[], string, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "createRetirementCertificateNFTAssociatedTicket",
-    values: [string, BigNumberish, BigNumberish, string, string]
+    functionFragment: "createTicketManager",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "getRoleAdmin",
@@ -72,18 +57,9 @@ export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
     functionFragment: "revokeRole",
     values: [BytesLike, string]
   ): string;
-  encodeFunctionData(functionFragment: "rngV2", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
     values: [BytesLike]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "ticketManagerFactory",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "vrfCoordinatorV2",
-    values?: undefined
   ): string;
 
   decodeFunctionResult(
@@ -91,15 +67,7 @@ export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "TICKET_CREATOR_ROLE",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "createBatchRetirementCertificateNFTAssociatedTicket",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "createRetirementCertificateNFTAssociatedTicket",
+    functionFragment: "createTicketManager",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -113,71 +81,23 @@ export interface RetirementCertificateNFTAssociatedTicketFactoryInterface
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "rngV2", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "ticketManagerFactory",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "vrfCoordinatorV2",
-    data: BytesLike
-  ): Result;
 
   events: {
-    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string,address)": EventFragment;
-    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string,address)": EventFragment;
     "RoleAdminChanged(bytes32,bytes32,bytes32)": EventFragment;
     "RoleGranted(bytes32,address,address)": EventFragment;
     "RoleRevoked(bytes32,address,address)": EventFragment;
+    "TicketManagerCreated(address,address)": EventFragment;
   };
 
-  getEvent(
-    nameOrSignatureOrTopic: "BatchRetirementCertificateNFTAssociatedTicketCreated"
-  ): EventFragment;
-  getEvent(
-    nameOrSignatureOrTopic: "RetirementCertificateNFTAssociatedTicketCreated"
-  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleAdminChanged"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleGranted"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RoleRevoked"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "TicketManagerCreated"): EventFragment;
 }
-
-export type BatchRetirementCertificateNFTAssociatedTicketCreatedEvent =
-  TypedEvent<
-    [string, string, BigNumber[], BigNumber[], string, string, string],
-    {
-      retirementCertificateNFTAssociatedTicket: string;
-      to: string;
-      ticketTypes: BigNumber[];
-      mintAmounts: BigNumber[];
-      retirementCertificateNFT: string;
-      uri: string;
-      ticketManager: string;
-    }
-  >;
-
-export type BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter =
-  TypedEventFilter<BatchRetirementCertificateNFTAssociatedTicketCreatedEvent>;
-
-export type RetirementCertificateNFTAssociatedTicketCreatedEvent = TypedEvent<
-  [string, string, BigNumber, BigNumber, string, string, string],
-  {
-    retirementCertificateNFTAssociatedTicket: string;
-    to: string;
-    ticketType: BigNumber;
-    mintAmount: BigNumber;
-    retirementCertificateNFT: string;
-    uri: string;
-    ticketManager: string;
-  }
->;
-
-export type RetirementCertificateNFTAssociatedTicketCreatedEventFilter =
-  TypedEventFilter<RetirementCertificateNFTAssociatedTicketCreatedEvent>;
 
 export type RoleAdminChangedEvent = TypedEvent<
   [string, string, string],
@@ -201,14 +121,21 @@ export type RoleRevokedEvent = TypedEvent<
 
 export type RoleRevokedEventFilter = TypedEventFilter<RoleRevokedEvent>;
 
-export interface RetirementCertificateNFTAssociatedTicketFactory
-  extends BaseContract {
-  contractName: "RetirementCertificateNFTAssociatedTicketFactory";
+export type TicketManagerCreatedEvent = TypedEvent<
+  [string, string],
+  { ticketManager: string; retirementCertificateNFTAssociatedTicket: string }
+>;
+
+export type TicketManagerCreatedEventFilter =
+  TypedEventFilter<TicketManagerCreatedEvent>;
+
+export interface TicketManagerFactory extends BaseContract {
+  contractName: "TicketManagerFactory";
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: RetirementCertificateNFTAssociatedTicketFactoryInterface;
+  interface: TicketManagerFactoryInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -232,23 +159,8 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
   functions: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<[string]>;
 
-    TICKET_CREATOR_ROLE(overrides?: CallOverrides): Promise<[string]>;
-
-    createBatchRetirementCertificateNFTAssociatedTicket(
-      to: string,
-      ticketTypes: BigNumberish[],
-      mintAmounts: BigNumberish[],
-      retirementCertificateNFT: string,
-      uri: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    createRetirementCertificateNFTAssociatedTicket(
-      to: string,
-      ticketType: BigNumberish,
-      mintAmount: BigNumberish,
-      retirementCertificateNFT: string,
-      uri: string,
+    createTicketManager(
+      _retirementCertificateNFTAssociatedTicket: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -278,37 +190,16 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    rngV2(overrides?: CallOverrides): Promise<[string]>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
-
-    ticketManagerFactory(overrides?: CallOverrides): Promise<[string]>;
-
-    vrfCoordinatorV2(overrides?: CallOverrides): Promise<[string]>;
   };
 
   DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
-  TICKET_CREATOR_ROLE(overrides?: CallOverrides): Promise<string>;
-
-  createBatchRetirementCertificateNFTAssociatedTicket(
-    to: string,
-    ticketTypes: BigNumberish[],
-    mintAmounts: BigNumberish[],
-    retirementCertificateNFT: string,
-    uri: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  createRetirementCertificateNFTAssociatedTicket(
-    to: string,
-    ticketType: BigNumberish,
-    mintAmount: BigNumberish,
-    retirementCertificateNFT: string,
-    uri: string,
+  createTicketManager(
+    _retirementCertificateNFTAssociatedTicket: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -338,39 +229,18 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  rngV2(overrides?: CallOverrides): Promise<string>;
-
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  ticketManagerFactory(overrides?: CallOverrides): Promise<string>;
-
-  vrfCoordinatorV2(overrides?: CallOverrides): Promise<string>;
-
   callStatic: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<string>;
 
-    TICKET_CREATOR_ROLE(overrides?: CallOverrides): Promise<string>;
-
-    createBatchRetirementCertificateNFTAssociatedTicket(
-      to: string,
-      ticketTypes: BigNumberish[],
-      mintAmounts: BigNumberish[],
-      retirementCertificateNFT: string,
-      uri: string,
+    createTicketManager(
+      _retirementCertificateNFTAssociatedTicket: string,
       overrides?: CallOverrides
-    ): Promise<void>;
-
-    createRetirementCertificateNFTAssociatedTicket(
-      to: string,
-      ticketType: BigNumberish,
-      mintAmount: BigNumberish,
-      retirementCertificateNFT: string,
-      uri: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<string>;
 
     getRoleAdmin(role: BytesLike, overrides?: CallOverrides): Promise<string>;
 
@@ -398,57 +268,13 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       overrides?: CallOverrides
     ): Promise<void>;
 
-    rngV2(overrides?: CallOverrides): Promise<string>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
-
-    ticketManagerFactory(overrides?: CallOverrides): Promise<string>;
-
-    vrfCoordinatorV2(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
-    "BatchRetirementCertificateNFTAssociatedTicketCreated(address,address,uint256[],uint256[],address,string,address)"(
-      retirementCertificateNFTAssociatedTicket?: null,
-      to?: null,
-      ticketTypes?: null,
-      mintAmounts?: null,
-      retirementCertificateNFT?: null,
-      uri?: null,
-      ticketManager?: null
-    ): BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter;
-    BatchRetirementCertificateNFTAssociatedTicketCreated(
-      retirementCertificateNFTAssociatedTicket?: null,
-      to?: null,
-      ticketTypes?: null,
-      mintAmounts?: null,
-      retirementCertificateNFT?: null,
-      uri?: null,
-      ticketManager?: null
-    ): BatchRetirementCertificateNFTAssociatedTicketCreatedEventFilter;
-
-    "RetirementCertificateNFTAssociatedTicketCreated(address,address,uint256,uint256,address,string,address)"(
-      retirementCertificateNFTAssociatedTicket?: null,
-      to?: null,
-      ticketType?: null,
-      mintAmount?: null,
-      retirementCertificateNFT?: null,
-      uri?: null,
-      ticketManager?: null
-    ): RetirementCertificateNFTAssociatedTicketCreatedEventFilter;
-    RetirementCertificateNFTAssociatedTicketCreated(
-      retirementCertificateNFTAssociatedTicket?: null,
-      to?: null,
-      ticketType?: null,
-      mintAmount?: null,
-      retirementCertificateNFT?: null,
-      uri?: null,
-      ticketManager?: null
-    ): RetirementCertificateNFTAssociatedTicketCreatedEventFilter;
-
     "RoleAdminChanged(bytes32,bytes32,bytes32)"(
       role?: BytesLike | null,
       previousAdminRole?: BytesLike | null,
@@ -481,28 +307,22 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       account?: string | null,
       sender?: string | null
     ): RoleRevokedEventFilter;
+
+    "TicketManagerCreated(address,address)"(
+      ticketManager?: null,
+      retirementCertificateNFTAssociatedTicket?: null
+    ): TicketManagerCreatedEventFilter;
+    TicketManagerCreated(
+      ticketManager?: null,
+      retirementCertificateNFTAssociatedTicket?: null
+    ): TicketManagerCreatedEventFilter;
   };
 
   estimateGas: {
     DEFAULT_ADMIN_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
 
-    TICKET_CREATOR_ROLE(overrides?: CallOverrides): Promise<BigNumber>;
-
-    createBatchRetirementCertificateNFTAssociatedTicket(
-      to: string,
-      ticketTypes: BigNumberish[],
-      mintAmounts: BigNumberish[],
-      retirementCertificateNFT: string,
-      uri: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    createRetirementCertificateNFTAssociatedTicket(
-      to: string,
-      ticketType: BigNumberish,
-      mintAmount: BigNumberish,
-      retirementCertificateNFT: string,
-      uri: string,
+    createTicketManager(
+      _retirementCertificateNFTAssociatedTicket: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -535,16 +355,10 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    rngV2(overrides?: CallOverrides): Promise<BigNumber>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    ticketManagerFactory(overrides?: CallOverrides): Promise<BigNumber>;
-
-    vrfCoordinatorV2(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -552,25 +366,8 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    TICKET_CREATOR_ROLE(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    createBatchRetirementCertificateNFTAssociatedTicket(
-      to: string,
-      ticketTypes: BigNumberish[],
-      mintAmounts: BigNumberish[],
-      retirementCertificateNFT: string,
-      uri: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    createRetirementCertificateNFTAssociatedTicket(
-      to: string,
-      ticketType: BigNumberish,
-      mintAmount: BigNumberish,
-      retirementCertificateNFT: string,
-      uri: string,
+    createTicketManager(
+      _retirementCertificateNFTAssociatedTicket: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -603,17 +400,9 @@ export interface RetirementCertificateNFTAssociatedTicketFactory
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    rngV2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    ticketManagerFactory(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    vrfCoordinatorV2(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

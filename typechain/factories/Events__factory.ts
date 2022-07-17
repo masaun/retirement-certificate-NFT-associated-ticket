@@ -45,6 +45,12 @@ const _abi = [
         name: "uri",
         type: "string",
       },
+      {
+        indexed: false,
+        internalType: "contract ITicketManager",
+        name: "ticketManager",
+        type: "address",
+      },
     ],
     name: "BatchRetirementCertificateNFTAssociatedTicketCreated",
     type: "event",
@@ -88,14 +94,39 @@ const _abi = [
         name: "uri",
         type: "string",
       },
+      {
+        indexed: false,
+        internalType: "contract ITicketManager",
+        name: "ticketManager",
+        type: "address",
+      },
     ],
     name: "RetirementCertificateNFTAssociatedTicketCreated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "contract ITicketManager",
+        name: "ticketManager",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "contract IRetirementCertificateNFTAssociatedTicket",
+        name: "retirementCertificateNFTAssociatedTicket",
+        type: "address",
+      },
+    ],
+    name: "TicketManagerCreated",
     type: "event",
   },
 ];
 
 const _bytecode =
-  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212203e55a785e9ba0dce59ee73a5dcebe5f6268ba345a6a35577bece54fdf9b5077564736f6c63430008070033";
+  "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea264697066735822122072603f4927057eb54c1823c17114445e7e1b41b30192c05a3079a796686ceee164736f6c63430008070033";
 
 type EventsConstructorParams =
   | [signer?: Signer]

@@ -57,6 +57,8 @@ export interface RetirementCertificateNFTAssociatedTicketInterface
     "saveRetirementCertificateNFTAssociatedTicketMetadata(address)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
+    "transferBatchRetirementCertificateNFTAssociatedTicket(address,address,uint256[],uint256[],bytes)": FunctionFragment;
+    "transferRetirementCertificateNFTAssociatedTicket(address,address,uint256,uint256,bytes)": FunctionFragment;
     "uri(uint256)": FunctionFragment;
     "vrfCoordinatorV2()": FunctionFragment;
   };
@@ -154,6 +156,14 @@ export interface RetirementCertificateNFTAssociatedTicketInterface
     functionFragment: "supportsInterface",
     values: [BytesLike]
   ): string;
+  encodeFunctionData(
+    functionFragment: "transferBatchRetirementCertificateNFTAssociatedTicket",
+    values: [string, string, BigNumberish[], BigNumberish[], BytesLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "transferRetirementCertificateNFTAssociatedTicket",
+    values: [string, string, BigNumberish, BigNumberish, BytesLike]
+  ): string;
   encodeFunctionData(functionFragment: "uri", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "vrfCoordinatorV2",
@@ -233,6 +243,14 @@ export interface RetirementCertificateNFTAssociatedTicketInterface
   ): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferBatchRetirementCertificateNFTAssociatedTicket",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferRetirementCertificateNFTAssociatedTicket",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uri", data: BytesLike): Result;
@@ -485,6 +503,24 @@ export interface RetirementCertificateNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
+    transferBatchRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    transferRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketType: BigNumberish,
+      numberOfTicket: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     uri(arg0: BigNumberish, overrides?: CallOverrides): Promise<[string]>;
 
     vrfCoordinatorV2(overrides?: CallOverrides): Promise<[string]>;
@@ -611,6 +647,24 @@ export interface RetirementCertificateNFTAssociatedTicket extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
+  transferBatchRetirementCertificateNFTAssociatedTicket(
+    from: string,
+    to: string,
+    ticketTypes: BigNumberish[],
+    numberOfTickets: BigNumberish[],
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  transferRetirementCertificateNFTAssociatedTicket(
+    from: string,
+    to: string,
+    ticketType: BigNumberish,
+    numberOfTicket: BigNumberish,
+    data: BytesLike,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   uri(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   vrfCoordinatorV2(overrides?: CallOverrides): Promise<string>;
@@ -736,6 +790,24 @@ export interface RetirementCertificateNFTAssociatedTicket extends BaseContract {
       interfaceId: BytesLike,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    transferBatchRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    transferRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketType: BigNumberish,
+      numberOfTicket: BigNumberish,
+      data: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     uri(arg0: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
@@ -949,6 +1021,24 @@ export interface RetirementCertificateNFTAssociatedTicket extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    transferBatchRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    transferRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketType: BigNumberish,
+      numberOfTicket: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     uri(arg0: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
 
     vrfCoordinatorV2(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1083,6 +1173,24 @@ export interface RetirementCertificateNFTAssociatedTicket extends BaseContract {
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    transferBatchRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketTypes: BigNumberish[],
+      numberOfTickets: BigNumberish[],
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    transferRetirementCertificateNFTAssociatedTicket(
+      from: string,
+      to: string,
+      ticketType: BigNumberish,
+      numberOfTicket: BigNumberish,
+      data: BytesLike,
+      overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     uri(
