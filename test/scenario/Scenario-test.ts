@@ -179,7 +179,6 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
           })
 
           it(`claimRetirementCertificateNFTAssociatedTicket() - Should be successful that RetirementCertificateNFT holder 1 claim a single type of RetirementCertificateNFTAssociatedTicket`, async () => {
-              //[TODO]: Now
               const tokenIdOfRetirementCertificateNFT: number = 0
               const ticketType: number = 0
               let tx: any = await ticketManager.connect(ticketHolder1).claimRetirementCertificateNFTAssociatedTicket(RETIREMENT_CERTIFICATE_NFT, tokenIdOfRetirementCertificateNFT, ticketType)
@@ -187,7 +186,11 @@ import { fromWei } from "../ethersjs-helper/ethersjsHelper"
           })
 
           it(`A RetirementCertificateNFT holder who are claimed should received 1 RetirementCertificateNFTAssociatedTicket`, async () => {
-              //[TODO]: 
+              const walletAddress: string = TICKET_HOLDER_1
+              const ticketType: number = 0    // Ticket type 0
+
+              let numberOfRetirementCertificateNFTAssociatedTickets: BigNumber = await retirementCertificateNFTAssociatedTicket.retirementCertificateNFTAssociatedTicketBalanceOf(walletAddress, ticketType)
+              console.log(`\n Number of RetirementCertificateNFTAssociatedTickets in the wallet of RetirementCertificateNFT holder who has already claimed: ${ numberOfRetirementCertificateNFTAssociatedTickets }`)
           })
 
 
