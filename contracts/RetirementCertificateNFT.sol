@@ -14,7 +14,7 @@ import { AccessControl } from "@openzeppelin/contracts/access/AccessControl.sol"
  */
 contract RetirementCertificateNFT is IRetirementCertificateNFT, ERC721, AccessControl {
 
-    constructor() ERC721("Retirement NFT", "RNFT") {
+    constructor() ERC721("Retirement Certificate NFT", "RETIREMENT_CERTIFICATE_NFT") {
         //@dev - Grant admin role to caller (msg.sender)
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     }
