@@ -15,7 +15,7 @@
     "lint:fix": "solhint 'contracts/**/*.sol' --fix",
     "format": "prettier --write .",
     "coverage": "hardhat coverage --solcoverjs ./.solcover.js",
-    "fuzzing": "docker run -it --rm -v $PWD:/src trailofbits/eth-security-toolbox"
+    "fuzzing": "docker run -it --rm -v ./contracts/chainlink-examples/test/fuzzing/KeepersCounterEchidnaTest.sol trailofbits/eth-security-toolbox"
   },
   "license": "MIT",
   "devDependencies": {
